@@ -4,6 +4,7 @@ import apiService from "@/app/services/apiService";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { handleLogin } from "@/app/lib/actions";
+import { signIn } from "next-auth/react";
 
 export default function SignUp() {
   const router = useRouter();
@@ -140,7 +141,8 @@ export default function SignUp() {
           <div className="text-center text-sm italic text-gray-400">Or</div>
         </div>
       </form>
-      <button className="btn w-full border border-gray-300 bg-white font-medium text-gray-700 shadow-sm hover:bg-gray-100 hover:shadow-md">
+      <button className="btn w-full border border-gray-300 bg-white font-medium text-gray-700 shadow-sm hover:bg-gray-100 hover:shadow-md"
+      onClick={()=>signIn('google')}>
         <span className="flex items-center justify-center">
           <img
             src="https://www.google.com/favicon.ico"

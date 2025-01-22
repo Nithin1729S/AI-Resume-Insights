@@ -40,12 +40,9 @@ def google_auth(request):
         )
         
         if picture_url:
-            # Download the image from the URL
             response = requests.get(picture_url)
             if response.status_code == 200:
-                # Create a unique filename
-                filename = f"avatars/{user.id}.jpg"
-                # Save the image to the media directory
+                filename = f"{user.id}.jpg"
                 user.avatar.save(filename, ContentFile(response.content), save=True)
         
         refresh = RefreshToken.for_user(user)
