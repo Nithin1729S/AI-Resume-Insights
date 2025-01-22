@@ -5,6 +5,7 @@ from dj_rest_auth.registration.views import RegisterView
 from dj_rest_auth.views import LoginView, LogoutView, UserDetailsView
 from rest_framework_simplejwt.views import TokenVerifyView
 from . import api
+from .views import google_auth
 
 urlpatterns = [
     path('register/', RegisterView.as_view(), name='rest_register'),
@@ -14,4 +15,5 @@ urlpatterns = [
     path('<uuid:pk>/',api.user_details,name='user_details'),
     path('update_avatar/',api.update_avatar,name='update_avatar'),
     path('update_user_details/',api.update_user_details,name='update_user_details'),
+    path('google/', google_auth, name='google_auth'),
 ]

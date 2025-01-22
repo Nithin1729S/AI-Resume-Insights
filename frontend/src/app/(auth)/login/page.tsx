@@ -6,6 +6,7 @@ import apiService from "@/app/services/apiService";
 import { getUserId, handleLogin } from "@/app/lib/actions";
 import Link from "next/link";
 import "../../styles/style.css";
+import { signIn } from "next-auth/react";
 
 export default function SignIn() {
   const router = useRouter();
@@ -130,7 +131,8 @@ export default function SignIn() {
       </form>
 
       <div className="mt-3 mb-3 text-center text-sm italic text-gray-400">Or</div>
-      <button className="btn w-full bg-white border border-gray-300 text-gray-700 font-medium shadow-sm hover:bg-gray-100 hover:shadow-md">
+      <button className="btn w-full bg-white border border-gray-300 text-gray-700 font-medium shadow-sm hover:bg-gray-100 hover:shadow-md"
+      onClick={()=>signIn('google')}>
         <span className="flex items-center justify-center">
           <img
             src="https://www.google.com/favicon.ico"
