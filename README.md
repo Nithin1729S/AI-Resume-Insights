@@ -26,6 +26,7 @@ DATABASE=postgres
 GOOGLE_API_KEY=your_google_api_key
 GOOGLE_CLIENT_ID=your_google_client_id
 GOOGLE_CLIENT_SECRET=your_google_client_secret
+GOOGLE_CALLBACK_URL=http://localhost:3000/api/auth/callback/google
 ```
 
 Replace `your_google_api_key`, `your_google_client_id` and `your_google_client_secret` with your credentials.
@@ -53,6 +54,9 @@ Create a `.env.local` file in the frontend directory with the following content:
 
 ```
 NEXT_PUBLIC_API_HOST=http://localhost:8001
+NEXT_PUBLIC_GOOGLE_REDIRECT_URI=http://localhost:3000/api/auth/callback/google
+GOOGLE_CLIENT_ID=your_google_client_id
+GOOGLE_CLIENT_SECRET=your_google_client_secret
 ```
 
 ### Installing Dependencies
