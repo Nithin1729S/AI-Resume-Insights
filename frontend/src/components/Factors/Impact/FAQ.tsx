@@ -46,30 +46,21 @@ const FAQsPage = () => {
   );
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 py-12 px-4 sm:px-6 lg:px-8">
+    <div className="min-h-screen bg-gradient-to-br from-white-50 to-white-100 py-12 px-4 sm:px-6 lg:px-8">
       <div className="max-w-3xl mx-auto">
-        <h1 className="text-4xl font-extrabold text-center text-indigo-900 mb-8">Frequently Asked Questions</h1>
+        <h1 className="text-4xl font-extrabold text-center text-indigo-900 mb-8">Recruiter Insights</h1>
         
         <div className="mb-8">
           <div className="relative">
             <input
               type="text"
-              placeholder="Search FAQs..."
+              placeholder="Search Insights..."
               className="w-full py-3 px-4 pr-10 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
               value={searchQuery}
               onChange={handleSearch}
             />
             <FaSearch className="absolute right-3 top-3 text-gray-400" />
           </div>
-        </div>
-
-        <div className="bg-white rounded-lg shadow-lg p-6 mb-8">
-          <p className="text-lg text-gray-700 mb-4">
-            Welcome to our FAQs page. Here you'll find answers to the most common questions about our products and services. If you can't find what you're looking for, please don't hesitate to contact us.
-          </p>
-          <button className="bg-indigo-600 text-white font-semibold py-2 px-4 rounded-lg hover:bg-indigo-700 transition duration-300 ease-in-out transform hover:-translate-y-1 hover:scale-105">
-            Browse FAQs
-          </button>
         </div>
 
         <div className="space-y-4">
