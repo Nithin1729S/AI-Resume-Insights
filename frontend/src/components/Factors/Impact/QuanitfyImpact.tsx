@@ -31,7 +31,6 @@ const QuantifyImpact: React.FC<QuantifyImpactProps> = ({
         <p className="mb-4 mt-1 text-sm text-gray-600 dark:text-gray-400">
           Increase your impact by using numbers and metrics in your bullet points
         </p>
-        <p>Quantify Impact score: {quantify_impact_score}</p>
         <p>Quantify Impact feedback: {quantify_impact_feedback}</p>
       </div>
   
