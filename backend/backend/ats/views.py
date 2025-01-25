@@ -477,3 +477,77 @@ def generate_job_matches(resume,cache_file="job_matches_cache.json"):
     except Exception as e:
         return f"Error generating cover letter: {e}"
 
+
+technical_skills = [
+    # Programming Languages
+    "Python", "Java", "JavaScript", "TypeScript", "C++", "C", "C#", "Go (Golang)", 
+    "Ruby", "Swift", "Kotlin", "Rust", "PHP", "SQL", "Bash/Shell Scripting", 
+    "R", "Scala", "Perl", "Dart", "Objective-C", "MATLAB", "Groovy", 
+    "Elixir", "Erlang", "Haskell", "Lua", "Julia",
+
+    # Web Development
+    "HTML", "CSS", "React", "Angular", "Vue.js", "Node.js", "Django", 
+    "Flask", "Spring Boot", "Express.js", "Ruby on Rails", "ASP.NET", 
+    "jQuery", "Bootstrap", "Tailwind CSS", "SASS/SCSS", "Webpack", 
+    "GraphQL", "REST APIs", "WebSockets", "JSON", "XML",
+
+    # Databases
+    "MySQL", "PostgreSQL", "MongoDB", "SQLite", "Oracle", "Redis", 
+    "Cassandra", "Firebase", "DynamoDB", "Elasticsearch", "Neo4j", 
+    "MariaDB", "Cosmos DB", "Snowflake", "BigQuery",
+
+    # Cloud Technologies
+    "AWS (Amazon Web Services)", "Google Cloud Platform (GCP)", 
+    "Microsoft Azure", "Docker", "Kubernetes", "Terraform", 
+    "Serverless Framework", "OpenStack", "Heroku", "CloudFormation", 
+    "Ansible", "Jenkins", "GitLab CI/CD", "CircleCI", "Travis CI",
+
+    # DevOps & Tools
+    "Git", "GitHub", "GitLab", "Bitbucket", "Jira", "Confluence", 
+    "Trello", "Slack", "Datadog", "Prometheus", "Grafana", 
+    "Splunk", "Kibana", "Nagios", "New Relic", "Puppet", "Chef",
+
+    # Mobile Development
+    "Android Development", "iOS Development", "React Native", 
+    "Flutter", "Xamarin", "SwiftUI", "Kotlin Multiplatform",
+
+    # Data Science & Machine Learning
+    "Pandas", "NumPy", "SciPy", "Matplotlib", "Seaborn", "Scikit-learn", 
+    "TensorFlow", "PyTorch", "Keras", "OpenCV", "NLTK", "spaCy", 
+    "Hadoop", "Spark", "Hive", "Pig", "Tableau", "Power BI", 
+    "Jupyter Notebooks", "Apache Kafka", "Apache Flink",
+
+    # Testing & QA
+    "Unit Testing", "Integration Testing", "Selenium", "Cypress", 
+    "Jest", "Mocha", "Chai", "Pytest", "JUnit", "TestNG", 
+    "Postman", "SoapUI", "Load Testing", "Performance Testing",
+
+    # Operating Systems
+    "Linux", "Unix", "Windows", "macOS", "Shell Scripting", 
+    "Bash", "Zsh", "PowerShell",
+
+    # Version Control & Collaboration
+    "Git", "GitHub", "GitLab", "Bitbucket", "SVN (Subversion)", 
+    "Mercurial", "Agile Methodology", "Scrum", "Kanban",
+
+    # Other Tools & Technologies
+    "VSCode", "IntelliJ IDEA", "PyCharm", "Eclipse", "Xcode", 
+    "Atom", "Sublime Text", "Vim", "Emacs", "Jupyter", 
+    "Docker", "Kubernetes", "Terraform", "Ansible", "Puppet", 
+    "Chef", "Nginx", "Apache", "IIS", "RabbitMQ", "Kafka", 
+    "Zookeeper", "gRPC", "WebRTC", "OAuth", "JWT", "OAuth2", 
+    "GraphQL", "REST", "SOAP",
+
+    # Soft Skills (often included alongside technical skills)
+    "Problem Solving", "Team Collaboration", "Communication", 
+    "Code Review", "Technical Documentation", "Mentorship", 
+    "Project Management", "Leadership"
+]
+
+def identify_skills(resume_text):
+    """Identify technical skills from the resume text."""
+    skills_found = []
+    for skill in technical_skills:
+        if skill.lower() in resume_text.lower():
+            skills_found.append(skill)
+    return skills_found
