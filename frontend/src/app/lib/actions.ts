@@ -1,47 +1,48 @@
 'use server';
 
 import { cookies } from 'next/headers';
+import { redirect } from 'next/navigation';
 
 export async function handleRefresh() {
-    console.log('handleRefresh');
+    try {
+        const refreshToken = await getRefreshToken();
 
-    const refreshToken = await getRefreshToken();
-
-    const token = await fetch('http://localhost:8001/api/auth/token/refresh/', {
-        method: 'POST',
-        body: JSON.stringify({
-            refresh: refreshToken
-        }),
-        headers: {
-            'Accept': 'application/json',
-            'Content-Type': 'application/json'
-        }
-    })
-        .then(response => response.json())
-        .then(async (json) => {
-            console.log('Response - Refresh:', json);
-
-            if (json.access) {
-                const cookieStore = await cookies();
-                cookieStore.set('session_access_token', json.access, {
-                    httpOnly: true,
-                    secure: false,
-                    maxAge: 60 * 60, // 60 minutes
-                    path: '/'
-                });
-
-                return json.access;
-            } else {
-                resetAuthCookies();
+        const token = await fetch('http://localhost:8001/api/auth/token/refresh/', {
+            method: 'POST',
+            body: JSON.stringify({
+                refresh: refreshToken
+            }),
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
             }
         })
-        .catch((error) => {
-            console.log('error', error);
+            .then(response => response.json())
+            .then(async (json) => {
+                console.log('Response - Refresh:', json);
 
-            resetAuthCookies();
-        })
+                if (json.access) {
+                    const cookieStore = await cookies();
+                    cookieStore.set('session_access_token', json.access, {
+                        httpOnly: true,
+                        secure: false,
+                        maxAge: 60 * 60, // 60 minutes
+                        path: '/'
+                    });
 
-    return token;
+                    return json.access;
+                } else {
+                    await resetAuthCookies();
+                    redirect('/login');
+                }
+            });
+
+        return token;
+    } catch (error) {
+        console.log('error', error);
+        await resetAuthCookies();
+        redirect('/login');
+    }
 }
 
 export async function handleLogin(userId: string, accessToken: string, refreshToken: string) {
@@ -69,10 +70,11 @@ export async function handleLogin(userId: string, accessToken: string, refreshTo
 }
 
 export async function resetAuthCookies() {
-    const cookieStore = await cookies();
-    cookieStore.set('session_userid', '');
-    cookieStore.set('session_access_token', '');
-    cookieStore.set('session_refresh_token', '');
+    const cookieStore = await cookies(); // Keep await here
+    cookieStore.delete('session_userid');
+    cookieStore.delete('session_access_token');
+    cookieStore.delete('session_refresh_token');
+    redirect('/login');
 }
 
 //
