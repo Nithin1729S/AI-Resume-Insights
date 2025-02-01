@@ -1,6 +1,12 @@
 import React, { useState } from "react";
 
-const Card: React.FC = () => {
+interface CardProps {
+  explanation: string;
+  question: string;
+  feedback: string;
+}
+
+const Card: React.FC<CardProps> = ({ explanation, question, feedback }) => {
   const [isExpanded, setIsExpanded] = useState(false);
 
   const toggleDropdown = () => {
@@ -21,7 +27,7 @@ const Card: React.FC = () => {
       </div>
 
       <div className="gap-2 text-center xsm:gap-0">
-        Your resume needs more specific numbers. Using hard numbers to describe your achievements is important, even if you're entry-level. You don't have enough of them, so let's show you how to improve this.
+        {feedback}
       </div>
 
       <div className="mt-4">
@@ -29,20 +35,13 @@ const Card: React.FC = () => {
           onClick={toggleDropdown}
           className="w-full text-center text-sm font-medium text-white bg-gray-500 rounded-md py-2 hover:bg-gray-600 focus:outline-none focus:ring-2 focus:ring-gray-400 focus:ring-opacity-75"
         >
-          {isExpanded ? "What do hard numbers and quantifying impact mean?" : "What do hard numbers and quantifying impact mean?"}
+          {question}
         </button>
       </div>
 
       {isExpanded && (
         <div className="mt-4 text-sm text-gray-700 dark:text-gray-300">
-          <p>
-            Providing clear, quantifiable achievements in your resume can greatly
-            improve its impact. For example, instead of "Assisted in increasing
-            sales," consider "Helped increase sales by 20% over six months by
-            implementing a new marketing strategy." Numbers provide context and
-            value, making your accomplishments more tangible to potential
-            employers.
-          </p>
+          <p>{explanation}</p>
         </div>
       )}
     </div>

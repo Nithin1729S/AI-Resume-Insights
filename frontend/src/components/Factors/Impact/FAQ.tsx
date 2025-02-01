@@ -1,43 +1,25 @@
 import React, { useState } from "react";
 import { FaSearch, FaChevronDown, FaChevronUp } from "react-icons/fa";
 
-const FAQsPage = () => {
+interface FAQ {
+  id: number;
+  question: string;
+  answer: string;
+}
+
+interface FAQsPageProps {
+  faqs: FAQ[];
+}
+
+const FAQsPage: React.FC<FAQsPageProps> = ({ faqs }) => {
   const [searchQuery, setSearchQuery] = useState("");
-  const [expandedFAQ, setExpandedFAQ] = useState(null);
+  const [expandedFAQ, setExpandedFAQ] = useState<number | null>(null);
 
-  const faqs = [
-    {
-      id: 1,
-      question: "What is your return policy?",
-      answer: "We offer a 30-day return policy for all unused items in their original packaging."
-    },
-    {
-      id: 2,
-      question: "How long does shipping take?",
-      answer: "Shipping typically takes 3-5 business days for domestic orders and 7-14 business days for international orders."
-    },
-    {
-      id: 3,
-      question: "Do you offer international shipping?",
-      answer: "Yes, we offer international shipping to most countries. Shipping costs and delivery times may vary."
-    },
-    {
-      id: 4,
-      question: "How can I track my order?",
-      answer: "Once your order is shipped, you will receive a tracking number via email. You can use this number to track your package on our website."
-    },
-    {
-      id: 5,
-      question: "What payment methods do you accept?",
-      answer: "We accept all major credit cards, PayPal, and Apple Pay."
-    }
-  ];
-
-  const handleSearch = (e:any) => {
+  const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSearchQuery(e.target.value);
   };
 
-  const toggleFAQ = (id:any) => {
+  const toggleFAQ = (id: number) => {
     setExpandedFAQ(expandedFAQ === id ? null : id);
   };
 
