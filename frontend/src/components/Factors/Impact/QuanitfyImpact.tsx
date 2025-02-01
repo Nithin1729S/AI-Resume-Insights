@@ -3,8 +3,8 @@
 import React from "react";
 import PDFCanvas from "@/components/PDFCanvas/PDFCanvas";
 import CircleProgress from "@/components/ProgressTrackers/CircleProgress";
-import FeedbackCard from "./FeedbackCard";
-import RecruiterInsightsCard from "./RecruiterInsightsCard";
+import FeedbackCard from "../../FeedbackCard";
+import RecruiterInsightsCard from "../../RecruiterInsightsCard";
 
 const faqs = [
   {
