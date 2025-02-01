@@ -245,3 +245,34 @@ def job_matches_gen(request):
             'success': False,
             'message': f'Error: {str(e)}'
         }, status=500)
+    
+@api_view(['GET'])
+def get_all_resumes(request):
+    try:
+        # Fetch the most recent resume for the user
+        resume = Resume.objects.filter(user__email=request.user).first()
+
+        if not resume:
+            return JsonResponse({
+                'success': False,
+                'message': 'No resumes found for this user'
+            }, status=404)
+
+        # Generate and save the cover letter
+        job_matches = generate_job_matches(resume.pdf.path)
+        resume.job_matches = job_matches
+        resume.save()
+
+        return JsonResponse({
+            'success': True,
+            'message': 'Job matches generated successfully',
+            'job_matches': job_matches
+        }, status=200)
+    
+    except Exception as e:
+        import traceback
+        traceback.print_exc()  # Log traceback details
+        return JsonResponse({
+            'success': False,
+            'message': f'Error: {str(e)}'
+        }, status=500)

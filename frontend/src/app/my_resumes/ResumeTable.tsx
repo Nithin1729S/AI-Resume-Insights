@@ -1,148 +1,117 @@
 import Image from "next/image";
 
-type BRAND = {
-  logo: string;
-  name: string;
-  visitors: number;
-  revenues: string;
-  sales: number;
-  conversion: number;
+type RESUME = {
+  picture: string;
+  impact: number;
+  brevity: number;
+  style: number;
+  sections: number;
+  total_score: number;
 };
 
-const brandData: BRAND[] = [
-  {
-    logo: "/images/brand/brand-01.svg",
-    name: "Google",
-    visitors: 3.5,
-    revenues: "5,768",
-    sales: 590,
-    conversion: 4.8,
-  },
-  {
-    logo: "/images/brand/brand-02.svg",
-    name: "X.com",
-    visitors: 2.2,
-    revenues: "4,635",
-    sales: 467,
-    conversion: 4.3,
-  },
-  {
-    logo: "/images/brand/brand-03.svg",
-    name: "Github",
-    visitors: 2.1,
-    revenues: "4,290",
-    sales: 420,
-    conversion: 3.7,
-  },
-  {
-    logo: "/images/brand/brand-04.svg",
-    name: "Vimeo",
-    visitors: 1.5,
-    revenues: "3,580",
-    sales: 389,
-    conversion: 2.5,
-  },
-  {
-    logo: "/images/brand/brand-05.svg",
-    name: "Facebook",
-    visitors: 1.2,
-    revenues: "2,740",
-    sales: 230,
-    conversion: 1.9,
-  },
-];
+type TableProps = {
+  resumeData: RESUME[];
+};
 
-const TableOne = () => {
-    return (
-      <div className="rounded-[10px] bg-white px-7.5 pb-4 pt-7.5 shadow-1 dark:bg-gray-dark dark:shadow-card">
-        <h4 className="mb-5.5 text-body-2xlg font-bold text-dark dark:text-white">
-          My Resumes
-        </h4>
-  
-        <div className="flex flex-col">
-          {/* Header Row */}
-          <div className="grid grid-cols-7">
-            <div className="px-2 pb-3.5">
-              <h5 className="text-sm font-medium uppercase xsm:text-base">
-                Resumes
-              </h5>
-            </div>
-            <div className="px-2 pb-3.5">
-              <h5 className="text-sm font-medium uppercase xsm:text-base">
-                Impact
-              </h5>
-            </div>
-            <div className="px-2 pb-3.5 text-center">
-              <h5 className="text-sm font-medium uppercase xsm:text-base">
-                Brevity
-              </h5>
-            </div>
-            <div className="px-2 pb-3.5 text-center">
-              <h5 className="text-sm font-medium uppercase xsm:text-base">
-                Style
-              </h5>
-            </div>
-            <div className="px-2 pb-3.5 text-center">
-              <h5 className="text-sm font-medium uppercase xsm:text-base">
-                Sections
-              </h5>
-            </div>
-            <div className="px-2 pb-3.5 text-center">
-              <h5 className="text-sm font-medium uppercase xsm:text-base">
-                Total Score
-              </h5>
-            </div>
-            <div className="px-2 pb-3.5 text-center">
-              <h5 className="text-sm font-medium uppercase xsm:text-base">
-                Action
-              </h5>
-            </div>
+const ResumeTable = ({ resumeData }: TableProps) => {
+  return (
+    <div className="rounded-[10px] bg-white px-7.5 pb-4 pt-7.5 shadow-1 dark:bg-gray-dark dark:shadow-card">
+      <h4 className="mb-5.5 text-body-2xlg font-bold text-dark dark:text-white">
+        My Resumes
+      </h4>
+
+      <div className="flex flex-col">
+        {/* Header Row */}
+        <div className="grid grid-cols-7 border-b border-stroke dark:border-dark-3">
+          <div className="px-2 pb-3.5">
+            <h5 className="text-sm font-medium uppercase xsm:text-base">
+              Resumes
+            </h5>
           </div>
-  
-          {/* Data Rows */}
-          {brandData.map((brand, key) => (
-            <div
-              className={`grid grid-cols-6 ${
-                key === brandData.length - 1
-                  ? ""
-                  : "border-b border-stroke dark:border-dark-3"
-              }`}
-              key={key}
-            >
-              <div className="flex items-center gap-3.5 px-2 py-4">
-                <div className="flex-shrink-0">
-                  <Image src={brand.logo} alt="Brand" width={48} height={48} />
-                </div>
-                <p className="hidden font-medium text-dark dark:text-white sm:block">
-                  {brand.name}
-                </p>
+          <div className="px-2 pb-3.5 text-center">
+            <h5 className="text-sm font-medium uppercase xsm:text-base">
+              Impact
+            </h5>
+          </div>
+          <div className="px-2 pb-3.5 text-center">
+            <h5 className="text-sm font-medium uppercase xsm:text-base">
+              Brevity
+            </h5>
+          </div>
+          <div className="px-2 pb-3.5 text-center">
+            <h5 className="text-sm font-medium uppercase xsm:text-base">
+              Style
+            </h5>
+          </div>
+          <div className="px-2 pb-3.5 text-center">
+            <h5 className="text-sm font-medium uppercase xsm:text-base">
+              Sections
+            </h5>
+          </div>
+          <div className="px-2 pb-3.5 text-center">
+            <h5 className="text-sm font-medium uppercase xsm:text-base">
+              Total Score
+            </h5>
+          </div>
+          <div className="px-2 pb-3.5 text-center">
+            <h5 className="text-sm font-medium uppercase xsm:text-base">
+              Action
+            </h5>
+          </div>
+        </div>
+
+        {/* Data Rows */}
+        {resumeData.map((RESUME, key) => (
+          <div
+            className={`grid grid-cols-7 ${
+              key === resumeData.length - 1 ? "" : "border-b border-stroke dark:border-dark-3"
+            }`}
+            key={key}
+          >
+            {/* Resume Image */}
+            <div className="flex items-center gap-3.5 px-2 py-4">
+              <div className="flex-shrink-0">
+                <Image src={RESUME.picture} alt="RESUME" width={48} height={48} />
               </div>
-  
-              <div className="flex items-center justify-center px-2 py-4">
-                <p className="font-medium text-dark dark:text-white">
-                  {brand.visitors}K
-                </p>
-              </div>
-  
-              <div className="flex items-center justify-center px-2 py-4">
-                <p className="font-medium text-green-light-1">
-                  ${brand.revenues}
-                </p>
-              </div>
-  
-              <div className="flex items-center justify-center px-2 py-4">
-                <p className="font-medium text-dark dark:text-white">
-                  {brand.sales}
-                </p>
-              </div>
-  
-              <div className="flex items-center justify-center px-2 py-4">
-                <p className="font-medium text-dark dark:text-white">
-                  {brand.conversion}%
-                </p>
-              </div>
-  
-              <div className="flex items-center justify-center px-2 py-4">
+            </div>
+
+            {/* Impact */}
+            <div className="flex items-center justify-center px-2 py-4">
+              <p className="font-medium text-dark dark:text-white">
+                {RESUME.impact}
+              </p>
+            </div>
+
+            {/* Brevity */}
+            <div className="flex items-center justify-center px-2 py-4">
+              <p className="font-medium text-dark dark:text-white">
+                {RESUME.brevity}
+              </p>
+            </div>
+
+            {/* Style */}
+            <div className="flex items-center justify-center px-2 py-4">
+              <p className="font-medium text-green-light-1">
+                {RESUME.style}
+              </p>
+            </div>
+
+            {/* Sections */}
+            <div className="flex items-center justify-center px-2 py-4">
+              <p className="font-medium text-dark dark:text-white">
+                {RESUME.sections}
+              </p>
+            </div>
+
+            {/* Total Score */}
+            <div className="flex items-center justify-center px-2 py-4">
+              <p className="font-medium text-dark dark:text-white">
+                {RESUME.total_score}
+              </p>
+            </div>
+
+            {/* Actions */}
+            <div className="flex items-center justify-center px-2 py-4">
               <div className="flex items-center justify-end space-x-3.5">
                     <button className="hover:text-primary">
                       <svg
@@ -217,11 +186,11 @@ const TableOne = () => {
                     </button>
                   </div>
               </div>
-            </div>
-          ))}
-        </div>
+          </div>
+        ))}
       </div>
-    );
-  };
+    </div>
+  );
+};
 
-export default TableOne;
+export default ResumeTable;
