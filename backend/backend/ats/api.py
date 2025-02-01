@@ -6,7 +6,7 @@ from rest_framework.decorators import api_view, authentication_classes, permissi
 from rest_framework_simplejwt.tokens import AccessToken
 from .forms import ResumeForm
 from .models import Resume
-from .views import generate_cover_letter, generate_job_matches, resumeReview
+from .views import extract_text_from_pdf, generate_cover_letter, generate_job_matches, identify_skills, resumeReview
 
 from django.http import JsonResponse
 from rest_framework.decorators import api_view
@@ -32,7 +32,11 @@ def upload_resume(request):
             except (KeyError, TypeError):
                 return default
         print(safe_get(structured_results, "agent_summaries.Impact.score", 0))
+        resume_text=extract_text_from_pdf(resume.pdf.path)
+        skills=identify_skills(resume_text)
+        resume.skills=skills
         # Fill resume fields safely
+        resume.resume_content=resume_text
         resume.impact_score = safe_get(structured_results, "agent_summaries.Impact.score", 0)
         resume.impact_feedback = safe_get(structured_results, "agent_summaries.Impact.feedback", "Error filling this field")
 

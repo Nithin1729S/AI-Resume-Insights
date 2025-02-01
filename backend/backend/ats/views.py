@@ -369,7 +369,8 @@ def resumeReview(resume):
 
 
     agent = list(agent_subagent_pairs.keys())[0]
-    subagent = agent_subagent_pairs[agent][0]
+    subagent = agent_subagent_pairs[agent][0] 
+    # Uncomment to all api !!!!!!!!
     # conversation = app.invoke({
     #             'subagent_feedback': [],
     #             'agent_feedback': [],
@@ -536,18 +537,17 @@ technical_skills = [
     "Docker", "Kubernetes", "Terraform", "Ansible", "Puppet", 
     "Chef", "Nginx", "Apache", "IIS", "RabbitMQ", "Kafka", 
     "Zookeeper", "gRPC", "WebRTC", "OAuth", "JWT", "OAuth2", 
-    "GraphQL", "REST", "SOAP",
-
-    # Soft Skills (often included alongside technical skills)
-    "Problem Solving", "Team Collaboration", "Communication", 
-    "Code Review", "Technical Documentation", "Mentorship", 
-    "Project Management", "Leadership"
+    "GraphQL", "REST", "SOAP", "CI/CD", "DevOps", "Agile",
 ]
 
 def identify_skills(resume_text):
     """Identify technical skills from the resume text."""
     skills_found = []
+    print("Received resume text")
+    print(resume_text)
     for skill in technical_skills:
         if skill.lower() in resume_text.lower():
             skills_found.append(skill)
+    print("View Fnction")
+    print(skills_found)
     return skills_found

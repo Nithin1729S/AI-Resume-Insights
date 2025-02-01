@@ -11,6 +11,8 @@ class ResumeSerializer(serializers.ModelSerializer):
             'id',
             'user',
             'pdf',
+            'skills',
+            'resume_content',
             'impact_score',
             'impact_feedback',
             'quantify_impact_score',

@@ -7,7 +7,9 @@ class Resume(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     user=models.ForeignKey(User,related_name='resumes',on_delete=models.CASCADE)
     pdf = models.FileField(upload_to='uploads/resumes/', blank=True, null=True)
-
+    resume_content=models.TextField(blank=True, null=True)
+    skills = models.JSONField(default=list, blank=True, null=True)
+    
     ############### Impact #################
 
     impact_score = models.DecimalField(max_digits=5, decimal_places=2, blank=True, null=True)
