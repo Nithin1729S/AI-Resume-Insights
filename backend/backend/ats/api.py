@@ -1,9 +1,11 @@
 import time
 from django.http import JsonResponse
+from rest_framework.response import Response
 from .serializers import ResumeSerializer
 from useraccount.models import User
 from rest_framework.decorators import api_view, authentication_classes, permission_classes
 from rest_framework_simplejwt.tokens import AccessToken
+from django.shortcuts import get_object_or_404
 from .forms import ResumeForm
 from .models import Resume
 from .views import extract_text_from_pdf, generate_cover_letter, generate_job_matches, identify_skills, resumeReview
@@ -245,34 +247,32 @@ def job_matches_gen(request):
             'success': False,
             'message': f'Error: {str(e)}'
         }, status=500)
-    
+
 @api_view(['GET'])
 def get_all_resumes(request):
-    try:
-        # Fetch the most recent resume for the user
-        resume = Resume.objects.filter(user__email=request.user).first()
-
-        if not resume:
-            return JsonResponse({
-                'success': False,
-                'message': 'No resumes found for this user'
-            }, status=404)
-
-        # Generate and save the cover letter
-        job_matches = generate_job_matches(resume.pdf.path)
-        resume.job_matches = job_matches
-        resume.save()
-
-        return JsonResponse({
-            'success': True,
-            'message': 'Job matches generated successfully',
-            'job_matches': job_matches
-        }, status=200)
+    # Ensure the user is authenticated
+    if not request.user.is_authenticated:
+        return Response({"error": "Authentication required"}, status=401)
     
-    except Exception as e:
-        import traceback
-        traceback.print_exc()  # Log traceback details
-        return JsonResponse({
-            'success': False,
-            'message': f'Error: {str(e)}'
-        }, status=500)
+    # Fetch all resumes related to the authenticated user
+    resumes = Resume.objects.filter(user=request.user)
+
+    # Default fields expected by the frontend
+    resume_list = [
+        {
+            "picture": resume.pdf.url if resume.pdf else None,  # URL for picture field
+            "impact": resume.impact_score,
+            "brevity": resume.brevity_score,
+            "style": resume.style_score, 
+            "sections": resume.sections_score,  
+            "total_score": sum(
+                filter(None, [resume.impact_score, resume.brevity_score, resume.style_score,resume.sections_score])
+            )  # Summing available scores
+        }
+        for resume in resumes
+    ]
+    print(resume_list)
+
+    return Response(resume_list, status=200)
+
+        
