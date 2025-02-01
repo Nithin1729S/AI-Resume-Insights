@@ -1,12 +1,12 @@
 import React, { useState } from "react";
 
-interface CardProps {
+interface FeedbackCardProps {
   explanation: string;
   question: string;
   feedback: string;
 }
 
-const Card: React.FC<CardProps> = ({ explanation, question, feedback }) => {
+const FeedbackCard: React.FC<FeedbackCardProps> = ({ explanation, question, feedback }) => {
   const [isExpanded, setIsExpanded] = useState(false);
 
   const toggleDropdown = () => {
@@ -31,12 +31,15 @@ const Card: React.FC<CardProps> = ({ explanation, question, feedback }) => {
       </div>
 
       <div className="mt-4">
-        <button
-          onClick={toggleDropdown}
-          className="w-full text-center text-sm font-medium text-white bg-gray-500 rounded-md py-2 hover:bg-gray-600 focus:outline-none focus:ring-2 focus:ring-gray-400 focus:ring-opacity-75"
-        >
-          {question}
-        </button>
+      <button
+  onClick={toggleDropdown}
+  style={{
+    backgroundColor: "#333a48",
+  }}
+  className="w-full text-center text-sm font-medium text-white rounded-md py-2 hover:bg-opacity-90 focus:outline-none focus:ring-2 focus:ring-gray-400 focus:ring-opacity-75"
+>
+  {question}
+</button>
       </div>
 
       {isExpanded && (
@@ -48,4 +51,4 @@ const Card: React.FC<CardProps> = ({ explanation, question, feedback }) => {
   );
 };
 
-export default Card;
+export default FeedbackCard;

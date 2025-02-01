@@ -1,17 +1,17 @@
 import React, { useState } from "react";
 import { FaSearch, FaChevronDown, FaChevronUp } from "react-icons/fa";
 
-interface FAQ {
+interface Insights {
   id: number;
   question: string;
   answer: string;
 }
 
-interface FAQsPageProps {
-  faqs: FAQ[];
+interface RecruiterInsightsPageProps {
+  faqs: Insights[];
 }
 
-const FAQsPage: React.FC<FAQsPageProps> = ({ faqs }) => {
+const RecruiterInsightsPage: React.FC<RecruiterInsightsPageProps> = ({ faqs }) => {
   const [searchQuery, setSearchQuery] = useState("");
   const [expandedFAQ, setExpandedFAQ] = useState<number | null>(null);
 
@@ -63,10 +63,11 @@ const FAQsPage: React.FC<FAQsPageProps> = ({ faqs }) => {
                 </div>
               </button>
               {expandedFAQ === faq.id && (
-                <div className="p-4 bg-indigo-50 transition-all duration-300 ease-in-out">
-                  <p className="text-gray-700">{faq.answer}</p>
-                </div>
-              )}
+            <div
+              className="p-4 bg-indigo-50 transition-all duration-300 ease-in-out"
+              dangerouslySetInnerHTML={{ __html: faq.answer }}
+            />
+          )}
             </div>
           ))}
         </div>
@@ -75,4 +76,4 @@ const FAQsPage: React.FC<FAQsPageProps> = ({ faqs }) => {
   );
 };
 
-export default FAQsPage;
+export default RecruiterInsightsPage;
