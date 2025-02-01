@@ -1,7 +1,10 @@
 "use client";
 import Image from "next/image";
+import apiService from "../services/apiService";
+import { useState } from "react";
 
 type RESUME = {
+  id: string;
   picture: string;
   pdf: string;
   impact: number;
@@ -13,9 +16,26 @@ type RESUME = {
 
 type TableProps = {
   resumeData: RESUME[];
+  onDelete: () => void;
 };
 
-const ResumeTable = ({ resumeData }: TableProps) => {
+const ResumeTable = ({ resumeData, onDelete }: TableProps) => {
+  const [resumes, setResumes] = useState<RESUME[]>(resumeData);
+  const handleDelete = async (id: string) => {
+    try {
+      if (!confirm("Are you sure you want to delete this resume?")) {
+        return;
+      }
+      await apiService.delete(`/api/ats/resumes/${id}/`);
+      setResumes((prevResumes) =>
+        prevResumes.filter((resume) => resume.id !== id),
+      );
+      onDelete();
+    } catch (error) {
+      console.error("Error deleting resume:", error);
+      alert("Failed to delete resume. Please try again.");
+    }
+  };
   return (
     <div className="dark:bg-gray-dark rounded-[10px] bg-white px-7.5 pb-4 pt-7.5 shadow-1 dark:shadow-card">
       <h4 className="text-body-2xlg text-dark mb-5.5 font-bold dark:text-white">
@@ -75,13 +95,15 @@ const ResumeTable = ({ resumeData }: TableProps) => {
             {/* Resume Image */}
             <div className="flex items-center gap-3.5 px-2 py-4">
               <div className="flex-shrink-0">
-              <Image
-                  src={`${process.env.NEXT_PUBLIC_API_HOST}/${RESUME.picture}` || "/default-avatar.jpg" }
+                <Image
+                  src={
+                    `${process.env.NEXT_PUBLIC_API_HOST}/${RESUME.picture}` ||
+                    "/default-avatar.jpg"
+                  }
                   alt="Resume Thumbnail"
                   width={48}
                   height={48}
-              />
-                
+                />
               </div>
             </div>
 
@@ -121,7 +143,12 @@ const ResumeTable = ({ resumeData }: TableProps) => {
             {/* Actions */}
             <div className="flex items-center justify-center px-2 py-4">
               <div className="flex items-center justify-end space-x-3.5">
-                <button className="hover:text-primary" onClick={() => viewPDF(`${process.env.NEXT_PUBLIC_API_HOST}/${RESUME.pdf}`)}>
+                <button
+                  className="hover:text-primary"
+                  onClick={() =>
+                    viewPDF(`${process.env.NEXT_PUBLIC_API_HOST}/${RESUME.pdf}`)
+                  }
+                >
                   <svg
                     className="fill-current"
                     width="20"
@@ -144,7 +171,10 @@ const ResumeTable = ({ resumeData }: TableProps) => {
                     />
                   </svg>
                 </button>
-                <button className="hover:text-primary">
+                <button
+                  className="hover:text-primary"
+                  onClick={() => handleDelete(RESUME.id)}
+                >
                   <svg
                     className="fill-current"
                     width="20"
@@ -173,7 +203,14 @@ const ResumeTable = ({ resumeData }: TableProps) => {
                     />
                   </svg>
                 </button>
-                <button className="hover:text-primary" onClick={() => downloadPDF(`${process.env.NEXT_PUBLIC_API_HOST}/${RESUME.pdf}`)}>
+                <button
+                  className="hover:text-primary"
+                  onClick={() =>
+                    downloadPDF(
+                      `${process.env.NEXT_PUBLIC_API_HOST}/${RESUME.pdf}`,
+                    )
+                  }
+                >
                   <svg
                     className="fill-current"
                     width="20"
@@ -201,12 +238,11 @@ const ResumeTable = ({ resumeData }: TableProps) => {
   );
 };
 
-
-function viewPDF(pdfUrl:string) {
-  const link = document.createElement('a');
-  link.href = pdfUrl; 
-  link.download = pdfUrl.split('/').pop() || 'default.pdf'; 
-  link.click(); 
+function viewPDF(pdfUrl: string) {
+  const link = document.createElement("a");
+  link.href = pdfUrl;
+  link.download = pdfUrl.split("/").pop() || "default.pdf";
+  link.click();
 }
 
 const downloadPDF = (pdfUrl: string): void => {

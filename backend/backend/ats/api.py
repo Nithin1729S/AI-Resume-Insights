@@ -1,9 +1,11 @@
 import time
 from django.http import JsonResponse
 from rest_framework.response import Response
+from rest_framework import status
 from .serializers import ResumeSerializer
 from useraccount.models import User
 from rest_framework.decorators import api_view, authentication_classes, permission_classes
+from rest_framework.permissions import IsAuthenticated
 from rest_framework_simplejwt.tokens import AccessToken
 from django.shortcuts import get_object_or_404
 from .forms import ResumeForm
@@ -297,6 +299,7 @@ def get_all_resumes(request):
     # Default fields expected by the frontend
     resume_list = [
         {
+            "id": str(resume.id), # Convert UUID to string
             "pdf": resume.pdf.url if resume.pdf else None,  # URL for picture field
             "picture": resume.thumbnail.url if resume.thumbnail else None,  # Use thumbnail if available
             "impact": resume.impact_score,
@@ -312,3 +315,20 @@ def get_all_resumes(request):
     return Response(resume_list, status=200)
 
         
+
+@api_view(['DELETE'])
+@permission_classes([IsAuthenticated])
+def delete_resume(request, resume_id):
+    # Get the resume object or return 404
+    resume = get_object_or_404(Resume, id=resume_id, user=request.user)
+    
+    # Delete the associated files
+    if resume.pdf:
+        resume.pdf.delete()
+    if resume.thumbnail:
+        resume.thumbnail.delete()
+        
+    # Delete the resume object
+    resume.delete()
+    
+    return Response({"message": "Resume deleted successfully"}, status=status.HTTP_204_NO_CONTENT)
