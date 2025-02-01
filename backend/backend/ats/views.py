@@ -543,11 +543,7 @@ technical_skills = [
 def identify_skills(resume_text):
     """Identify technical skills from the resume text."""
     skills_found = []
-    print("Received resume text")
-    print(resume_text)
     for skill in technical_skills:
         if skill.lower() in resume_text.lower():
             skills_found.append(skill)
-    print("View Fnction")
-    print(skills_found)
     return skills_found

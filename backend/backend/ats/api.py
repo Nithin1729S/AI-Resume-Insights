@@ -9,7 +9,11 @@ from django.shortcuts import get_object_or_404
 from .forms import ResumeForm
 from .models import Resume
 from .views import extract_text_from_pdf, generate_cover_letter, generate_job_matches, identify_skills, resumeReview
-
+from pdf2image import convert_from_path
+from PIL import Image
+import os
+from django.conf import settings
+import tempfile
 from django.http import JsonResponse
 from rest_framework.decorators import api_view
 
@@ -20,6 +24,39 @@ def upload_resume(request):
         resume = form.save(commit=False)
         resume.user = request.user
         resume.save()
+        # Generate thumbnail from PDF
+        try:
+            # Convert first page of PDF to image
+            with tempfile.TemporaryDirectory() as temp_dir:
+                images = convert_from_path(
+                    resume.pdf.path,
+                    first_page=1,
+                    last_page=1,
+                    output_folder=temp_dir
+                )
+                
+                if images:
+                    # Take first page and create thumbnail
+                    thumbnail = images[0]
+                    thumbnail.thumbnail((100, 100))  # Resize to desired dimensions
+                    
+                    # Create filename for thumbnail
+                    thumb_filename = f'thumb_{os.path.basename(resume.pdf.path)}.png'
+                    thumb_path = os.path.join(settings.MEDIA_ROOT, 'uploads/thumbnails', thumb_filename)
+                    
+                    # Ensure directory exists
+                    os.makedirs(os.path.dirname(thumb_path), exist_ok=True)
+                    
+                    # Save thumbnail
+                    thumbnail.save(thumb_path, 'PNG')
+                    
+                    # Update resume model with thumbnail path
+                    relative_path = os.path.join('uploads/thumbnails', thumb_filename)
+                    resume.thumbnail = relative_path
+                    resume.save()
+        except Exception as e:
+            print(f"Error generating thumbnail: {e}")
+            # Continue even if thumbnail generation fails
         resume = Resume.objects.filter(user__email=request.user).first()
         file_path = resume.pdf.path  
         structured_results = resumeReview(file_path)
@@ -260,7 +297,8 @@ def get_all_resumes(request):
     # Default fields expected by the frontend
     resume_list = [
         {
-            "picture": resume.pdf.url if resume.pdf else None,  # URL for picture field
+            "pdf": resume.pdf.url if resume.pdf else None,  # URL for picture field
+            "picture": resume.thumbnail.url if resume.thumbnail else None,  # Use thumbnail if available
             "impact": resume.impact_score,
             "brevity": resume.brevity_score,
             "style": resume.style_score, 
@@ -271,8 +309,6 @@ def get_all_resumes(request):
         }
         for resume in resumes
     ]
-    print(resume_list)
-
     return Response(resume_list, status=200)
 
         
