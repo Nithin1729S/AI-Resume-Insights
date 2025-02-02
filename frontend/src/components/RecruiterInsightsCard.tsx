@@ -1,5 +1,13 @@
-import React, { useState } from "react";
-import { FaSearch, FaChevronDown, FaChevronUp } from "react-icons/fa";
+import React from "react";
+import { Search, ChevronDown, ChevronUp, Lightbulb } from "lucide-react";
+import { Input } from "@/components/ui/input";
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "@/components/ui/accordion";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
 interface Insights {
   id: number;
@@ -12,64 +20,71 @@ interface RecruiterInsightsPageProps {
 }
 
 const RecruiterInsightsPage: React.FC<RecruiterInsightsPageProps> = ({ faqs }) => {
-  const [searchQuery, setSearchQuery] = useState("");
-  const [expandedFAQ, setExpandedFAQ] = useState<number | null>(null);
-
-  const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setSearchQuery(e.target.value);
-  };
-
-  const toggleFAQ = (id: number) => {
-    setExpandedFAQ(expandedFAQ === id ? null : id);
-  };
+  const [searchQuery, setSearchQuery] = React.useState("");
 
   const filteredFAQs = faqs.filter((faq) =>
     faq.question.toLowerCase().includes(searchQuery.toLowerCase())
   );
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-white-50 to-white-100 py-12 px-4 sm:px-6 lg:px-8">
-      <div className="max-w-3xl mx-auto">
-        <h1 className="text-4xl font-extrabold text-center text-indigo-900 mb-8">Recruiter Insights</h1>
-        
-        <div className="mb-8">
-          <div className="relative">
-            <input
-              type="text"
-              placeholder="Search Insights..."
-              className="w-full py-3 px-4 pr-10 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
-              value={searchQuery}
-              onChange={handleSearch}
-            />
-            <FaSearch className="absolute right-3 top-3 text-gray-400" />
+    <div className="min-h-screen bg-background py-12 px-4 sm:px-6 lg:px-8">
+      <div className="max-w-4xl mx-auto space-y-8">
+        {/* Header Section */}
+        <div className="text-center space-y-4">
+          <div className="flex items-center justify-center space-x-2">
+            <Lightbulb className="h-8 w-8 text-primary" />
+            <h1 className="text-4xl font-bold tracking-tight">Recruiter Insights</h1>
           </div>
+          <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
+            Discover valuable insights and answers to common recruiting questions
+          </p>
         </div>
 
-        <div className="space-y-4">
-          {filteredFAQs.map((faq) => (
-            <div key={faq.id} className="bg-white rounded-lg shadow-md overflow-hidden">
-              <button
-                className="w-full text-left p-4 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-inset"
-                onClick={() => toggleFAQ(faq.id)}
-                aria-expanded={expandedFAQ === faq.id}
-              >
-                <div className="flex justify-between items-center">
-                  <h2 className="text-lg font-semibold text-gray-800">{faq.question}</h2>
-                  {expandedFAQ === faq.id ? (
-                    <FaChevronUp className="text-indigo-600" />
-                  ) : (
-                    <FaChevronDown className="text-indigo-600" />
-                  )}
-                </div>
-              </button>
-              {expandedFAQ === faq.id && (
-            <div
-              className="p-4 bg-indigo-50 transition-all duration-300 ease-in-out"
-              dangerouslySetInnerHTML={{ __html: faq.answer }}
-            />
-          )}
+        {/* Search Section */}
+        <Card className="border-none shadow-md">
+          <CardContent className="pt-6">
+            <div className="relative">
+              <Search className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
+              <Input
+                type="text"
+                placeholder="Search insights..."
+                className="pl-10 h-12"
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+              />
             </div>
-          ))}
+          </CardContent>
+        </Card>
+
+        {/* FAQs Section */}
+        <div className="space-y-6">
+          {filteredFAQs.length === 0 ? (
+            <div className="text-center py-12">
+              <p className="text-muted-foreground">No matching insights found</p>
+            </div>
+          ) : (
+            <Accordion type="single" collapsible className="space-y-4">
+              {filteredFAQs.map((faq) => (
+                <AccordionItem
+                  key={faq.id}
+                  value={faq.id.toString()}
+                  className="bg-card rounded-lg shadow-sm border px-6"
+                >
+                  <AccordionTrigger className="hover:no-underline py-4">
+                    <div className="flex items-start text-left">
+                      <span className="text-lg font-medium">{faq.question}</span>
+                    </div>
+                  </AccordionTrigger>
+                  <AccordionContent className="pt-2 pb-6">
+                    <div
+                      className="prose prose-sm max-w-none text-muted-foreground"
+                      dangerouslySetInnerHTML={{ __html: faq.answer }}
+                    />
+                  </AccordionContent>
+                </AccordionItem>
+              ))}
+            </Accordion>
+          )}
         </div>
       </div>
     </div>

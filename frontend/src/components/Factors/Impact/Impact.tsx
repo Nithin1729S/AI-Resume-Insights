@@ -79,6 +79,62 @@ interface ImpactProps {
   impact_feedback: string;
 }
 
+import { AlertCircle, Check, ChevronRight, Lock } from "lucide-react";
+
+interface ScoreItem {
+  id: string;
+  title: string;
+  description: string;
+  status: "success" | "error" | "locked";
+  action: "FIX" | "MORE";
+}
+
+const scoreItems: ScoreItem[] = [
+  {
+    id: "1",
+    title: "Quantifying impact",
+    description: "Add more numbers and metrics",
+    status: "error",
+    action: "FIX",
+  },
+  {
+    id: "2",
+    title: "Unique action verbs",
+    description: "No verbs were overused",
+    status: "success",
+    action: "MORE",
+  },
+  {
+    id: "3",
+    title: "Weak action verbs",
+    description: "We found weak action verbs that you should remove from your resume.",
+    status: "error",
+    action: "FIX",
+  },
+  {
+    id: "4",
+    title: "Incorrect verb tenses",
+    description: "We found some improvements in the tenses you use to describe your experiences.",
+    status: "error",
+    action: "FIX",
+  },
+  {
+    id: "5",
+    title: "Accomplishment-oriented language",
+    description: "Pro only section",
+    status: "locked",
+    action: "MORE",
+  },
+  {
+    id: "6",
+    title: "Spell check",
+    description: "Pro-only section",
+    status: "locked",
+    action: "MORE",
+  },
+];
+
+
 const Impact: React.FC<ImpactProps> = ({
   resume_url,
   impact_score,
@@ -88,28 +144,62 @@ const Impact: React.FC<ImpactProps> = ({
     <div className="grid h-screen grid-cols-2">
       {/* Left half */}
       <div className="flex h-full flex-col justify-start overflow-y-auto p-4 [-ms-overflow-style:none] [scrollbar-width:none] hover:[-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden">
-        {/* Row with heading on the left and circle at the far right */}
-        <div className="flex w-full items-center justify-between">
-          <p className="text-2xl font-semibold text-black dark:text-white">
-            Quantify Impact
-            <p className="mb-4 mt-1 text-sm text-gray-600 dark:text-gray-400">
-              Increase your impact by using numbers and metrics in your bullet
-              points
-            </p>
-          </p>
-          <CircleProgress score={impact_score} />
+      <div className="bg-white rounded-xl shadow-sm border border-gray-100 p-8">
+      <div className="flex items-center justify-between mb-6">
+        <h2 className="text-2xl font-semibold text-purple-900">Impact</h2>
+        <div className="bg-orange-50 px-4 py-2 rounded-full">
+          <span className="text-orange-600 font-semibold">63</span>
+          <span className="text-orange-400 text-sm">/100</span>
         </div>
-        <br />
-        <hr />
-        <br />
+      </div>
+      
+      <p className="text-gray-600 mb-8">
+        Your resume&apos;s impact score is made up of these checks.
+      </p>
 
-        {/* The rest of the content below */}
-        {/* <p>Quantify Impact feedback: {quantify_impact_feedback}</p> */}
-        <FeedbackCard
-          explanation={explanation}
-          question={question}
-          feedback={impact_feedback}
-        />
+      <div className="space-y-4">
+        {scoreItems.map((item) => (
+          <div
+            key={item.id}
+            className="flex items-center justify-between p-4 rounded-lg border border-gray-100 hover:border-gray-200 transition-colors"
+          >
+            <div className="flex items-start gap-3">
+              {item.status === "success" && (
+                <div className="mt-1">
+                  <Check className="w-5 h-5 text-green-500" />
+                </div>
+              )}
+              {item.status === "error" && (
+                <div className="mt-1">
+                  <AlertCircle className="w-5 h-5 text-red-500" />
+                </div>
+              )}
+              {item.status === "locked" && (
+                <div className="mt-1">
+                  <Lock className="w-5 h-5 text-gray-400" />
+                </div>
+              )}
+              <div>
+                <h3 className="font-medium text-gray-900 mb-1">
+                  {item.title}
+                </h3>
+                <p className="text-sm text-gray-500">{item.description}</p>
+              </div>
+            </div>
+            <button
+              className={`flex items-center px-4 py-1.5 rounded-full text-sm font-medium transition-colors ${
+                item.action === "FIX"
+                  ? "text-purple-600 hover:bg-purple-50"
+                  : "text-purple-600 hover:bg-purple-50"
+              }`}
+            >
+              {item.action}
+              <ChevronRight className="w-4 h-4 ml-1" />
+            </button>
+          </div>
+        ))}
+      </div>
+    </div>
         <br />
         <RecruiterInsightsCard faqs={faqs} />
       </div>

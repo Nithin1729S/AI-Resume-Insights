@@ -1,4 +1,9 @@
-import React, { useState } from "react";
+import React from "react";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { MessageCircle, ChevronDown, ChevronUp } from "lucide-react";
+import { cn } from "@/utils/cn";
+import { Button } from "./ui/button";
+
 
 interface FeedbackCardProps {
   explanation: string;
@@ -7,47 +12,55 @@ interface FeedbackCardProps {
 }
 
 const FeedbackCard: React.FC<FeedbackCardProps> = ({ explanation, question, feedback }) => {
-  const [isExpanded, setIsExpanded] = useState(false);
-
-  const toggleDropdown = () => {
-    setIsExpanded((prev) => !prev);
-  };
+  const [isExpanded, setIsExpanded] = React.useState(false);
 
   return (
-    <div className="col-span-12 rounded-[10px] bg-white px-7.5 pb-6 pt-7.5 shadow-1 dark:bg-gray-dark dark:shadow-card xl:col-span-7">
-      <div className="mb-3.5 flex flex-col gap-2.5 sm:flex-row sm:items-center sm:justify-between">
-        <div>
-          <h4 className="text-body-2xlg font-bold text-dark dark:text-white">
-            Feedback
-          </h4>
+    <Card className="w-full transition-all duration-300 hover:shadow-lg">
+      <CardHeader className="space-y-1">
+        <div className="flex items-center space-x-2">
+          <MessageCircle className="h-5 w-5 text-primary" />
+          <CardTitle className="text-xl">Feedback</CardTitle>
         </div>
-        <div className="flex items-center gap-2.5">
-          {/* Additional controls or icons can go here */}
+      </CardHeader>
+      <CardContent className="space-y-4">
+        {/* Feedback Section */}
+        <div className="rounded-lg bg-muted/50 p-4">
+          <p className="text-base leading-relaxed">{feedback}</p>
         </div>
-      </div>
 
-      <div className="gap-2 text-center xsm:gap-0">
-        {feedback}
-      </div>
+        {/* Question Button */}
+        <Button
+          variant="outline"
+          className="w-full justify-between"
+          onClick={() => setIsExpanded(!isExpanded)}
+        >
+          <span className="text-sm font-medium">{question}</span>
+          {isExpanded ? (
+            <ChevronUp className="h-4 w-4 ml-2 text-muted-foreground" />
+          ) : (
+            <ChevronDown className="h-4 w-4 ml-2 text-muted-foreground" />
+          )}
+        </Button>
 
-      <div className="mt-4">
-      <button
-  onClick={toggleDropdown}
-  style={{
-    backgroundColor: "#333a48",
-  }}
-  className="w-full text-center text-sm font-medium text-white rounded-md py-2 hover:bg-opacity-90 focus:outline-none focus:ring-2 focus:ring-gray-400 focus:ring-opacity-75"
->
-  {question}
-</button>
-      </div>
-
-      {isExpanded && (
-        <div className="mt-4 text-sm text-gray-700 dark:text-gray-300">
-          <p>{explanation}</p>
+        {/* Explanation Section */}
+        <div
+          className={cn(
+            "grid transition-all duration-300",
+            isExpanded ? "grid-rows-[1fr]" : "grid-rows-[0fr]"
+          )}
+        >
+          <div className="overflow-hidden">
+            <div className={cn(
+              "rounded-lg bg-accent/50 p-4 text-sm leading-relaxed",
+              isExpanded ? "opacity-100" : "opacity-0",
+              "transition-opacity duration-300"
+            )}>
+              {explanation}
+            </div>
+          </div>
         </div>
-      )}
-    </div>
+      </CardContent>
+    </Card>
   );
 };
 
