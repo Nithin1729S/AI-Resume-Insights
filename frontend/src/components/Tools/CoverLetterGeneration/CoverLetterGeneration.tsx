@@ -1,7 +1,9 @@
-"use client";
 import React from "react";
+import { ScrollArea } from "@/components/ui/scroll-area";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Separator } from "@/components/ui/separator";
+import { FileText, SplitSquareVertical } from "lucide-react";
 import PDFCanvas from "@/components/PDFCanvas/PDFCanvas";
-
 interface CoverLetterGenerationProps {
   resume_url: string;
   cover_letter: string;
@@ -17,18 +19,36 @@ const CoverLetterGeneration: React.FC<CoverLetterGenerationProps> = ({
   return (
     <div className="grid grid-cols-2 h-screen">
       {/* Left half */}
-      <div className="p-6">
-        <h2 className="text-2xl font-bold mb-6">Cover Letter Generation</h2>
-        <div
-          className="bg-white rounded-lg p-6 shadow-md h-[calc(100vh-120px)] overflow-y-auto scrollbar-hide"
-        >
-          <div className="whitespace-pre-line font-sans text-base leading-relaxed">
-            {paragraphs.map((paragraph, index) => (
-              <div key={index} className="mb-4">
-                {paragraph}
-              </div>
-            ))}
+      <div className="flex-1 p-6 ">
+        <div className="h-full flex flex-col max-w-3xl mx-auto">
+          <div className="flex items-center gap-2 mb-6">
+            <FileText className="h-6 w-6 text-primary" />
+            <h1 className="text-2xl font-semibold tracking-tight">Cover Letter</h1>
           </div>
+          
+          <Card className="flex-1 shadow-md">
+            <CardHeader className="pb-3">
+              <div className="flex items-center justify-between">
+                <CardTitle className="text-lg font-medium">Generated Content</CardTitle>
+                <SplitSquareVertical className="h-4 w-4 text-muted-foreground" />
+              </div>
+              <Separator className="mt-2" />
+            </CardHeader>
+            <CardContent>
+              <ScrollArea className="h-[calc(100vh-220px)] pr-4">
+                <div className="space-y-6">
+                  {paragraphs.map((paragraph, index) => (
+                    <p
+                      key={index}
+                      className="text-base leading-relaxed first-letter:text-lg first-letter:font-medium"
+                    >
+                      {paragraph}
+                    </p>
+                  ))}
+                </div>
+              </ScrollArea>
+            </CardContent>
+          </Card>
         </div>
       </div>
 
