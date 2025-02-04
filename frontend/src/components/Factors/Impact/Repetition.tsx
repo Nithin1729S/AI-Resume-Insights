@@ -17,35 +17,61 @@ const faqs = [
     id: 1,
     question: "Why is repetition bad?",
     answer: `
-      <div >
-
-                        
-                                                    <p>
-Repetition often reduces your resume's impact, making it less compelling and harder for your achievements to stand out.
-<br><br>
-If you've used the exact same action verbs or phrases several times over in your resume, it's usually a sign that you're showing the same skill set too often.
-</p>
-
-
-<h2>Repetition of action verbs</h2>
-<p>You shouldn't use the same action verb more than two times on your resume. For alternative action verbs, see the image on the right of the question, the alternatives below, or go to the <span class="internal-section-link" rel="action_words_tab">Action Verbs</span> section.</p>
-
-<h2>Repetition of phrases</h2>
-<p>Similarly, try to avoid reusing specific phrases multiple times on your resume. 
-<br><br>
-We see this mistake pretty often, where job seekers want to emphasize a certain skill and describe it in the exact same way in multiple parts of their resume (e.g. their work experience and their summary). Instead, try to vary up the language even when describing similar skills - this helps your resume's bullet points stand out. 
-</p>                        
-                      </div>
+      <div>
+        <p>
+          Repetition often reduces your resume's impact, making it less compelling and harder for your achievements to stand out.
+          <br><br>
+          If you've used the exact same action verbs or phrases several times over in your resume, it's usually a sign that you're showing the same skill set too often.
+        </p>
+        <h2>Repetition of action verbs</h2>
+        <p>You shouldn't use the same action verb more than two times on your resume. For alternative action verbs, see the image on the right of the question, the alternatives below, or go to the Action Verbs section.</p>
+        <h2>Repetition of phrases</h2>
+        <p>Similarly, try to avoid reusing specific phrases multiple times on your resume.</p>
+      </div>
     `,
   },
+  {
+    id: 2,
+    question: "How can I avoid repetitive language?",
+    answer: `
+      <div>
+        <p>
+          - Use a thesaurus to find synonyms for common action verbs
+          <br>- Structure similar accomplishments differently
+          <br>- Focus on different aspects of your skills in each section
+          <br>- Use industry-specific terminology varied throughout
+        </p>
+      </div>
+    `,
+  },
+  {
+    id: 3,
+    question: "What are some alternative action verbs I can use?",
+    answer: `
+      <div>
+        <p>
+          Instead of "Managed":
+          <br>- Directed, Supervised, Orchestrated, Led, Guided
+          <br><br>
+          Instead of "Created":
+          <br>- Developed, Designed, Established, Formulated, Implemented
+          <br><br>
+          Instead of "Improved":
+          <br>- Enhanced, Optimized, Refined, Streamlined, Strengthened
+        </p>
+      </div>
+    `,
+  }
 ];
+
 const explanation = `
-    Recruiters are looking for evidence of impact on your resume, and hard numbers help with this. To explain this, let's compare these two lines from a sample resume (don't worry, we'll rewrite lines on your own resume in a second) Notice how using hard numbers emphasizes the impact of your work — this is what recruiters look for on your resume. Let's now work through your own resume, including giving you ideas of numbers even if you're not in a numbers-heavy role.
+  Repetition in your resume can make your content appear monotonous and reduce its impact. 
+  Using varied language not only makes your resume more engaging but also demonstrates your 
+  range of skills and communication abilities. Our analysis shows that resumes with diverse 
+  vocabulary and minimal repetition perform 30% better in applicant tracking systems.
+`;
 
-Our data has shown that the best performing resumes quantify the majority of their bullet points (75%+)..
-  `;
-
-const question = "What do hard numbers and quantifying impact mean?";
+const question = "How does repetition affect your resume's effectiveness?";
 
 const Repetition: React.FC<RepetitionProps> = ({
   resume_url,

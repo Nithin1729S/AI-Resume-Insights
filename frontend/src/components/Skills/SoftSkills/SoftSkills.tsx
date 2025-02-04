@@ -3,89 +3,83 @@
 import React from "react";
 import PDFCanvas from "@/components/PDFCanvas/PDFCanvas";
 import RecruiterInsightsCard from "../../RecruiterInsightsCard";
-const THRESHOLD: number = 6;
+import { AlertCircle, Check, ChevronRight, Lock } from "lucide-react";
+import { useRouter } from "next/navigation";
+
+const THRESHOLD: number = 5.9;
 
 const faqs = [
   {
     id: 1,
-    question: "I'm a student or recent graduate. What metrics should I use?",
+    question: "How can I effectively demonstrate soft skills on my resume?",
     answer: `
-      If you're a student and you are struggling to come up with metrics and numbers, here are a few ideas:
+      Here are key ways to showcase your soft skills:
       <ul>
-        <li><strong>Team size:</strong> e.g. how many people have you worked with for specific projects or extracurricular activities? e.g. Teamed with x people to deliver y...</li>
-        <li><strong>Industry-specific metrics:</strong> Depending on the industry you're looking to apply to, there are specific metrics. e.g. have you worked with large amounts of data? For example, you could explain how you "analyzed 10,000 data points to do x" or "Collected 1,000 survey responses to do y".</li>
-        <li><strong>Extra-curricular activities:</strong> Think about any other extra-curricular activities you may have participated in. e.g. you could discuss the # of participants at an event you may have organized, etc.</li>
+        <li><strong>Use action verbs:</strong> Instead of just listing skills, demonstrate them through actions. e.g., "Collaborated with 5 team members" instead of just "Good team player"</li>
+        <li><strong>Provide specific examples:</strong> Share situations where you used these skills. e.g., "Led a team of 4 to complete project ahead of schedule" shows leadership and time management</li>
+        <li><strong>Quantify achievements:</strong> Where possible, add numbers to your soft skill achievements. e.g., "Mentored 3 junior team members, improving their productivity by 40%"</li>
       </ul>
     `,
   },
   {
     id: 2,
-    question: "What if I'm not in a numbers-focused role?",
+    question: "Which soft skills are most valued by employers?",
     answer: `
-      A common misconception is that only people in financial or sales roles have access to numbers they can use on their resume. That's not true. Every role or project has something you can quantify. You just need to think about the impact of your work in a non-financial context.
+      While specific soft skills may vary by industry, these are consistently highly valued:
       <br /><br />
-      Let's go through a few examples:
+      Here's how to highlight them:
       <ul>
-        <li><strong>Time savings:</strong> Did you introduce a new process, template, or tool that saved your company time? e.g. in terms of hours per week.</li>
-        <li><strong>Scope:</strong> You can highlight the complexity of work you did by mentioning how many customers or users your team served.</li>
-        <li><strong>Industry-specific metrics:</strong> Depending on the industry you're looking to apply to, there are specific metrics. e.g. have you worked with large amounts of data? For example, you could explain how you "analyzed 10,000 data points to do x" or "Collected 1,000 survey responses to do y".</li>
+        <li><strong>Communication:</strong> Show how you've presented ideas, written reports, or facilitated discussions</li>
+        <li><strong>Leadership:</strong> Highlight instances where you've led projects, mentored others, or taken initiative</li>
+        <li><strong>Problem-solving:</strong> Describe specific challenges you've overcome and how you approached them</li>
+        <li><strong>Teamwork:</strong> Demonstrate collaboration experiences and successful team outcomes</li>
+        <li><strong>Adaptability:</strong> Show how you've handled change or learned new skills quickly</li>
       </ul>
-      Don't be afraid to estimate if you don't have an exact number available. Most resumes use estimates. For example, if you upgraded some machinery and made your company’s operations more efficient, you could estimate how many hours of labor those new machines saved per week.
-      <br /><br />
-      To take it a step further, you could multiply these weekly labor hours by the average hourly employee pay to give a rough idea of how much money the machines saved.
     `,
   },
   {
     id: 3,
-    question: "How do you add numbers and metrics to your bullet points?",
+    question: "How do I balance technical and soft skills on my resume?",
     answer: `<p>
-Expand the image next to the question for a real example of how to add numbers to your bullet points. This is called quantifying your bullet points.
+A strong resume needs both technical and soft skills. Here's how to achieve the right balance:
 <br><br>
-This is one of the best things you can do to separate your resume from other applicants.
-<br><br>								In the examples, notice how we explicitly describe the <em>impact</em> of our work. You want to always talk about the <em>result</em> of your work —&nbsp;did you help your company get more sales? Did you save your company time? Doing this makes your achievements more meaningful and helps employers know what kind of impact you can have at their company.					</p>`,
+1. Integrate soft skills naturally into your experience descriptions rather than just listing them
+<br><br>
+2. Use specific examples that show both technical and soft skills in action
+<br><br>
+3. Choose soft skills that are particularly relevant to your target role and industry</p>`,
   },
   {
     id: 4,
-    question: "What numbers can I use to quantify my resume?",
+    question: "How can I prove my soft skills in my resume?",
     answer: `<p>
-Employers love to see achievements that directly contribute to the company’s bottom line (i.e. revenues and costs). Thus, quantifying your impact in dollars will be most impressive to employers.
+Here are effective ways to validate your soft skills:
 <br><br>
-However, not all of us work in sales or finance roles where our performance can be easily converted into dollar figures. What should you do in that case? Here are a few options:
+1) Use the STAR method (Situation, Task, Action, Result) to describe situations where you demonstrated these skills
 <br><br>
-1) Use any metric that is relevant to your job, and then make an educated estimate to convert that metric into dollars. For example, improvements you made to a process may have cut the process’s time by 20 hours a week. Twenty hours is equivalent to half of one full-time employee’s workweek, so you can convert your time savings into an estimated financial impact of half the average full-time employee’s salary — say, $30,000 a year.
-										<br><br>
-										2) There are also other metrics you can use to quantify your results!
-										For example, how many people or departments did you work with? Did a change you made result in fewer customer support queries? You can even quantify your achievements based on the size of a project you ran or the time you saved your team on a weekly basis. 
-										<br><br>
-										3. Keep in mind that quantifying a bullet point is not just about the amount (i.e. how much, or a dollar or percentage value) but also the frequency (i.e. how often) and length (i.e. how long a project was).
-
+2) Include measurable achievements. For example:
+- "Improved team communication efficiency by implementing weekly stand-ups, reducing project delays by 30%"
+- "Led cross-functional team of 8 members to deliver project under budget"
+- "Resolved average of 15 customer conflicts per week with 95% satisfaction rate"
 <br><br>
-
-There are hundreds of other metrics you can use depending on your industry. If you're in marketing, metrics include things like marketing spend, total subscribers, change in conversion rates and changes in customer acquisition costs. If you're in a technical field like software engineering, metrics could include reduction in execution speed, size of data you worked with and time you saved your team.</p>`,
+3) Incorporate feedback or recognition you've received that validates these skills, such as awards or commendations
+<br><br>
+Remember, the key is to show, not tell. Instead of saying "excellent communicator," demonstrate it through your achievements and experiences.</p>`,
   },
 ];
 
-const explanation = `
-    Recruiters are looking for evidence of impact on your resume, and hard numbers help with this. To explain this, let's compare these two lines from a sample resume (don't worry, we'll rewrite lines on your own resume in a second) Notice how using hard numbers emphasizes the impact of your work — this is what recruiters look for on your resume. Let's now work through your own resume, including giving you ideas of numbers even if you're not in a numbers-heavy role.
 
-Our data has shown that the best performing resumes quantify the majority of their bullet points (75%+)..
-  `;
-
-const question = "What do hard numbers and quantifying impact mean?";
-interface ImpactProps {
+interface SoftSkillsProps {
   resume_url: string;
-  impact_score: number;
-  impact_feedback: string;
-  quantify_impact_score: number;
-  repetition_score: number;
-  weak_verbs_score: number;
-  responsibilities_score: number;
-  verb_tenses_score: number;
-  spelling_consistencies_score: number;
+  soft_skills_score: number;
+  soft_skills_feedback: string;
+  communication_score: number;
+  leadership_score: number;
+  analytical_score: number;
+  teamwork_score: number;
+  drive_score: number;
 }
 
-import { AlertCircle, Check, ChevronRight, Lock } from "lucide-react";
-import { useRouter } from "next/navigation";
 
 interface ScoreItem {
   id: string;
@@ -97,91 +91,78 @@ interface ScoreItem {
 }
 
 const scoreItems = (
-  quantify_impact_score: number,
-  repetition_score: number,
-  weak_verbs_score: number,
-  responsibilities_score: number,
-  verb_tenses_score: number,
-  spelling_consistencies_score: number,
+  communication_score: number,
+  leadership_score: number,
+  analytical_score: number,
+  teamwork_score: number,
+  drive_score: number,
 ): ScoreItem[] => [
   {
     id: "1",
-    title: "Quantifying impact",
+    title: "Communication",
     description:
-      quantify_impact_score > THRESHOLD
+      communication_score > THRESHOLD
         ? "Great job! Your numbers make achievements stand out."
         : "Missing numbers! Your impact feels vague.",
-    status: quantify_impact_score > THRESHOLD ? "success" : "error",
-    action: quantify_impact_score > THRESHOLD ? "MORE" : "FIX",
-    path: "/factors/impact/quantify-impact",
+    status: communication_score > THRESHOLD ? "success" : "error",
+    action: communication_score > THRESHOLD ? "MORE" : "FIX",
+    path: "/skills/soft-skills/communication",
   },
   {
     id: "2",
-    title: "Repetition",
+    title: "Leadership",
     description:
-      repetition_score > THRESHOLD
+      leadership_score > THRESHOLD
         ? "No verbs were overused."
         : "Repetitive verbs found! Try to diversify your language.",
-    status: repetition_score > THRESHOLD ? "success" : "error",
-    action: repetition_score > THRESHOLD ? "MORE" : "FIX",
-    path: "/factors/impact/repetition",
+    status: leadership_score > THRESHOLD ? "success" : "error",
+    action: leadership_score > THRESHOLD ? "MORE" : "FIX",
+    path: "/skills/soft-skills/leadership",
   },
   {
     id: "3",
-    title: "Weak verbs",
+    title: "Analytical",
     description:
-      weak_verbs_score > THRESHOLD
+      analytical_score > THRESHOLD
         ? "Strong verbs used effectively."
         : "Weak verbs found! They don’t showcase your impact.",
-    status: weak_verbs_score > THRESHOLD ? "success" : "error",
-    action: weak_verbs_score > THRESHOLD ? "MORE" : "FIX",
-    path: "/factors/impact/weak-verbs",
+    status: analytical_score > THRESHOLD ? "success" : "error",
+    action: analytical_score > THRESHOLD ? "MORE" : "FIX",
+    path: "/skills/soft-skills/analytical",
   },
   {
     id: "4",
-    title: "Responsibilities",
+    title: "Team Work",
     description:
-      responsibilities_score > THRESHOLD
+      teamwork_score > THRESHOLD
         ? "Responsibilities are well described."
         : "Responsibilities need more detail.",
-    status: responsibilities_score > THRESHOLD ? "success" : "error",
-    action: responsibilities_score > THRESHOLD ? "MORE" : "FIX",
-    path: "/factors/impact/responsibilities",
+    status: teamwork_score > THRESHOLD ? "success" : "error",
+    action: teamwork_score > THRESHOLD ? "MORE" : "FIX",
+    path: "/skills/soft-skills/teamwork",
   },
   {
     id: "5",
-    title: "Verb tenses",
+    title: "Drive",
     description:
-      verb_tenses_score > THRESHOLD
+      drive_score > THRESHOLD
         ? "Verb tenses are consistent."
         : "Inconsistent verb tenses found.",
-    status: verb_tenses_score > THRESHOLD ? "success" : "error",
-    action: verb_tenses_score > THRESHOLD ? "MORE" : "FIX",
-    path: "/factors/impact/verb-tenses",
-  },
-  {
-    id: "6",
-    title: "Spelling & Consistency",
-    description:
-      spelling_consistencies_score > THRESHOLD
-        ? "Spelling and consistency are on point."
-        : "Spelling or consistency issues found.",
-    status: spelling_consistencies_score > THRESHOLD ? "success" : "error",
-    action: spelling_consistencies_score > THRESHOLD ? "MORE" : "FIX",
-    path: "/factors/impact/spelling-consistencies",
+    status: drive_score > THRESHOLD ? "success" : "error",
+    action: drive_score > THRESHOLD ? "MORE" : "FIX",
+    path: "/skills/soft-skills/drive",
   },
 ];
 
-const Impact: React.FC<ImpactProps> = ({
+const SoftSkills: React.FC<SoftSkillsProps> = ({
   resume_url,
-  impact_score,
-  impact_feedback,
-  quantify_impact_score,
-  repetition_score,
-  weak_verbs_score,
-  responsibilities_score,
-  verb_tenses_score,
-  spelling_consistencies_score,
+  soft_skills_score,
+  soft_skills_feedback,
+  communication_score,
+  leadership_score,
+  analytical_score,
+  teamwork_score,
+  drive_score,
 }) => {
   const router = useRouter();
   return (
@@ -190,24 +171,23 @@ const Impact: React.FC<ImpactProps> = ({
       <div className="flex h-full flex-col justify-start overflow-y-auto p-4 [-ms-overflow-style:none] [scrollbar-width:none] hover:[-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden">
         <div className="rounded-xl border border-gray-100 bg-white p-8 shadow-sm">
           <div className="mb-6 flex items-center justify-between">
-            <h2 className="text-2xl font-semibold text-purple-900">Impact</h2>
+            <h2 className="text-2xl font-semibold text-purple-900">Soft Skills</h2>
             <div className="rounded-full bg-orange-50 px-4 py-2">
               <span className="font-semibold text-orange-600">
-                {impact_score}
+                {soft_skills_score}
               </span>
               <span className="text-sm text-orange-400">/10</span>
             </div>
           </div>
 
-          <p className="mb-8 text-gray-600">{impact_feedback}</p>
+          <p className="mb-8 text-gray-600">{soft_skills_feedback}</p>
 
           {scoreItems(
-            quantify_impact_score,
-            repetition_score,
-            weak_verbs_score,
-            responsibilities_score,
-            verb_tenses_score,
-            spelling_consistencies_score,
+            communication_score,
+            leadership_score,
+            analytical_score,
+            teamwork_score,
+            drive_score,
           ).map((item: ScoreItem) => (
             <div
               key={item.id}
@@ -264,4 +244,4 @@ const Impact: React.FC<ImpactProps> = ({
   );
 };
 
-export default Impact;
+export default SoftSkills;

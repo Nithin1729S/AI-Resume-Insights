@@ -9,70 +9,69 @@ import RecruiterInsightsCard from "../../RecruiterInsightsCard";
 const faqs = [
   {
     id: 1,
-    question: "I'm a student or recent graduate. What metrics should I use?",
+    question: "Why is consistent spelling important in a resume?",
     answer: `
-      If you're a student and you are struggling to come up with metrics and numbers, here are a few ideas:
+      Consistent spelling is crucial for several reasons:
       <ul>
-        <li><strong>Team size:</strong> e.g. how many people have you worked with for specific projects or extracurricular activities? e.g. Teamed with x people to deliver y...</li>
-        <li><strong>Industry-specific metrics:</strong> Depending on the industry you're looking to apply to, there are specific metrics. e.g. have you worked with large amounts of data? For example, you could explain how you "analyzed 10,000 data points to do x" or "Collected 1,000 survey responses to do y".</li>
-        <li><strong>Extra-curricular activities:</strong> Think about any other extra-curricular activities you may have participated in. e.g. you could discuss the # of participants at an event you may have organized, etc.</li>
+        <li><strong>Professionalism:</strong> Inconsistent spelling makes your resume appear unprofessional and suggests lack of attention to detail.</li>
+        <li><strong>ATS Compatibility:</strong> Applicant Tracking Systems may reject resumes with spelling variations of the same word.</li>
+        <li><strong>First Impression:</strong> Recruiters spend an average of 6-7 seconds scanning your resume - spelling errors can lead to immediate rejection.</li>
       </ul>
     `,
   },
   {
     id: 2,
-    question: "What if I'm not in a numbers-focused role?",
+    question: "What are common spelling consistency issues in resumes?",
     answer: `
-      A common misconception is that only people in financial or sales roles have access to numbers they can use on their resume. That's not true. Every role or project has something you can quantify. You just need to think about the impact of your work in a non-financial context.
-      <br /><br />
-      Let's go through a few examples:
+      Here are frequent spelling consistency issues to watch out for:
       <ul>
-        <li><strong>Time savings:</strong> Did you introduce a new process, template, or tool that saved your company time? e.g. in terms of hours per week.</li>
-        <li><strong>Scope:</strong> You can highlight the complexity of work you did by mentioning how many customers or users your team served.</li>
-        <li><strong>Industry-specific metrics:</strong> Depending on the industry you're looking to apply to, there are specific metrics. e.g. have you worked with large amounts of data? For example, you could explain how you "analyzed 10,000 data points to do x" or "Collected 1,000 survey responses to do y".</li>
+        <li><strong>Regional Variations:</strong> Mixing American and British spellings (e.g., 'color' vs 'colour', 'organize' vs 'organise').</li>
+        <li><strong>Technical Terms:</strong> Inconsistent capitalization in tech terms (e.g., 'JavaScript' vs 'Javascript', 'PowerPoint' vs 'Powerpoint').</li>
+        <li><strong>Company Names:</strong> Incorrect spelling of company names or product names (e.g., 'LinkedIn' vs 'Linkedin').</li>
       </ul>
-      Don't be afraid to estimate if you don't have an exact number available. Most resumes use estimates. For example, if you upgraded some machinery and made your company’s operations more efficient, you could estimate how many hours of labor those new machines saved per week.
-      <br /><br />
-      To take it a step further, you could multiply these weekly labor hours by the average hourly employee pay to give a rough idea of how much money the machines saved.
+      Pick one style and stick to it throughout your resume to maintain consistency.
     `,
   },
   {
     id: 3,
-    question: "How do you add numbers and metrics to your bullet points?",
+    question: "How can I ensure spelling consistency in my resume?",
     answer: `<p>
-Expand the image next to the question for a real example of how to add numbers to your bullet points. This is called quantifying your bullet points.
-<br><br>
-This is one of the best things you can do to separate your resume from other applicants.
-<br><br>								In the examples, notice how we explicitly describe the <em>impact</em> of our work. You want to always talk about the <em>result</em> of your work —&nbsp;did you help your company get more sales? Did you save your company time? Doing this makes your achievements more meaningful and helps employers know what kind of impact you can have at their company.					</p>`,
+      Here are some practical tips:
+      <br><br>
+      1. Use spell-check tools but don't rely on them completely
+      <br><br>
+      2. Choose either US or UK English and stick to it
+      <br><br>
+      3. Create a style guide for your resume with correct spellings of:
+      - Company names
+      - Technical terms
+      - Industry-specific terminology
+      <br><br>
+      4. Have someone else proofread your resume
+    </p>`,
   },
   {
     id: 4,
-    question: "What numbers can I use to quantify my resume?",
+    question: "What tools can help check spelling consistency?",
     answer: `<p>
-Employers love to see achievements that directly contribute to the company’s bottom line (i.e. revenues and costs). Thus, quantifying your impact in dollars will be most impressive to employers.
-<br><br>
-However, not all of us work in sales or finance roles where our performance can be easily converted into dollar figures. What should you do in that case? Here are a few options:
-<br><br>
-1) Use any metric that is relevant to your job, and then make an educated estimate to convert that metric into dollars. For example, improvements you made to a process may have cut the process’s time by 20 hours a week. Twenty hours is equivalent to half of one full-time employee’s workweek, so you can convert your time savings into an estimated financial impact of half the average full-time employee’s salary — say, $30,000 a year.
-										<br><br>
-										2) There are also other metrics you can use to quantify your results!
-										For example, how many people or departments did you work with? Did a change you made result in fewer customer support queries? You can even quantify your achievements based on the size of a project you ran or the time you saved your team on a weekly basis. 
-										<br><br>
-										3. Keep in mind that quantifying a bullet point is not just about the amount (i.e. how much, or a dollar or percentage value) but also the frequency (i.e. how often) and length (i.e. how long a project was).
-
-<br><br>
-
-There are hundreds of other metrics you can use depending on your industry. If you're in marketing, metrics include things like marketing spend, total subscribers, change in conversion rates and changes in customer acquisition costs. If you're in a technical field like software engineering, metrics could include reduction in execution speed, size of data you worked with and time you saved your team.</p>`,
+      Several tools can help maintain spelling consistency:
+      <br><br>
+      1. Grammarly - Checks for spelling and consistency across documents
+      <br><br>
+      2. Microsoft Word's Editor - Helps maintain consistent spelling standards
+      <br><br>
+      3. Google Docs - Has built-in spell check and language settings
+      <br><br>
+      Remember: While these tools are helpful, they shouldn't replace human proofreading.
+    </p>`,
   },
 ];
 
 const explanation = `
-    Recruiters are looking for evidence of impact on your resume, and hard numbers help with this. To explain this, let's compare these two lines from a sample resume (don't worry, we'll rewrite lines on your own resume in a second) Notice how using hard numbers emphasizes the impact of your work — this is what recruiters look for on your resume. Let's now work through your own resume, including giving you ideas of numbers even if you're not in a numbers-heavy role.
-
-Our data has shown that the best performing resumes quantify the majority of their bullet points (75%+)..
+    Spelling consistency is a crucial aspect of resume writing that many candidates overlook. It's not just about avoiding typos - it's about maintaining consistent spelling conventions throughout your document. This includes regional spelling variations, technical terms, and company names. Good spelling shows attention to detail and professionalism, two qualities that employers highly value.
   `;
 
-const question = "What do hard numbers and quantifying impact mean?";
+const question = "Why should I care about spelling consistency in my resume?";
 
 interface SpellingConsistencyProps {
   resume_url: string;

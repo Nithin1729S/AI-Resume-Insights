@@ -3,83 +3,82 @@
 import React from "react";
 import PDFCanvas from "@/components/PDFCanvas/PDFCanvas";
 import RecruiterInsightsCard from "../../RecruiterInsightsCard";
-const THRESHOLD: number = 6;
+import { AlertCircle, Check, ChevronRight, Lock } from "lucide-react";
+import { useRouter } from "next/navigation";
+
+const THRESHOLD: number = 5.9;
 
 const faqs = [
   {
     id: 1,
-    question: "I'm a student or recent graduate. What metrics should I use?",
+    question: "What sections should I include in my resume?",
     answer: `
-      If you're a student and you are struggling to come up with metrics and numbers, here are a few ideas:
+      Here are the essential sections every resume should have:
       <ul>
-        <li><strong>Team size:</strong> e.g. how many people have you worked with for specific projects or extracurricular activities? e.g. Teamed with x people to deliver y...</li>
-        <li><strong>Industry-specific metrics:</strong> Depending on the industry you're looking to apply to, there are specific metrics. e.g. have you worked with large amounts of data? For example, you could explain how you "analyzed 10,000 data points to do x" or "Collected 1,000 survey responses to do y".</li>
-        <li><strong>Extra-curricular activities:</strong> Think about any other extra-curricular activities you may have participated in. e.g. you could discuss the # of participants at an event you may have organized, etc.</li>
+        <li><strong>Contact Information:</strong> Your name, email, phone, and location at the top</li>
+        <li><strong>Work Experience:</strong> Your relevant work history in reverse chronological order</li>
+        <li><strong>Education:</strong> Your academic credentials, certifications, and relevant coursework</li>
+        <li><strong>Skills:</strong> Technical, soft, and industry-specific skills that match the job requirements</li>
       </ul>
     `,
   },
   {
     id: 2,
-    question: "What if I'm not in a numbers-focused role?",
+    question: "What sections should I avoid in my resume?",
     answer: `
-      A common misconception is that only people in financial or sales roles have access to numbers they can use on their resume. That's not true. Every role or project has something you can quantify. You just need to think about the impact of your work in a non-financial context.
-      <br /><br />
-      Let's go through a few examples:
+      Some sections that you should generally avoid include:
       <ul>
-        <li><strong>Time savings:</strong> Did you introduce a new process, template, or tool that saved your company time? e.g. in terms of hours per week.</li>
-        <li><strong>Scope:</strong> You can highlight the complexity of work you did by mentioning how many customers or users your team served.</li>
-        <li><strong>Industry-specific metrics:</strong> Depending on the industry you're looking to apply to, there are specific metrics. e.g. have you worked with large amounts of data? For example, you could explain how you "analyzed 10,000 data points to do x" or "Collected 1,000 survey responses to do y".</li>
+        <li><strong>Objective Statements:</strong> These are outdated and take up valuable space</li>
+        <li><strong>References:</strong> Don't include "References available upon request" - this is assumed</li>
+        <li><strong>Personal Information:</strong> Avoid including age, marital status, or other personal details</li>
+        <li><strong>Irrelevant Hobbies:</strong> Only include hobbies if they're relevant to the job</li>
       </ul>
-      Don't be afraid to estimate if you don't have an exact number available. Most resumes use estimates. For example, if you upgraded some machinery and made your company’s operations more efficient, you could estimate how many hours of labor those new machines saved per week.
-      <br /><br />
-      To take it a step further, you could multiply these weekly labor hours by the average hourly employee pay to give a rough idea of how much money the machines saved.
+      Focus on sections that directly demonstrate your qualifications and value to employers.
     `,
   },
   {
     id: 3,
-    question: "How do you add numbers and metrics to your bullet points?",
+    question: "How should I organize my Education section?",
     answer: `<p>
-Expand the image next to the question for a real example of how to add numbers to your bullet points. This is called quantifying your bullet points.
+Your Education section should be organized effectively:
 <br><br>
-This is one of the best things you can do to separate your resume from other applicants.
-<br><br>								In the examples, notice how we explicitly describe the <em>impact</em> of our work. You want to always talk about the <em>result</em> of your work —&nbsp;did you help your company get more sales? Did you save your company time? Doing this makes your achievements more meaningful and helps employers know what kind of impact you can have at their company.					</p>`,
+- List education in reverse chronological order
+<br><br>
+- Include: Degree, Institution, Graduation Date, GPA (if above 3.0)
+<br><br>
+- Add relevant coursework, academic projects, and honors
+<br><br>
+For recent graduates, place Education near the top. For experienced professionals, it can go after Work Experience.
+</p>`,
   },
   {
     id: 4,
-    question: "What numbers can I use to quantify my resume?",
+    question: "How do I structure my Skills section effectively?",
     answer: `<p>
-Employers love to see achievements that directly contribute to the company’s bottom line (i.e. revenues and costs). Thus, quantifying your impact in dollars will be most impressive to employers.
+To create an impactful Skills section:
 <br><br>
-However, not all of us work in sales or finance roles where our performance can be easily converted into dollar figures. What should you do in that case? Here are a few options:
+1) Group similar skills together (e.g., Programming Languages, Tools, Soft Skills)
 <br><br>
-1) Use any metric that is relevant to your job, and then make an educated estimate to convert that metric into dollars. For example, improvements you made to a process may have cut the process’s time by 20 hours a week. Twenty hours is equivalent to half of one full-time employee’s workweek, so you can convert your time savings into an estimated financial impact of half the average full-time employee’s salary — say, $30,000 a year.
-										<br><br>
-										2) There are also other metrics you can use to quantify your results!
-										For example, how many people or departments did you work with? Did a change you made result in fewer customer support queries? You can even quantify your achievements based on the size of a project you ran or the time you saved your team on a weekly basis. 
-										<br><br>
-										3. Keep in mind that quantifying a bullet point is not just about the amount (i.e. how much, or a dollar or percentage value) but also the frequency (i.e. how often) and length (i.e. how long a project was).
-
+2) Prioritize skills mentioned in the job description
 <br><br>
-
-There are hundreds of other metrics you can use depending on your industry. If you're in marketing, metrics include things like marketing spend, total subscribers, change in conversion rates and changes in customer acquisition costs. If you're in a technical field like software engineering, metrics could include reduction in execution speed, size of data you worked with and time you saved your team.</p>`,
+3) Use industry-standard terminology
+<br><br>
+4) Keep it concise - list only relevant and current skills
+<br><br>
+5) Consider using proficiency levels for technical skills
+<br><br>
+Remember to update your Skills section for each application to match the specific job requirements.</p>`,
   },
 ];
 
-
-interface ImpactProps {
+interface SectionsProps {
   resume_url: string;
-  impact_score: number;
-  impact_feedback: string;
-  quantify_impact_score: number;
-  repetition_score: number;
-  weak_verbs_score: number;
-  responsibilities_score: number;
-  verb_tenses_score: number;
-  spelling_consistencies_score: number;
+  sections_score: number;
+  sections_feedback: string;
+  education_score: number;
+  unnecessary_sections_score: number;
+  skills_score: number;
 }
-
-import { AlertCircle, Check, ChevronRight, Lock } from "lucide-react";
-import { useRouter } from "next/navigation";
 
 interface ScoreItem {
   id: string;
@@ -91,91 +90,52 @@ interface ScoreItem {
 }
 
 const scoreItems = (
-  quantify_impact_score: number,
-  repetition_score: number,
-  weak_verbs_score: number,
-  responsibilities_score: number,
-  verb_tenses_score: number,
-  spelling_consistencies_score: number,
+  education_score: number,
+  unnecessary_sections_score: number,
+  skills_score: number,
 ): ScoreItem[] => [
   {
     id: "1",
-    title: "Quantifying impact",
+    title: "Education",
     description:
-      quantify_impact_score > THRESHOLD
-        ? "Great job! Your numbers make achievements stand out."
-        : "Missing numbers! Your impact feels vague.",
-    status: quantify_impact_score > THRESHOLD ? "success" : "error",
-    action: quantify_impact_score > THRESHOLD ? "MORE" : "FIX",
-    path: "/factors/impact/quantify-impact",
+      education_score > THRESHOLD
+        ? "Your education section is well-detailed with impressive metrics."
+        : "Your education section lacks detailed metrics.",
+    status: education_score > THRESHOLD ? "success" : "error",
+    action: education_score > THRESHOLD ? "MORE" : "FIX",
+    path: "/factors/sections/education",
   },
   {
     id: "2",
-    title: "Repetition",
+    title: "Unnecessary Sections",
     description:
-      repetition_score > THRESHOLD
-        ? "No verbs were overused."
-        : "Repetitive verbs found! Try to diversify your language.",
-    status: repetition_score > THRESHOLD ? "success" : "error",
-    action: repetition_score > THRESHOLD ? "MORE" : "FIX",
-    path: "/factors/impact/repetition",
+      unnecessary_sections_score > THRESHOLD
+        ? "Your resume is free from unnecessary sections."
+        : "Your resume contains unnecessary sections that should be removed.",
+    status: unnecessary_sections_score > THRESHOLD ? "success" : "error",
+    action: unnecessary_sections_score > THRESHOLD ? "MORE" : "FIX",
+    path: "/factors/sections/unnecessary-sections",
   },
   {
     id: "3",
-    title: "Weak verbs",
+    title: "Skills",
     description:
-      weak_verbs_score > THRESHOLD
-        ? "Strong verbs used effectively."
-        : "Weak verbs found! They don’t showcase your impact.",
-    status: weak_verbs_score > THRESHOLD ? "success" : "error",
-    action: weak_verbs_score > THRESHOLD ? "MORE" : "FIX",
-    path: "/factors/impact/weak-verbs",
-  },
-  {
-    id: "4",
-    title: "Responsibilities",
-    description:
-      responsibilities_score > THRESHOLD
-        ? "Responsibilities are well described."
-        : "Responsibilities need more detail.",
-    status: responsibilities_score > THRESHOLD ? "success" : "error",
-    action: responsibilities_score > THRESHOLD ? "MORE" : "FIX",
-    path: "/factors/impact/responsibilities",
-  },
-  {
-    id: "5",
-    title: "Verb tenses",
-    description:
-      verb_tenses_score > THRESHOLD
-        ? "Verb tenses are consistent."
-        : "Inconsistent verb tenses found.",
-    status: verb_tenses_score > THRESHOLD ? "success" : "error",
-    action: verb_tenses_score > THRESHOLD ? "MORE" : "FIX",
-    path: "/factors/impact/verb-tenses",
-  },
-  {
-    id: "6",
-    title: "Spelling & Consistency",
-    description:
-      spelling_consistencies_score > THRESHOLD
-        ? "Spelling and consistency are on point."
-        : "Spelling or consistency issues found.",
-    status: spelling_consistencies_score > THRESHOLD ? "success" : "error",
-    action: spelling_consistencies_score > THRESHOLD ? "MORE" : "FIX",
-    path: "/factors/impact/spelling-consistencies",
+      skills_score > THRESHOLD
+        ? "Your skills section effectively highlights your strengths."
+        : "Your skills section needs stronger verbs to showcase your abilities.",
+    status: skills_score > THRESHOLD ? "success" : "error",
+    action: skills_score > THRESHOLD ? "MORE" : "FIX",
+    path: "/factors/sections/skills",
   },
 ];
 
-const Impact: React.FC<ImpactProps> = ({
+const Sections: React.FC<SectionsProps> = ({
   resume_url,
-  impact_score,
-  impact_feedback,
-  quantify_impact_score,
-  repetition_score,
-  weak_verbs_score,
-  responsibilities_score,
-  verb_tenses_score,
-  spelling_consistencies_score,
+  sections_score,
+  sections_feedback,
+  education_score,
+  unnecessary_sections_score,
+  skills_score,
 }) => {
   const router = useRouter();
   return (
@@ -184,24 +144,21 @@ const Impact: React.FC<ImpactProps> = ({
       <div className="flex h-full flex-col justify-start overflow-y-auto p-4 [-ms-overflow-style:none] [scrollbar-width:none] hover:[-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden">
         <div className="rounded-xl border border-gray-100 bg-white p-8 shadow-sm">
           <div className="mb-6 flex items-center justify-between">
-            <h2 className="text-2xl font-semibold text-purple-900">Impact</h2>
+            <h2 className="text-2xl font-semibold text-purple-900">Sections</h2>
             <div className="rounded-full bg-orange-50 px-4 py-2">
               <span className="font-semibold text-orange-600">
-                {impact_score}
+                {sections_score}
               </span>
               <span className="text-sm text-orange-400">/10</span>
             </div>
           </div>
 
-          <p className="mb-8 text-gray-600">{impact_feedback}</p>
+          <p className="mb-8 text-gray-600">{sections_feedback}</p>
 
           {scoreItems(
-            quantify_impact_score,
-            repetition_score,
-            weak_verbs_score,
-            responsibilities_score,
-            verb_tenses_score,
-            spelling_consistencies_score,
+            education_score,
+            unnecessary_sections_score,
+            skills_score,
           ).map((item: ScoreItem) => (
             <div
               key={item.id}
@@ -258,4 +215,4 @@ const Impact: React.FC<ImpactProps> = ({
   );
 };
 
-export default Impact;
+export default Sections;
