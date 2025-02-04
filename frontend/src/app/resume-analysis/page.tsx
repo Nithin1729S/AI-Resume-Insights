@@ -32,7 +32,7 @@ const HomePage = async () => {
   return (
     <DefaultLayout>
       {/* <Main resume_url={resume.get_pdf_url} overall_score={resume.overall_score} overall_feedback={resume.overall_feedback}/> */}
-      <Main companyName={""} score={0} previousScore={null} resume_url={resume.get_pdf_url} overall_score={resume.overall_score} overall_feedback={resume.overall_feedback}/>
+      <Main userName={resume.user.name ? resume.user.name : resume.user.email.split('@')[0]} score={resume.overall_score} previousScore={null} resume_url={resume.get_pdf_url} overall_score={resume.overall_score} overall_feedback={resume.overall_feedback}/>
     </DefaultLayout>
   );
 };

@@ -133,7 +133,7 @@ const scoreItems: ScoreItem[] = [
   },
 ];
 interface ResumeScoreCardProps {
-  companyName: string;
+  userName: string;
   score: number;
   previousScore: number | null;
 }
@@ -145,17 +145,16 @@ interface MainProps {
   resume_url: string;
   overall_score: number;
   overall_feedback: string;
-  companyName: string;
+  userName: string;
   score: number;
   previousScore: number | null;
 }
 
 const Main: React.FC<MainProps> = ({
   resume_url,
-  overall_score,
   overall_feedback,
-  companyName,
-  score,
+  userName,
+  overall_score,
   previousScore,
 }) => {
   return (
@@ -169,7 +168,7 @@ const Main: React.FC<MainProps> = ({
               <div className="flex items-center justify-between">
                 <div>
                   <h1 className="text-2xl font-semibold text-[#1A1942]">
-                    Good morning, {companyName}.
+                    Good morning, {userName}.
                   </h1>
                   <p className="mt-1 text-gray-600">
                     Welcome to your resume review.
@@ -195,7 +194,7 @@ const Main: React.FC<MainProps> = ({
               {/* Score Content */}
               <div className="space-y-6">
                 <h2 className="text-xl text-gray-700">
-                  Your resume scored {score} out of 100.
+                  Your resume scored {overall_score} out of 10.
                 </h2>
                 <p className="leading-relaxed text-gray-600">
                   You made a good start to your resume, and it scores well on
@@ -206,19 +205,36 @@ const Main: React.FC<MainProps> = ({
 
                 {/* Score Bar */}
                 <div className="relative pb-4 pt-8">
-                  <div className="absolute right-0 top-0 text-sm text-gray-600">
+                  {/* Progress Bar */}
+                  <div className="relative h-2 w-full rounded-full bg-gradient-to-r from-red-500 via-yellow-500 to-green-500" />
+
+                  {/* Movable "YOUR RESUME" Label and Indicator */}
+                  <div
+                    className="absolute -top-5 -translate-x-1/2 text-sm text-gray-600"
+                    style={{
+                      left: `${(Math.min(overall_score, 10) / 10) * 100}%`,
+                    }}
+                  >
                     YOUR RESUME
                   </div>
-                  <div className="h-2 w-full rounded-full bg-gradient-to-r from-red-500 via-yellow-500 to-green-500" />
                   <div
                     className="absolute top-1/2 -translate-y-1/2 transform"
-                    style={{ left: `${score}%` }}
+                    style={{
+                      left: `${(Math.min(overall_score, 10) / 10) * 100}%`,
+                    }}
                   >
                     <div className="h-4 w-4 -translate-x-1/2 transform rounded-full bg-blue-600 shadow-lg" />
                   </div>
-                  <div className="mt-2 flex justify-between text-sm text-gray-600">
+
+                  {/* Scale Labels */}
+                  <div className="relative mt-2 flex justify-between text-sm text-gray-600">
                     <span>0</span>
-                    <span>TOP RESUMES</span>
+                    <span
+                      className="absolute -translate-x-1/2"
+                      style={{ left: "90%" }} // Aligns "TOP RESUMES" with score 9
+                    >
+                      TOP RESUMES
+                    </span>
                   </div>
                 </div>
 
