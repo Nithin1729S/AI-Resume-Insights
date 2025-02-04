@@ -9,70 +9,68 @@ import RecruiterInsightsCard from "../../RecruiterInsightsCard";
 const faqs = [
   {
     id: 1,
-    question: "I'm a student or recent graduate. What metrics should I use?",
+    question: "How many pages should my resume be?",
     answer: `
-      If you're a student and you are struggling to come up with metrics and numbers, here are a few ideas:
+      The ideal resume length depends on your experience level:
       <ul>
-        <li><strong>Team size:</strong> e.g. how many people have you worked with for specific projects or extracurricular activities? e.g. Teamed with x people to deliver y...</li>
-        <li><strong>Industry-specific metrics:</strong> Depending on the industry you're looking to apply to, there are specific metrics. e.g. have you worked with large amounts of data? For example, you could explain how you "analyzed 10,000 data points to do x" or "Collected 1,000 survey responses to do y".</li>
-        <li><strong>Extra-curricular activities:</strong> Think about any other extra-curricular activities you may have participated in. e.g. you could discuss the # of participants at an event you may have organized, etc.</li>
+        <li><strong>Students/Recent Graduates:</strong> Stick to one page. You likely don't have enough relevant experience to justify more.</li>
+        <li><strong>Mid-Level Professionals (3-10 years):</strong> One to two pages is appropriate, depending on your achievements and relevant experience.</li>
+        <li><strong>Senior Professionals (10+ years):</strong> Two pages maximum. Focus on recent and relevant experience.</li>
       </ul>
     `,
   },
   {
     id: 2,
-    question: "What if I'm not in a numbers-focused role?",
+    question: "My resume content feels too cramped. What should I do?",
     answer: `
-      A common misconception is that only people in financial or sales roles have access to numbers they can use on their resume. That's not true. Every role or project has something you can quantify. You just need to think about the impact of your work in a non-financial context.
-      <br /><br />
-      Let's go through a few examples:
+      A cramped resume can be hard to read. Here are some tips to improve readability:
       <ul>
-        <li><strong>Time savings:</strong> Did you introduce a new process, template, or tool that saved your company time? e.g. in terms of hours per week.</li>
-        <li><strong>Scope:</strong> You can highlight the complexity of work you did by mentioning how many customers or users your team served.</li>
-        <li><strong>Industry-specific metrics:</strong> Depending on the industry you're looking to apply to, there are specific metrics. e.g. have you worked with large amounts of data? For example, you could explain how you "analyzed 10,000 data points to do x" or "Collected 1,000 survey responses to do y".</li>
+        <li><strong>Margins:</strong> Keep margins between 0.5 to 1 inch</li>
+        <li><strong>Font Size:</strong> Use 10-12pt for body text, 12-14pt for headings</li>
+        <li><strong>White Space:</strong> Add appropriate spacing between sections</li>
+        <li><strong>Bullet Points:</strong> Keep to 4-6 bullets per role</li>
       </ul>
-      Don't be afraid to estimate if you don't have an exact number available. Most resumes use estimates. For example, if you upgraded some machinery and made your company’s operations more efficient, you could estimate how many hours of labor those new machines saved per week.
-      <br /><br />
-      To take it a step further, you could multiply these weekly labor hours by the average hourly employee pay to give a rough idea of how much money the machines saved.
+      Remember, a well-spaced resume with less content is more effective than a cramped resume trying to fit everything.
     `,
   },
   {
     id: 3,
-    question: "How do you add numbers and metrics to your bullet points?",
-    answer: `<p>
-Expand the image next to the question for a real example of how to add numbers to your bullet points. This is called quantifying your bullet points.
-<br><br>
-This is one of the best things you can do to separate your resume from other applicants.
-<br><br>								In the examples, notice how we explicitly describe the <em>impact</em> of our work. You want to always talk about the <em>result</em> of your work —&nbsp;did you help your company get more sales? Did you save your company time? Doing this makes your achievements more meaningful and helps employers know what kind of impact you can have at their company.					</p>`,
+    question: "Should I reduce font size to fit more content?",
+    answer: `
+      Reducing font size below 10pt to fit more content is not recommended. Instead:
+      <ul>
+        <li>Remove redundant information</li>
+        <li>Focus on recent and relevant experience</li>
+        <li>Use concise bullet points</li>
+        <li>Consider what the recruiter really needs to know</li>
+      </ul>
+      Readability should never be compromised just to include more information.
+    `,
   },
   {
     id: 4,
-    question: "What numbers can I use to quantify my resume?",
-    answer: `<p>
-Employers love to see achievements that directly contribute to the company’s bottom line (i.e. revenues and costs). Thus, quantifying your impact in dollars will be most impressive to employers.
-<br><br>
-However, not all of us work in sales or finance roles where our performance can be easily converted into dollar figures. What should you do in that case? Here are a few options:
-<br><br>
-1) Use any metric that is relevant to your job, and then make an educated estimate to convert that metric into dollars. For example, improvements you made to a process may have cut the process’s time by 20 hours a week. Twenty hours is equivalent to half of one full-time employee’s workweek, so you can convert your time savings into an estimated financial impact of half the average full-time employee’s salary — say, $30,000 a year.
-										<br><br>
-										2) There are also other metrics you can use to quantify your results!
-										For example, how many people or departments did you work with? Did a change you made result in fewer customer support queries? You can even quantify your achievements based on the size of a project you ran or the time you saved your team on a weekly basis. 
-										<br><br>
-										3. Keep in mind that quantifying a bullet point is not just about the amount (i.e. how much, or a dollar or percentage value) but also the frequency (i.e. how often) and length (i.e. how long a project was).
-
-<br><br>
-
-There are hundreds of other metrics you can use depending on your industry. If you're in marketing, metrics include things like marketing spend, total subscribers, change in conversion rates and changes in customer acquisition costs. If you're in a technical field like software engineering, metrics could include reduction in execution speed, size of data you worked with and time you saved your team.</p>`,
+    question: "How do I decide what to keep or remove?",
+    answer: `
+      When trimming content, consider:
+      <ul>
+        <li><strong>Relevance:</strong> Keep information most relevant to the job you're applying for</li>
+        <li><strong>Recency:</strong> Focus on recent experience (last 10 years)</li>
+        <li><strong>Impact:</strong> Prioritize achievements with measurable results</li>
+        <li><strong>Uniqueness:</strong> Remove duplicate skills or similar experiences</li>
+      </ul>
+      Remember, your resume is a highlight reel, not a complete job history.
+    `,
   },
 ];
 
 const explanation = `
-    Recruiters are looking for evidence of impact on your resume, and hard numbers help with this. To explain this, let's compare these two lines from a sample resume (don't worry, we'll rewrite lines on your own resume in a second) Notice how using hard numbers emphasizes the impact of your work — this is what recruiters look for on your resume. Let's now work through your own resume, including giving you ideas of numbers even if you're not in a numbers-heavy role.
-
-Our data has shown that the best performing resumes quantify the majority of their bullet points (75%+)..
+    Page density refers to how efficiently you use space in your resume while maintaining readability. 
+    A good resume strikes a balance between including necessary information and maintaining clear, 
+    readable formatting. Cramming too much information or having too sparse content can both hurt 
+    your chances with recruiters.
   `;
 
-const question = "What do hard numbers and quantifying impact mean?";
+const question = "What is page density and why does it matter?";
 
 interface PageDensityProps {
   resume_url: string;
