@@ -7,6 +7,7 @@ import apiService from "@/app/services/apiService";
 import { useEffect, useState } from "react";
 import { getUserId } from "@/app/lib/actions";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 
 const Profile = () => {
   interface UserData {
@@ -23,6 +24,7 @@ const Profile = () => {
   const [previewUrl, setPreviewUrl] = useState<string | null>(null);
 
   const fetchUserDetails = async () => {
+    const router = useRouter();
     try {
       const userId = await getUserId();
       if (!userId) {
@@ -34,6 +36,7 @@ const Profile = () => {
     } catch (error) {
       setError("Error fetching user details");
       console.error("Error fetching user details:", error);
+      router.push("/login");
     }
   };
 

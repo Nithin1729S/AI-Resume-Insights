@@ -1,15 +1,19 @@
-import { getUserId } from "@/app/lib/actions";
-import apiService from "@/app/services/apiService";
+import { usePageData } from "@/hooks/usePageData";
 import Sections from "@/components/Factors/Sections/Sections";
 import DefaultLayout from "@/components/Layouts/DefaultLayout";
 
-
 const SectionsPage = async () => {
-  const userId=await getUserId();
-  const resume=await apiService.get(`/api/ats/${userId}`)
+  const { resumeData } = await usePageData();
   return (
     <DefaultLayout>
-      <Sections resume_url={resume.get_pdf_url} sections_score={resume.sections_score} sections_feedback={resume.sections_feedback} education_score={resume.education_score} unnecessary_sections_score={resume.unnecessary_sections_score} skills_score={resume.skills_score} />
+      <Sections
+        resume_url={resumeData.get_pdf_url}
+        sections_score={resumeData.sections_score}
+        sections_feedback={resumeData.sections_feedback}
+        education_score={resumeData.education_score}
+        unnecessary_sections_score={resumeData.unnecessary_sections_score}
+        skills_score={resumeData.skills_score}
+      />
     </DefaultLayout>
   );
 };

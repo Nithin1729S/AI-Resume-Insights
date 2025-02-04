@@ -1,17 +1,18 @@
-import { getUserId } from "@/app/lib/actions";
-import apiService from "@/app/services/apiService";
+import { usePageData } from "@/hooks/usePageData";
 import WeakVerbs from "@/components/Factors/Impact/WeakVerbs";
 import DefaultLayout from "@/components/Layouts/DefaultLayout";
 
-
 const WeakVerbsPage = async () => {
-  const userId=await getUserId();
-  const resume=await apiService.get(`/api/ats/${userId}`)
+  const { resumeData } = await usePageData();
   return (
     <DefaultLayout>
-      <WeakVerbs resume_url={resume.get_pdf_url} weak_verbs_score={resume.weak_verbs_score} weak_verbs_feedback={resume.weak_verbs_feedback}/>
+      <WeakVerbs
+        resume_url={resumeData.get_pdf_url}
+        weak_verbs_score={resumeData.weak_verbs_score}
+        weak_verbs_feedback={resumeData.weak_verbs_feedback}
+      />
     </DefaultLayout>
   );
 };
 
-export default  WeakVerbsPage;
+export default WeakVerbsPage;

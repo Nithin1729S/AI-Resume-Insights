@@ -2,6 +2,7 @@
 import Image from "next/image";
 import apiService from "../services/apiService";
 import { useState } from "react";
+import { useRouter } from "next/navigation";
 
 type RESUME = {
   id: string;
@@ -21,6 +22,7 @@ type TableProps = {
 
 const ResumeTable = ({ resumeData, onDelete }: TableProps) => {
   const [resumes, setResumes] = useState<RESUME[]>(resumeData);
+  const router = useRouter();
   const handleDelete = async (id: string) => {
     try {
       if (!confirm("Are you sure you want to delete this resume?")) {
@@ -34,6 +36,7 @@ const ResumeTable = ({ resumeData, onDelete }: TableProps) => {
     } catch (error) {
       console.error("Error deleting resume:", error);
       alert("Failed to delete resume. Please try again.");
+      router.push("/login");
     }
   };
   return (

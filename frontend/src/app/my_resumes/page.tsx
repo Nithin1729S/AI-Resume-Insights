@@ -4,9 +4,10 @@ import Table from "./ResumeTable";
 import apiService from "@/app/services/apiService";
 import DefaultLayout from "@/components/Layouts/DefaultLayout";
 import Loader from "@/components/common/Loader";
-
+import { useRouter } from "next/router";
 
 const MyResumesPage = () => {
+  const router = useRouter();
   const [resumeData, setResumeData] = useState([]);
   const [loading, setLoading] = useState(true);
 
@@ -16,6 +17,7 @@ const MyResumesPage = () => {
       setResumeData(response);
     } catch (error) {
       console.error("Error fetching resumes:", error);
+      router.push("/login");
     } finally {
       setLoading(false);
     }
@@ -26,7 +28,11 @@ const MyResumesPage = () => {
   }, []);
 
   if (loading) {
-    return <DefaultLayout><Loader/></DefaultLayout>;
+    return (
+      <DefaultLayout>
+        <Loader />
+      </DefaultLayout>
+    );
   }
 
   return (

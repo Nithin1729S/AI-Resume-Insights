@@ -1,17 +1,22 @@
-import { getUserId } from "@/app/lib/actions";
-import apiService from "@/app/services/apiService";
+import { usePageData } from "@/hooks/usePageData";
 import ContactPersonalDetails from "@/components/Factors/Style/ContactPersonalDetails";
 import DefaultLayout from "@/components/Layouts/DefaultLayout";
 
-
 const ContactPersonalDetailsPage = async () => {
-  const userId=await getUserId();
-  const resume=await apiService.get(`/api/ats/${userId}`)
+  const { resumeData } = await usePageData();
   return (
     <DefaultLayout>
-      <ContactPersonalDetails resume_url={resume.get_pdf_url} contact_personal_details_score={resume.contact_and_personal_details_score} contact_personal_details_feedback={resume.contact_and_personal_details_feedback}/>
+      <ContactPersonalDetails
+        resume_url={resumeData.get_pdf_url}
+        contact_personal_details_score={
+          resumeData.contact_and_personal_details_score
+        }
+        contact_personal_details_feedback={
+          resumeData.contact_and_personal_details_feedback
+        }
+      />
     </DefaultLayout>
   );
 };
 
-export default  ContactPersonalDetailsPage;
+export default ContactPersonalDetailsPage;

@@ -1,17 +1,18 @@
-import { getUserId } from "@/app/lib/actions";
-import apiService from "@/app/services/apiService";
+import { usePageData } from "@/hooks/usePageData";
 import Buzzwords from "@/components/Factors/Style/Buzzwords";
 import DefaultLayout from "@/components/Layouts/DefaultLayout";
 
-
 const BuzzwordsPage = async () => {
-  const userId=await getUserId();
-  const resume=await apiService.get(`/api/ats/${userId}`)
+  const { resumeData } = await usePageData();
   return (
     <DefaultLayout>
-      <Buzzwords resume_url={resume.get_pdf_url} buzzwords_score={resume.buzzwords_score} buzzwords_feedback={resume.buzzwords_feedback}/>
+      <Buzzwords
+        resume_url={resumeData.get_pdf_url}
+        buzzwords_score={resumeData.buzzwords_score}
+        buzzwords_feedback={resumeData.buzzwords_feedback}
+      />
     </DefaultLayout>
   );
 };
 
-export default  BuzzwordsPage;
+export default BuzzwordsPage;

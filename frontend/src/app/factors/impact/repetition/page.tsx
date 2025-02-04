@@ -1,17 +1,18 @@
-import { getUserId } from "@/app/lib/actions";
-import apiService from "@/app/services/apiService";
+import { usePageData } from "@/hooks/usePageData";
 import Repetition from "@/components/Factors/Impact/Repetition";
 import DefaultLayout from "@/components/Layouts/DefaultLayout";
 
-
 const RepetitionPage = async () => {
-  const userId=await getUserId();
-  const resume=await apiService.get(`/api/ats/${userId}`)
+  const { resumeData } = await usePageData();
   return (
     <DefaultLayout>
-      <Repetition resume_url={resume.get_pdf_url} repetition_score={resume.repetition_score} repetition_feedback={resume.repetition_feedback}/>
+      <Repetition
+        resume_url={resumeData.get_pdf_url}
+        repetition_score={resumeData.repetition_score}
+        repetition_feedback={resumeData.repetition_feedback}
+      />
     </DefaultLayout>
   );
 };
 
-export default  RepetitionPage;
+export default RepetitionPage;

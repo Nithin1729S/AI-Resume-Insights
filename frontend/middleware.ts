@@ -1,38 +1,29 @@
-// middleware.ts
-import { getUserId } from '@/app/lib/actions';
-import apiService from '@/app/services/apiService';
 import { NextResponse } from 'next/server'
 import type { NextRequest } from 'next/server'
 
-export async function middleware(request: NextRequest) {
-  try {
-    // Check if user is authenticated
-    const userId = await getUserId();
-    if (!userId) {
-      return NextResponse.redirect(new URL('/login', request.url))
-    }
-
-    // Get resume data
-    const resume = await apiService.get(`/api/ats/${userId}`);
-    if (!resume) {
-      return NextResponse.redirect(new URL('/login', request.url))
-    }
-
-    // Add data to request headers
-    const requestHeaders = new Headers(request.headers)
-    requestHeaders.set('x-user-id', userId)
-    requestHeaders.set('x-resume-data', JSON.stringify(resume))
-
-    return NextResponse.next({
-      request: {
-        headers: requestHeaders,
-      }
-    })
-  } catch (error) {
+export function middleware(request: NextRequest) {
+  const token = request.cookies.get('token')
+  
+  if (!token) {
     return NextResponse.redirect(new URL('/login', request.url))
   }
+
+  return NextResponse.next()
 }
 
 export const config = {
-  matcher: ['/impact', '/other-protected-routes'],
+  matcher: [
+    /*
+     * Match all paths except:
+     * 1. /login
+     * 2. /logout
+     * 3. /signin
+     * 4. / (home)
+     * 5. /_next (Next.js internals)
+     * 6. /static (static files)
+     * 7. /api (API routes)
+     * 8. public files like favicon.ico, robots.txt
+     */
+    '/((?!login|logout|signin|api|_next|static|favicon.ico|robots.txt|$).*)',
+  ],
 }

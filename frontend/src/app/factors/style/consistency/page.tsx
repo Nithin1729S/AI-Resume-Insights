@@ -1,17 +1,18 @@
-import { getUserId } from "@/app/lib/actions";
-import apiService from "@/app/services/apiService";
+import { usePageData } from "@/hooks/usePageData";
 import Consistency from "@/components/Factors/Style/Consistency";
 import DefaultLayout from "@/components/Layouts/DefaultLayout";
 
-
 const ConsistencyPage = async () => {
-  const userId=await getUserId();
-  const resume=await apiService.get(`/api/ats/${userId}`)
+  const { resumeData } = await usePageData();
   return (
     <DefaultLayout>
-      <Consistency resume_url={resume.get_pdf_url} consistency_score={resume.consistency_score} consistency_feedback={resume.consistency_feedback}/>
+      <Consistency
+        resume_url={resumeData.get_pdf_url}
+        consistency_score={resumeData.consistency_score}
+        consistency_feedback={resumeData.consistency_feedback}
+      />
     </DefaultLayout>
   );
 };
 
-export default  ConsistencyPage;
+export default ConsistencyPage;
