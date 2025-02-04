@@ -15,7 +15,7 @@ const handler = NextAuth({
   callbacks: {
     async signIn({ user, account, profile }) {
       try {
-        console.log('Account:', account); // Log the account object to see the id_token
+        //console.log('Account:', account); // Log the account object to see the id_token
         const response = await fetch(`${process.env.NEXT_PUBLIC_API_HOST}/api/auth/google/`, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
@@ -25,8 +25,8 @@ const handler = NextAuth({
         });
 
         const responseBody = await response.text();  // Get the response body as text
-        console.log('Response status:', response.status);
-        console.log('Response body:', responseBody);
+        //console.log('Response status:', response.status);
+        //console.log('Response body:', responseBody);
 
         if (!response.ok) throw new Error('Authentication failed');
         

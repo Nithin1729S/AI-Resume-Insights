@@ -27,23 +27,25 @@ const RecruiterInsightsPage: React.FC<RecruiterInsightsPageProps> = ({ faqs }) =
   );
 
   return (
-    <div className="min-h-screen bg-background py-12 px-4 sm:px-6 lg:px-8">
-      <div className="max-w-4xl mx-auto space-y-8">
+    <div className="min-h-screen bg-background py-12 px-6">
+      <div className="w-full mx-auto space-y-8">
         {/* Header Section */}
-        <div className="text-center space-y-4">
-          <div className="flex items-center justify-center space-x-2">
-            <Lightbulb className="h-8 w-8 text-primary" />
-            <h1 className="text-4xl font-bold tracking-tight">Recruiter Insights</h1>
-          </div>
-          <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
-            Discover valuable insights and answers to common recruiting questions
-          </p>
-        </div>
+        <Card className="bg-white shadow-lg w-full">
+          <CardHeader className="text-center pb-2">
+            <div className="flex items-center justify-center space-x-2">
+              <Lightbulb className="h-8 w-8 text-primary" />
+              <CardTitle className="text-4xl font-bold tracking-tight">
+                Recruiter Insights
+              </CardTitle>
+            </div>
+            <p className="text-muted-foreground text-lg mx-auto mt-4">
+              Discover valuable insights and answers to common recruiting questions
+            </p>
+          </CardHeader>
 
-        {/* Search Section */}
-        <Card className="border-none shadow-md">
-          <CardContent className="pt-6">
-            <div className="relative">
+          {/* Search Section */}
+          <CardContent className="pt-4 pb-6">
+            <div className="relative w-full max-w-2xl mx-auto">
               <Search className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
               <Input
                 type="text"
@@ -57,35 +59,37 @@ const RecruiterInsightsPage: React.FC<RecruiterInsightsPageProps> = ({ faqs }) =
         </Card>
 
         {/* FAQs Section */}
-        <div className="space-y-6">
-          {filteredFAQs.length === 0 ? (
-            <div className="text-center py-12">
-              <p className="text-muted-foreground">No matching insights found</p>
-            </div>
-          ) : (
-            <Accordion type="single" collapsible className="space-y-4">
-              {filteredFAQs.map((faq) => (
-                <AccordionItem
-                  key={faq.id}
-                  value={faq.id.toString()}
-                  className="bg-card rounded-lg shadow-sm border px-6"
-                >
-                  <AccordionTrigger className="hover:no-underline py-4">
-                    <div className="flex items-start text-left">
-                      <span className="text-lg font-medium">{faq.question}</span>
-                    </div>
-                  </AccordionTrigger>
-                  <AccordionContent className="pt-2 pb-6">
-                    <div
-                      className="prose prose-sm max-w-none text-muted-foreground"
-                      dangerouslySetInnerHTML={{ __html: faq.answer }}
-                    />
-                  </AccordionContent>
-                </AccordionItem>
-              ))}
-            </Accordion>
-          )}
-        </div>
+        <Card className="bg-white shadow-lg w-full">
+          <CardContent className="p-6">
+            {filteredFAQs.length === 0 ? (
+              <div className="text-center py-12">
+                <p className="text-muted-foreground">No matching insights found</p>
+              </div>
+            ) : (
+              <Accordion type="single" collapsible className="space-y-4">
+                {filteredFAQs.map((faq) => (
+                  <AccordionItem
+                    key={faq.id}
+                    value={faq.id.toString()}
+                    className="border rounded-lg px-6 bg-gray-50"
+                  >
+                    <AccordionTrigger className="hover:no-underline py-4">
+                      <div className="flex items-start text-left">
+                        <span className="text-lg font-medium">{faq.question}</span>
+                      </div>
+                    </AccordionTrigger>
+                    <AccordionContent className="pt-2 pb-6">
+                      <div
+                        className="prose prose-sm max-w-none text-muted-foreground"
+                        dangerouslySetInnerHTML={{ __html: faq.answer }}
+                      />
+                    </AccordionContent>
+                  </AccordionItem>
+                ))}
+              </Accordion>
+            )}
+          </CardContent>
+        </Card>
       </div>
     </div>
   );

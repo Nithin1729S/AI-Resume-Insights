@@ -1,8 +1,12 @@
 "use client";
 
+import React from "react";
+import PDFCanvas from "@/components/PDFCanvas/PDFCanvas";
+import RecruiterInsightsCard from "../RecruiterInsightsCard";
 import { Star, History } from "lucide-react";
 import { Card } from "../ui/card";
-
+import { AlertCircle, Check, ChevronRight, Lock } from "lucide-react";
+const THRESHOLD:number = 6;
 const faqs = [
   {
     id: 1,
@@ -70,13 +74,20 @@ Our data has shown that the best performing resumes quantify the majority of the
   `;
 
 const question = "What do hard numbers and quantifying impact mean?";
-interface ImpactProps {
-  resume_url: string;
-  impact_score: number;
-  impact_feedback: string;
-}
 
-import { AlertCircle, Check, ChevronRight, Lock } from "lucide-react";
+
+interface MainProps {
+  resume_url: string;
+  impact_score:number;
+  brevity_score:number;
+  style_score:number;
+  sections_score:number;
+  soft_skills_score:number;
+  overall_score: number;
+  overall_feedback: string;
+  userName: string;
+  previousScore: number | null;
+}
 
 interface ScoreItem {
   id: string;
@@ -86,69 +97,57 @@ interface ScoreItem {
   action: "FIX" | "MORE";
 }
 
-const scoreItems: ScoreItem[] = [
+
+
+const scoreItems = (impact_score: number,brevity_score:number,style_score:number,sections_score:number,soft_skills_score:number): ScoreItem[] => [
   {
     id: "1",
-    title: "Quantifying impact",
-    description: "Add more numbers and metrics",
-    status: "error",
-    action: "FIX",
+    title: "Impact",
+    description: impact_score > THRESHOLD ? "Strong metrics showcase achievements." :"Add more numbers and metrics",
+    status: impact_score > THRESHOLD ? "success" : "error",
+    action: impact_score > THRESHOLD ? "MORE" : "FIX",
   },
   {
     id: "2",
-    title: "Unique action verbs",
-    description: "No verbs were overused",
-    status: "success",
-    action: "MORE",
+    title: "Brevity",
+    description: brevity_score > THRESHOLD ? "No verbs were overused" : "Wordy—trim unnecessary details.",
+    status: brevity_score > THRESHOLD ? "success" : "error",
+    action: brevity_score > THRESHOLD ? "MORE" : "FIX",
   },
   {
     id: "3",
-    title: "Weak action verbs",
+    title: "Style",
     description:
-      "We found weak action verbs that you should remove from your resume.",
-    status: "error",
-    action: "FIX",
+    style_score>THRESHOLD ? "Well-formatted, consistent, and professional":"We found weak action verbs that you should remove from your resume.",
+    status: style_score > THRESHOLD ? "success" : "error",
+    action: style_score > THRESHOLD ? "MORE" : "FIX",
   },
   {
     id: "4",
-    title: "Incorrect verb tenses",
-    description:
-      "We found some improvements in the tenses you use to describe your experiences.",
-    status: "error",
-    action: "FIX",
+    title: "Sections",
+    description: soft_skills_score > THRESHOLD ? "Well-structured with key sections." : "Missing sections—add for completeness.",
+    status: sections_score > THRESHOLD ? "success" : "error",
+    action: sections_score > THRESHOLD ? "MORE" : "FIX",
   },
   {
     id: "5",
-    title: "Accomplishment-oriented language",
-    description: "Pro only section",
-    status: "locked",
-    action: "MORE",
+    title: "Soft Skills",
+    description: soft_skills_score > THRESHOLD ? "Highlights interpersonal strengths." : "Highlights interpersonal strengths.",
+    status: soft_skills_score > THRESHOLD ? "success" : "error",
+    action: soft_skills_score > THRESHOLD ? "MORE" : "FIX",
   },
   {
     id: "6",
-    title: "Spell check",
+    title: "Hard Skills",
     description: "Pro-only section",
-    status: "locked",
+    status: "success",
     action: "MORE",
   },
 ];
-interface ResumeScoreCardProps {
-  userName: string;
-  score: number;
-  previousScore: number | null;
-}
-import React from "react";
-import PDFCanvas from "@/components/PDFCanvas/PDFCanvas";
-import RecruiterInsightsCard from "../RecruiterInsightsCard";
 
-interface MainProps {
-  resume_url: string;
-  overall_score: number;
-  overall_feedback: string;
-  userName: string;
-  score: number;
-  previousScore: number | null;
-}
+
+
+
 
 const Main: React.FC<MainProps> = ({
   resume_url,
@@ -156,6 +155,11 @@ const Main: React.FC<MainProps> = ({
   userName,
   overall_score,
   previousScore,
+  impact_score,
+  brevity_score,
+  style_score,
+  sections_score,
+  soft_skills_score,
 }) => {
   return (
     <>
@@ -197,10 +201,7 @@ const Main: React.FC<MainProps> = ({
                   Your resume scored {overall_score} out of 10.
                 </h2>
                 <p className="leading-relaxed text-gray-600">
-                  You made a good start to your resume, and it scores well on
-                  some key checks hiring managers care about. However, your
-                  resume fell short in other key areas. Don't worry, they can be
-                  improved easily – and we'll show you exactly how to do that.
+                  {overall_feedback}
                 </p>
 
                 {/* Score Bar */}
@@ -218,7 +219,7 @@ const Main: React.FC<MainProps> = ({
                     YOUR RESUME
                   </div>
                   <div
-                    className="absolute top-1/2 -translate-y-1/2 transform"
+                    className="absolute top-1/6 -translate-y-1/2 transform"
                     style={{
                       left: `${(Math.min(overall_score, 10) / 10) * 100}%`,
                     }}
@@ -235,6 +236,7 @@ const Main: React.FC<MainProps> = ({
                     >
                       TOP RESUMES
                     </span>
+                    <span>10</span>
                   </div>
                 </div>
 
@@ -251,24 +253,20 @@ const Main: React.FC<MainProps> = ({
               </div>
             </div>
           </Card>
-          <div className="flex h-full flex-col justify-start overflow-y-auto p-4 [-ms-overflow-style:none] [scrollbar-width:none] hover:[-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden">
-            <div className="rounded-xl border border-gray-100 bg-white p-8 shadow-sm">
+          <div className="flex w-full h-full flex-col justify-start pt-8">
+            <div className="w-full max-w-3xl rounded-xl border border-gray-100 bg-white p-8 shadow-sm">
               <div className="mb-6 flex items-center justify-between">
                 <h2 className="text-2xl font-semibold text-purple-900">
-                  Impact
+                Steps to increase your score
                 </h2>
-                <div className="rounded-full bg-orange-50 px-4 py-2">
-                  <span className="font-semibold text-orange-600">63</span>
-                  <span className="text-sm text-orange-400">/100</span>
-                </div>
               </div>
 
               <p className="mb-8 text-gray-600">
-                Your resume&apos;s impact score is made up of these checks.
+              Your score is made up of five categories: Impact, Brevity, Style, Sections and Soft Skills. Let's show you how to increase your score in each, and thus your overall resume score so you get more interviews.
               </p>
 
               <div className="space-y-4">
-                {scoreItems.map((item) => (
+                {scoreItems(impact_score, brevity_score, style_score, sections_score, soft_skills_score).map((item) => (
                   <div
                     key={item.id}
                     className="flex items-center justify-between rounded-lg border border-gray-100 p-4 transition-colors hover:border-gray-200"
@@ -299,10 +297,21 @@ const Main: React.FC<MainProps> = ({
                       </div>
                     </div>
                     <button
+                      onClick={() => {
+                      const routes = {
+                        "Impact": "/factors/impact",
+                        "Brevity": "/factors/brevity",
+                        "Style": "/factors/style",
+                        "Sections": "/factors/sections",
+                        "Soft Skills": "/skills/soft-skills",
+                        "Hard Skills": "/skills/hard-skills",
+                      };
+                      window.location.href = routes[item.title as keyof typeof routes];
+                      }}
                       className={`flex items-center rounded-full px-4 py-1.5 text-sm font-medium transition-colors ${
-                        item.action === "FIX"
-                          ? "text-purple-600 hover:bg-purple-50"
-                          : "text-purple-600 hover:bg-purple-50"
+                      item.action === "FIX"
+                        ? "text-purple-600 hover:bg-purple-50"
+                        : "text-purple-600 hover:bg-purple-50"
                       }`}
                     >
                       {item.action}
@@ -312,9 +321,11 @@ const Main: React.FC<MainProps> = ({
                 ))}
               </div>
             </div>
-            <br />
-            <RecruiterInsightsCard faqs={faqs} />
+            <div className="w-full max-w-6xl mx-auto">
+              <RecruiterInsightsCard faqs={faqs} />
+            </div>
           </div>
+          
         </div>
 
         {/* Right half - PDFCanvas */}

@@ -25,7 +25,7 @@ export default function SignIn() {
 
     try {
       const response = await apiService.postWithoutToken('/api/auth/login/', JSON.stringify(formData));
-      console.log(response);
+      //console.log(response);
 
       if (response.access) {
         handleLogin(response.user.pk, response.access, response.refresh);
