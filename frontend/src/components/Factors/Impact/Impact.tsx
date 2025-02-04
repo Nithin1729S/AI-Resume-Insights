@@ -2,204 +2,243 @@
 
 import React from "react";
 import PDFCanvas from "@/components/PDFCanvas/PDFCanvas";
-import CircleProgress from "@/components/ProgressTrackers/CircleProgress";
-import FeedbackCard from "../../FeedbackCard";
 import RecruiterInsightsCard from "../../RecruiterInsightsCard";
+import { AlertCircle, Check, ChevronRight, Lock } from "lucide-react";
+import { useRouter } from "next/navigation";
+
+
+const THRESHOLD: number = 6;
 
 const faqs = [
   {
     id: 1,
-    question: "I'm a student or recent graduate. What metrics should I use?",
+    question: "How can I effectively quantify my impact on a resume?",
     answer: `
-      If you're a student and you are struggling to come up with metrics and numbers, here are a few ideas:
+      Quantifying your impact involves using numbers to highlight your achievements. Here are a few tips:
       <ul>
-        <li><strong>Team size:</strong> e.g. how many people have you worked with for specific projects or extracurricular activities? e.g. Teamed with x people to deliver y...</li>
-        <li><strong>Industry-specific metrics:</strong> Depending on the industry you're looking to apply to, there are specific metrics. e.g. have you worked with large amounts of data? For example, you could explain how you "analyzed 10,000 data points to do x" or "Collected 1,000 survey responses to do y".</li>
-        <li><strong>Extra-curricular activities:</strong> Think about any other extra-curricular activities you may have participated in. e.g. you could discuss the # of participants at an event you may have organized, etc.</li>
+        <li><strong>Use specific metrics:</strong> Mention the exact numbers, percentages, or amounts. For example, "Increased sales by 20%" or "Managed a budget of $50,000".</li>
+        <li><strong>Highlight scope and scale:</strong> Describe the size of the team you led, the number of projects you completed, or the scale of the operations you managed.</li>
+        <li><strong>Showcase improvements:</strong> Focus on the improvements you brought about, such as "Reduced processing time by 30%" or "Improved customer satisfaction scores by 15%".</li>
       </ul>
     `,
   },
   {
     id: 2,
-    question: "What if I'm not in a numbers-focused role?",
+    question: "What if my role doesn't involve easily quantifiable metrics?",
     answer: `
-      A common misconception is that only people in financial or sales roles have access to numbers they can use on their resume. That's not true. Every role or project has something you can quantify. You just need to think about the impact of your work in a non-financial context.
-      <br /><br />
-      Let's go through a few examples:
+      Even if your role isn't numbers-focused, you can still quantify your impact:
       <ul>
-        <li><strong>Time savings:</strong> Did you introduce a new process, template, or tool that saved your company time? e.g. in terms of hours per week.</li>
-        <li><strong>Scope:</strong> You can highlight the complexity of work you did by mentioning how many customers or users your team served.</li>
-        <li><strong>Industry-specific metrics:</strong> Depending on the industry you're looking to apply to, there are specific metrics. e.g. have you worked with large amounts of data? For example, you could explain how you "analyzed 10,000 data points to do x" or "Collected 1,000 survey responses to do y".</li>
+        <li><strong>Time savings:</strong> Did you implement a new process that saved time? Estimate the hours saved per week or month.</li>
+        <li><strong>Efficiency improvements:</strong> Mention any improvements in efficiency, such as "Streamlined workflow, reducing errors by 25%".</li>
+        <li><strong>Customer impact:</strong> Highlight how your work affected customers, like "Enhanced user experience, leading to a 10% increase in user retention".</li>
       </ul>
-      Don't be afraid to estimate if you don't have an exact number available. Most resumes use estimates. For example, if you upgraded some machinery and made your company’s operations more efficient, you could estimate how many hours of labor those new machines saved per week.
-      <br /><br />
-      To take it a step further, you could multiply these weekly labor hours by the average hourly employee pay to give a rough idea of how much money the machines saved.
     `,
   },
   {
     id: 3,
-    question: "How do you add numbers and metrics to your bullet points?",
-    answer: `<p>
-Expand the image next to the question for a real example of how to add numbers to your bullet points. This is called quantifying your bullet points.
-<br><br>
-This is one of the best things you can do to separate your resume from other applicants.
-<br><br>								In the examples, notice how we explicitly describe the <em>impact</em> of our work. You want to always talk about the <em>result</em> of your work —&nbsp;did you help your company get more sales? Did you save your company time? Doing this makes your achievements more meaningful and helps employers know what kind of impact you can have at their company.					</p>`,
+    question: "How do I add impact metrics to my resume bullet points?",
+    answer: `
+      Adding metrics to your bullet points makes your achievements stand out. Here's how:
+      <ul>
+        <li><strong>Be specific:</strong> Use exact numbers and percentages. For example, "Led a team of 5 to complete a project 2 weeks ahead of schedule".</li>
+        <li><strong>Focus on results:</strong> Highlight the outcomes of your actions, such as "Increased website traffic by 30% through SEO optimization".</li>
+        <li><strong>Use action verbs:</strong> Start your bullet points with strong action verbs like "Achieved", "Implemented", "Reduced", or "Increased".</li>
+      </ul>
+    `,
   },
   {
     id: 4,
-    question: "What numbers can I use to quantify my resume?",
-    answer: `<p>
-Employers love to see achievements that directly contribute to the company’s bottom line (i.e. revenues and costs). Thus, quantifying your impact in dollars will be most impressive to employers.
-<br><br>
-However, not all of us work in sales or finance roles where our performance can be easily converted into dollar figures. What should you do in that case? Here are a few options:
-<br><br>
-1) Use any metric that is relevant to your job, and then make an educated estimate to convert that metric into dollars. For example, improvements you made to a process may have cut the process’s time by 20 hours a week. Twenty hours is equivalent to half of one full-time employee’s workweek, so you can convert your time savings into an estimated financial impact of half the average full-time employee’s salary — say, $30,000 a year.
-										<br><br>
-										2) There are also other metrics you can use to quantify your results!
-										For example, how many people or departments did you work with? Did a change you made result in fewer customer support queries? You can even quantify your achievements based on the size of a project you ran or the time you saved your team on a weekly basis. 
-										<br><br>
-										3. Keep in mind that quantifying a bullet point is not just about the amount (i.e. how much, or a dollar or percentage value) but also the frequency (i.e. how often) and length (i.e. how long a project was).
-
-<br><br>
-
-There are hundreds of other metrics you can use depending on your industry. If you're in marketing, metrics include things like marketing spend, total subscribers, change in conversion rates and changes in customer acquisition costs. If you're in a technical field like software engineering, metrics could include reduction in execution speed, size of data you worked with and time you saved your team.</p>`,
+    question: "What are some examples of impact metrics I can use?",
+    answer: `
+      Here are some examples of metrics you can use to quantify your impact:
+      <ul>
+        <li><strong>Sales and revenue:</strong> "Boosted sales by 15%" or "Generated $100,000 in new revenue".</li>
+        <li><strong>Cost savings:</strong> "Reduced operational costs by 10%" or "Saved $20,000 annually through process improvements".</li>
+        <li><strong>Performance improvements:</strong> "Enhanced system performance, reducing load times by 50%" or "Increased production efficiency by 20%".</li>
+        <li><strong>Customer satisfaction:</strong> "Improved customer satisfaction scores by 25%" or "Decreased customer complaints by 30%".</li>
+      </ul>
+    `,
   },
 ];
 
-const explanation = `
-    Recruiters are looking for evidence of impact on your resume, and hard numbers help with this. To explain this, let's compare these two lines from a sample resume (don't worry, we'll rewrite lines on your own resume in a second) Notice how using hard numbers emphasizes the impact of your work — this is what recruiters look for on your resume. Let's now work through your own resume, including giving you ideas of numbers even if you're not in a numbers-heavy role.
-
-Our data has shown that the best performing resumes quantify the majority of their bullet points (75%+)..
-  `;
-
-const question = "What do hard numbers and quantifying impact mean?";
 interface ImpactProps {
   resume_url: string;
   impact_score: number;
   impact_feedback: string;
+  quantify_impact_score: number;
+  repetition_score: number;
+  weak_verbs_score: number;
+  responsibilities_score: number;
+  verb_tenses_score: number;
+  spelling_consistencies_score: number;
 }
 
-import { AlertCircle, Check, ChevronRight, Lock } from "lucide-react";
 
 interface ScoreItem {
   id: string;
   title: string;
   description: string;
+  path: string;
   status: "success" | "error" | "locked";
   action: "FIX" | "MORE";
 }
 
-const scoreItems: ScoreItem[] = [
+const scoreItems = (
+  quantify_impact_score: number,
+  repetition_score: number,
+  weak_verbs_score: number,
+  responsibilities_score: number,
+  verb_tenses_score: number,
+  spelling_consistencies_score: number,
+): ScoreItem[] => [
   {
     id: "1",
     title: "Quantifying impact",
-    description: "Add more numbers and metrics",
-    status: "error",
-    action: "FIX",
+    description:
+      quantify_impact_score > THRESHOLD
+        ? "Great job! Your numbers make achievements stand out."
+        : "Missing numbers! Your impact feels vague.",
+    status: quantify_impact_score > THRESHOLD ? "success" : "error",
+    action: quantify_impact_score > THRESHOLD ? "MORE" : "FIX",
+    path: "/factors/impact/quantify-impact",
   },
   {
     id: "2",
-    title: "Unique action verbs",
-    description: "No verbs were overused",
-    status: "success",
-    action: "MORE",
+    title: "Repetition",
+    description:
+      repetition_score > THRESHOLD
+        ? "No verbs were overused."
+        : "Repetitive verbs found! Try to diversify your language.",
+    status: repetition_score > THRESHOLD ? "success" : "error",
+    action: repetition_score > THRESHOLD ? "MORE" : "FIX",
+    path: "/factors/impact/repetition",
   },
   {
     id: "3",
-    title: "Weak action verbs",
-    description: "We found weak action verbs that you should remove from your resume.",
-    status: "error",
-    action: "FIX",
+    title: "Weak verbs",
+    description:
+      weak_verbs_score > THRESHOLD
+        ? "Strong verbs used effectively."
+        : "Weak verbs found! They don’t showcase your impact.",
+    status: weak_verbs_score > THRESHOLD ? "success" : "error",
+    action: weak_verbs_score > THRESHOLD ? "MORE" : "FIX",
+    path: "/factors/impact/weak-verbs",
   },
   {
     id: "4",
-    title: "Incorrect verb tenses",
-    description: "We found some improvements in the tenses you use to describe your experiences.",
-    status: "error",
-    action: "FIX",
+    title: "Responsibilities",
+    description:
+      responsibilities_score > THRESHOLD
+        ? "Responsibilities are well described."
+        : "Responsibilities need more detail.",
+    status: responsibilities_score > THRESHOLD ? "success" : "error",
+    action: responsibilities_score > THRESHOLD ? "MORE" : "FIX",
+    path: "/factors/impact/responsibilities",
   },
   {
     id: "5",
-    title: "Accomplishment-oriented language",
-    description: "Pro only section",
-    status: "locked",
-    action: "MORE",
+    title: "Verb tenses",
+    description:
+      verb_tenses_score > THRESHOLD
+        ? "Verb tenses are consistent."
+        : "Inconsistent verb tenses found.",
+    status: verb_tenses_score > THRESHOLD ? "success" : "error",
+    action: verb_tenses_score > THRESHOLD ? "MORE" : "FIX",
+    path: "/factors/impact/verb-tenses",
   },
   {
     id: "6",
-    title: "Spell check",
-    description: "Pro-only section",
-    status: "locked",
-    action: "MORE",
+    title: "Spelling & Consistency",
+    description:
+      spelling_consistencies_score > THRESHOLD
+        ? "Spelling and consistency are on point."
+        : "Spelling or consistency issues found.",
+    status: spelling_consistencies_score > THRESHOLD ? "success" : "error",
+    action: spelling_consistencies_score > THRESHOLD ? "MORE" : "FIX",
+    path: "/factors/impact/spelling-consistencies",
   },
 ];
-
 
 const Impact: React.FC<ImpactProps> = ({
   resume_url,
   impact_score,
   impact_feedback,
+  quantify_impact_score,
+  repetition_score,
+  weak_verbs_score,
+  responsibilities_score,
+  verb_tenses_score,
+  spelling_consistencies_score,
 }) => {
+  const router = useRouter();
   return (
     <div className="grid h-screen grid-cols-2">
       {/* Left half */}
       <div className="flex h-full flex-col justify-start overflow-y-auto p-4 [-ms-overflow-style:none] [scrollbar-width:none] hover:[-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden">
-      <div className="bg-white rounded-xl shadow-sm border border-gray-100 p-8">
-      <div className="flex items-center justify-between mb-6">
-        <h2 className="text-2xl font-semibold text-purple-900">Impact</h2>
-        <div className="bg-orange-50 px-4 py-2 rounded-full">
-          <span className="text-orange-600 font-semibold">63</span>
-          <span className="text-orange-400 text-sm">/100</span>
-        </div>
-      </div>
-      
-      <p className="text-gray-600 mb-8">
-        Your resume&apos;s impact score is made up of these checks.
-      </p>
-
-      <div className="space-y-4">
-        {scoreItems.map((item) => (
-          <div
-            key={item.id}
-            className="flex items-center justify-between p-4 rounded-lg border border-gray-100 hover:border-gray-200 transition-colors"
-          >
-            <div className="flex items-start gap-3">
-              {item.status === "success" && (
-                <div className="mt-1">
-                  <Check className="w-5 h-5 text-green-500" />
-                </div>
-              )}
-              {item.status === "error" && (
-                <div className="mt-1">
-                  <AlertCircle className="w-5 h-5 text-red-500" />
-                </div>
-              )}
-              {item.status === "locked" && (
-                <div className="mt-1">
-                  <Lock className="w-5 h-5 text-gray-400" />
-                </div>
-              )}
-              <div>
-                <h3 className="font-medium text-gray-900 mb-1">
-                  {item.title}
-                </h3>
-                <p className="text-sm text-gray-500">{item.description}</p>
-              </div>
+        <div className="rounded-xl border border-gray-100 bg-white p-8 shadow-sm">
+          <div className="mb-6 flex items-center justify-between">
+            <h2 className="text-2xl font-semibold text-purple-900">Impact</h2>
+            <div className="rounded-full bg-orange-50 px-4 py-2">
+              <span className="font-semibold text-orange-600">
+                {impact_score}
+              </span>
+              <span className="text-sm text-orange-400">/10</span>
             </div>
-            <button
-              className={`flex items-center px-4 py-1.5 rounded-full text-sm font-medium transition-colors ${
-                item.action === "FIX"
-                  ? "text-purple-600 hover:bg-purple-50"
-                  : "text-purple-600 hover:bg-purple-50"
-              }`}
-            >
-              {item.action}
-              <ChevronRight className="w-4 h-4 ml-1" />
-            </button>
           </div>
-        ))}
-      </div>
-    </div>
+
+          <p className="mb-8 text-gray-600">{impact_feedback}</p>
+
+          {scoreItems(
+            quantify_impact_score,
+            repetition_score,
+            weak_verbs_score,
+            responsibilities_score,
+            verb_tenses_score,
+            spelling_consistencies_score,
+          ).map((item: ScoreItem) => (
+            <div
+              key={item.id}
+              className="flex items-center justify-between rounded-lg border border-gray-100 p-4 transition-colors hover:border-gray-200"
+            >
+              <div className="flex items-start gap-3">
+                {item.status === "success" && (
+                  <div className="mt-1">
+                    <Check className="h-5 w-5 text-green-500" />
+                  </div>
+                )}
+                {item.status === "error" && (
+                  <div className="mt-1">
+                    <AlertCircle className="h-5 w-5 text-red-500" />
+                  </div>
+                )}
+                {item.status === "locked" && (
+                  <div className="mt-1">
+                    <Lock className="h-5 w-5 text-gray-400" />
+                  </div>
+                )}
+                <div>
+                  <h3 className="mb-1 font-medium text-gray-900">
+                    {item.title}
+                  </h3>
+                  <p className="text-sm text-gray-500">{item.description}</p>
+                </div>
+              </div>
+              <button
+                className={`flex items-center rounded-full px-4 py-1.5 text-sm font-medium transition-colors ${
+                  item.action === "FIX"
+                    ? "text-purple-600 hover:bg-purple-50"
+                    : "text-purple-600 hover:bg-purple-50"
+                }`}
+                onClick={() => {
+                  router.push(item.path);
+                }}
+              >
+                {item.action}
+                <ChevronRight className="ml-1 h-4 w-4" />
+              </button>
+            </div>
+          ))}
+        </div>
         <br />
         <RecruiterInsightsCard faqs={faqs} />
       </div>

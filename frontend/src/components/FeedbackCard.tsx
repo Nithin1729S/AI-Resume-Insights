@@ -15,7 +15,8 @@ const FeedbackCard: React.FC<FeedbackCardProps> = ({ explanation, question, feed
   const [isExpanded, setIsExpanded] = React.useState(false);
 
   return (
-    <Card className="w-full transition-all duration-300 hover:shadow-lg">
+    <Card className="w-full bg-white transition-all duration-300 hover:shadow-lg">
+
       <CardHeader className="space-y-1">
         <div className="flex items-center space-x-2">
           <MessageCircle className="h-5 w-5 text-primary" />

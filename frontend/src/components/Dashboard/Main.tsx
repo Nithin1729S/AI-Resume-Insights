@@ -6,7 +6,8 @@ import RecruiterInsightsCard from "../RecruiterInsightsCard";
 import { Star, History } from "lucide-react";
 import { Card } from "../ui/card";
 import { AlertCircle, Check, ChevronRight, Lock } from "lucide-react";
-const THRESHOLD:number = 6;
+import { useRouter } from "next/navigation";
+const THRESHOLD: number = 6;
 const faqs = [
   {
     id: 1,
@@ -75,14 +76,13 @@ Our data has shown that the best performing resumes quantify the majority of the
 
 const question = "What do hard numbers and quantifying impact mean?";
 
-
 interface MainProps {
   resume_url: string;
-  impact_score:number;
-  brevity_score:number;
-  style_score:number;
-  sections_score:number;
-  soft_skills_score:number;
+  impact_score: number;
+  brevity_score: number;
+  style_score: number;
+  sections_score: number;
+  soft_skills_score: number;
   overall_score: number;
   overall_feedback: string;
   userName: string;
@@ -93,61 +93,82 @@ interface ScoreItem {
   id: string;
   title: string;
   description: string;
+  path: string;
   status: "success" | "error" | "locked";
   action: "FIX" | "MORE";
 }
 
-
-
-const scoreItems = (impact_score: number,brevity_score:number,style_score:number,sections_score:number,soft_skills_score:number): ScoreItem[] => [
+const scoreItems = (
+  impact_score: number,
+  brevity_score: number,
+  style_score: number,
+  sections_score: number,
+  soft_skills_score: number,
+): ScoreItem[] => [
   {
     id: "1",
     title: "Impact",
-    description: impact_score > THRESHOLD ? "Strong metrics showcase achievements." :"Add more numbers and metrics",
+    description:
+      impact_score > THRESHOLD
+        ? "Strong metrics showcase achievements."
+        : "Add more numbers and metrics",
     status: impact_score > THRESHOLD ? "success" : "error",
     action: impact_score > THRESHOLD ? "MORE" : "FIX",
+    path: "/factors/impact",
   },
   {
     id: "2",
     title: "Brevity",
-    description: brevity_score > THRESHOLD ? "No verbs were overused" : "Wordy—trim unnecessary details.",
+    description:
+      brevity_score > THRESHOLD
+        ? "No verbs were overused"
+        : "Wordy—trim unnecessary details.",
     status: brevity_score > THRESHOLD ? "success" : "error",
     action: brevity_score > THRESHOLD ? "MORE" : "FIX",
+    path: "/factors/brevity",
   },
   {
     id: "3",
     title: "Style",
     description:
-    style_score>THRESHOLD ? "Well-formatted, consistent, and professional":"We found weak action verbs that you should remove from your resume.",
+      style_score > THRESHOLD
+        ? "Well-formatted, consistent, and professional"
+        : "We found weak action verbs that you should remove from your resume.",
     status: style_score > THRESHOLD ? "success" : "error",
     action: style_score > THRESHOLD ? "MORE" : "FIX",
+    path: "/factors/style",
   },
   {
     id: "4",
     title: "Sections",
-    description: soft_skills_score > THRESHOLD ? "Well-structured with key sections." : "Missing sections—add for completeness.",
+    description:
+      soft_skills_score > THRESHOLD
+        ? "Well-structured with key sections."
+        : "Missing sections—add for completeness.",
     status: sections_score > THRESHOLD ? "success" : "error",
     action: sections_score > THRESHOLD ? "MORE" : "FIX",
+    path: "/factors/sections",
   },
   {
     id: "5",
     title: "Soft Skills",
-    description: soft_skills_score > THRESHOLD ? "Highlights interpersonal strengths." : "Highlights interpersonal strengths.",
+    description:
+      soft_skills_score > THRESHOLD
+        ? "Highlights interpersonal strengths."
+        : "Highlights interpersonal strengths.",
     status: soft_skills_score > THRESHOLD ? "success" : "error",
     action: soft_skills_score > THRESHOLD ? "MORE" : "FIX",
+    path: "/skills/soft-skills",
   },
   {
     id: "6",
     title: "Hard Skills",
-    description: "Pro-only section",
+    description: "Look at the hard skills mentioned in your resume.",
     status: "success",
     action: "MORE",
+    path: "/skills/hard-skills",
   },
 ];
-
-
-
-
 
 const Main: React.FC<MainProps> = ({
   resume_url,
@@ -161,6 +182,7 @@ const Main: React.FC<MainProps> = ({
   sections_score,
   soft_skills_score,
 }) => {
+  const router = useRouter();
   return (
     <>
       <div className="grid h-screen grid-cols-2">
@@ -219,7 +241,7 @@ const Main: React.FC<MainProps> = ({
                     YOUR RESUME
                   </div>
                   <div
-                    className="absolute top-1/6 -translate-y-1/2 transform"
+                    className="top-1/6 absolute -translate-y-1/2 transform"
                     style={{
                       left: `${(Math.min(overall_score, 10) / 10) * 100}%`,
                     }}
@@ -253,20 +275,29 @@ const Main: React.FC<MainProps> = ({
               </div>
             </div>
           </Card>
-          <div className="flex w-full h-full flex-col justify-start pt-8">
+          <div className="flex h-full w-full flex-col justify-start pt-8">
             <div className="w-full max-w-3xl rounded-xl border border-gray-100 bg-white p-8 shadow-sm">
               <div className="mb-6 flex items-center justify-between">
                 <h2 className="text-2xl font-semibold text-purple-900">
-                Steps to increase your score
+                  Steps to increase your score
                 </h2>
               </div>
 
               <p className="mb-8 text-gray-600">
-              Your score is made up of five categories: Impact, Brevity, Style, Sections and Soft Skills. Let's show you how to increase your score in each, and thus your overall resume score so you get more interviews.
+                Your score is made up of five categories: Impact, Brevity,
+                Style, Sections and Soft Skills. Let's show you how to increase
+                your score in each, and thus your overall resume score so you
+                get more interviews.
               </p>
 
               <div className="space-y-4">
-                {scoreItems(impact_score, brevity_score, style_score, sections_score, soft_skills_score).map((item) => (
+                {scoreItems(
+                  impact_score,
+                  brevity_score,
+                  style_score,
+                  sections_score,
+                  soft_skills_score,
+                ).map((item) => (
                   <div
                     key={item.id}
                     className="flex items-center justify-between rounded-lg border border-gray-100 p-4 transition-colors hover:border-gray-200"
@@ -298,20 +329,12 @@ const Main: React.FC<MainProps> = ({
                     </div>
                     <button
                       onClick={() => {
-                      const routes = {
-                        "Impact": "/factors/impact",
-                        "Brevity": "/factors/brevity",
-                        "Style": "/factors/style",
-                        "Sections": "/factors/sections",
-                        "Soft Skills": "/skills/soft-skills",
-                        "Hard Skills": "/skills/hard-skills",
-                      };
-                      window.location.href = routes[item.title as keyof typeof routes];
+                        router.push(item.path);
                       }}
                       className={`flex items-center rounded-full px-4 py-1.5 text-sm font-medium transition-colors ${
-                      item.action === "FIX"
-                        ? "text-purple-600 hover:bg-purple-50"
-                        : "text-purple-600 hover:bg-purple-50"
+                        item.action === "FIX"
+                          ? "text-purple-600 hover:bg-purple-50"
+                          : "text-purple-600 hover:bg-purple-50"
                       }`}
                     >
                       {item.action}
@@ -321,11 +344,10 @@ const Main: React.FC<MainProps> = ({
                 ))}
               </div>
             </div>
-            <div className="w-full max-w-6xl mx-auto">
+            <div className="mx-auto w-full max-w-6xl">
               <RecruiterInsightsCard faqs={faqs} />
             </div>
           </div>
-          
         </div>
 
         {/* Right half - PDFCanvas */}

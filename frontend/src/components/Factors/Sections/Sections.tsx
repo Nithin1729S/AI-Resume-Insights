@@ -2,9 +2,8 @@
 
 import React from "react";
 import PDFCanvas from "@/components/PDFCanvas/PDFCanvas";
-import CircleProgress from "@/components/ProgressTrackers/CircleProgress";
-import FeedbackCard from "../../FeedbackCard";
 import RecruiterInsightsCard from "../../RecruiterInsightsCard";
+const THRESHOLD: number = 6;
 
 const faqs = [
   {
@@ -66,50 +65,187 @@ There are hundreds of other metrics you can use depending on your industry. If y
   },
 ];
 
-const explanation = `
-    Recruiters are looking for evidence of impact on your resume, and hard numbers help with this. To explain this, let's compare these two lines from a sample resume (don't worry, we'll rewrite lines on your own resume in a second) Notice how using hard numbers emphasizes the impact of your work — this is what recruiters look for on your resume. Let's now work through your own resume, including giving you ideas of numbers even if you're not in a numbers-heavy role.
 
-Our data has shown that the best performing resumes quantify the majority of their bullet points (75%+)..
-  `;
-
-const question = "What do hard numbers and quantifying impact mean?";
-
-interface SectionsProps {
+interface ImpactProps {
   resume_url: string;
-  sections_score: number;
-  sections_feedback: string;
+  impact_score: number;
+  impact_feedback: string;
+  quantify_impact_score: number;
+  repetition_score: number;
+  weak_verbs_score: number;
+  responsibilities_score: number;
+  verb_tenses_score: number;
+  spelling_consistencies_score: number;
 }
-const Sections: React.FC<SectionsProps> = ({
+
+import { AlertCircle, Check, ChevronRight, Lock } from "lucide-react";
+import { useRouter } from "next/navigation";
+
+interface ScoreItem {
+  id: string;
+  title: string;
+  description: string;
+  path: string;
+  status: "success" | "error" | "locked";
+  action: "FIX" | "MORE";
+}
+
+const scoreItems = (
+  quantify_impact_score: number,
+  repetition_score: number,
+  weak_verbs_score: number,
+  responsibilities_score: number,
+  verb_tenses_score: number,
+  spelling_consistencies_score: number,
+): ScoreItem[] => [
+  {
+    id: "1",
+    title: "Quantifying impact",
+    description:
+      quantify_impact_score > THRESHOLD
+        ? "Great job! Your numbers make achievements stand out."
+        : "Missing numbers! Your impact feels vague.",
+    status: quantify_impact_score > THRESHOLD ? "success" : "error",
+    action: quantify_impact_score > THRESHOLD ? "MORE" : "FIX",
+    path: "/factors/impact/quantify-impact",
+  },
+  {
+    id: "2",
+    title: "Repetition",
+    description:
+      repetition_score > THRESHOLD
+        ? "No verbs were overused."
+        : "Repetitive verbs found! Try to diversify your language.",
+    status: repetition_score > THRESHOLD ? "success" : "error",
+    action: repetition_score > THRESHOLD ? "MORE" : "FIX",
+    path: "/factors/impact/repetition",
+  },
+  {
+    id: "3",
+    title: "Weak verbs",
+    description:
+      weak_verbs_score > THRESHOLD
+        ? "Strong verbs used effectively."
+        : "Weak verbs found! They don’t showcase your impact.",
+    status: weak_verbs_score > THRESHOLD ? "success" : "error",
+    action: weak_verbs_score > THRESHOLD ? "MORE" : "FIX",
+    path: "/factors/impact/weak-verbs",
+  },
+  {
+    id: "4",
+    title: "Responsibilities",
+    description:
+      responsibilities_score > THRESHOLD
+        ? "Responsibilities are well described."
+        : "Responsibilities need more detail.",
+    status: responsibilities_score > THRESHOLD ? "success" : "error",
+    action: responsibilities_score > THRESHOLD ? "MORE" : "FIX",
+    path: "/factors/impact/responsibilities",
+  },
+  {
+    id: "5",
+    title: "Verb tenses",
+    description:
+      verb_tenses_score > THRESHOLD
+        ? "Verb tenses are consistent."
+        : "Inconsistent verb tenses found.",
+    status: verb_tenses_score > THRESHOLD ? "success" : "error",
+    action: verb_tenses_score > THRESHOLD ? "MORE" : "FIX",
+    path: "/factors/impact/verb-tenses",
+  },
+  {
+    id: "6",
+    title: "Spelling & Consistency",
+    description:
+      spelling_consistencies_score > THRESHOLD
+        ? "Spelling and consistency are on point."
+        : "Spelling or consistency issues found.",
+    status: spelling_consistencies_score > THRESHOLD ? "success" : "error",
+    action: spelling_consistencies_score > THRESHOLD ? "MORE" : "FIX",
+    path: "/factors/impact/spelling-consistencies",
+  },
+];
+
+const Impact: React.FC<ImpactProps> = ({
   resume_url,
-  sections_score,
-  sections_feedback,
+  impact_score,
+  impact_feedback,
+  quantify_impact_score,
+  repetition_score,
+  weak_verbs_score,
+  responsibilities_score,
+  verb_tenses_score,
+  spelling_consistencies_score,
 }) => {
+  const router = useRouter();
   return (
     <div className="grid h-screen grid-cols-2">
       {/* Left half */}
       <div className="flex h-full flex-col justify-start overflow-y-auto p-4 [-ms-overflow-style:none] [scrollbar-width:none] hover:[-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden">
-        {/* Row with heading on the left and circle at the far right */}
-        <div className="flex w-full items-center justify-between">
-          <p className="text-2xl font-semibold text-black dark:text-white">
-            Sections
-            <p className="mb-4 mt-1 text-sm text-gray-600 dark:text-gray-400">
-              Increase your impact by using numbers and metrics in your bullet
-              points
-            </p>
-          </p>
-          <CircleProgress score={sections_score} />
-        </div>
-        <br />
-        <hr />
-        <br />
+        <div className="rounded-xl border border-gray-100 bg-white p-8 shadow-sm">
+          <div className="mb-6 flex items-center justify-between">
+            <h2 className="text-2xl font-semibold text-purple-900">Impact</h2>
+            <div className="rounded-full bg-orange-50 px-4 py-2">
+              <span className="font-semibold text-orange-600">
+                {impact_score}
+              </span>
+              <span className="text-sm text-orange-400">/10</span>
+            </div>
+          </div>
 
-        {/* The rest of the content below */}
-        {/* <p>Quantify Impact feedback: {quantify_impact_feedback}</p> */}
-        <FeedbackCard
-          explanation={explanation}
-          question={question}
-          feedback={sections_feedback}
-        />
+          <p className="mb-8 text-gray-600">{impact_feedback}</p>
+
+          {scoreItems(
+            quantify_impact_score,
+            repetition_score,
+            weak_verbs_score,
+            responsibilities_score,
+            verb_tenses_score,
+            spelling_consistencies_score,
+          ).map((item: ScoreItem) => (
+            <div
+              key={item.id}
+              className="flex items-center justify-between rounded-lg border border-gray-100 p-4 transition-colors hover:border-gray-200"
+            >
+              <div className="flex items-start gap-3">
+                {item.status === "success" && (
+                  <div className="mt-1">
+                    <Check className="h-5 w-5 text-green-500" />
+                  </div>
+                )}
+                {item.status === "error" && (
+                  <div className="mt-1">
+                    <AlertCircle className="h-5 w-5 text-red-500" />
+                  </div>
+                )}
+                {item.status === "locked" && (
+                  <div className="mt-1">
+                    <Lock className="h-5 w-5 text-gray-400" />
+                  </div>
+                )}
+                <div>
+                  <h3 className="mb-1 font-medium text-gray-900">
+                    {item.title}
+                  </h3>
+                  <p className="text-sm text-gray-500">{item.description}</p>
+                </div>
+              </div>
+              <button
+                className={`flex items-center rounded-full px-4 py-1.5 text-sm font-medium transition-colors ${
+                  item.action === "FIX"
+                    ? "text-purple-600 hover:bg-purple-50"
+                    : "text-purple-600 hover:bg-purple-50"
+                }`}
+                onClick={() => {
+                  router.push(item.path);
+                }}
+              >
+                {item.action}
+                <ChevronRight className="ml-1 h-4 w-4" />
+              </button>
+            </div>
+          ))}
+        </div>
         <br />
         <RecruiterInsightsCard faqs={faqs} />
       </div>
@@ -122,4 +258,4 @@ const Sections: React.FC<SectionsProps> = ({
   );
 };
 
-export default Sections;
+export default Impact;

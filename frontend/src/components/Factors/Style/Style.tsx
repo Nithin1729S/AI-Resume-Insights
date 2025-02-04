@@ -1,115 +1,258 @@
 "use client";
 
-import React from "react";
+import React, { act } from "react";
 import PDFCanvas from "@/components/PDFCanvas/PDFCanvas";
-import CircleProgress from "@/components/ProgressTrackers/CircleProgress";
-import FeedbackCard from "../../FeedbackCard";
 import RecruiterInsightsCard from "../../RecruiterInsightsCard";
+import { AlertCircle, Check, ChevronRight, Lock } from "lucide-react";
+import { useRouter } from "next/navigation";
+
+const THRESHOLD: number = 5.9;
 
 const faqs = [
   {
     id: 1,
-    question: "I'm a student or recent graduate. What metrics should I use?",
+    question: "How can I improve the readability of my resume?",
     answer: `
-      If you're a student and you are struggling to come up with metrics and numbers, here are a few ideas:
+      Improving readability is crucial for making your resume easy to scan. Here are some tips:
       <ul>
-        <li><strong>Team size:</strong> e.g. how many people have you worked with for specific projects or extracurricular activities? e.g. Teamed with x people to deliver y...</li>
-        <li><strong>Industry-specific metrics:</strong> Depending on the industry you're looking to apply to, there are specific metrics. e.g. have you worked with large amounts of data? For example, you could explain how you "analyzed 10,000 data points to do x" or "Collected 1,000 survey responses to do y".</li>
-        <li><strong>Extra-curricular activities:</strong> Think about any other extra-curricular activities you may have participated in. e.g. you could discuss the # of participants at an event you may have organized, etc.</li>
+        <li><strong>Use bullet points:</strong> Break down information into bullet points to make it easier to read.</li>
+        <li><strong>Consistent formatting:</strong> Ensure that fonts, sizes, and spacing are consistent throughout your resume.</li>
+        <li><strong>Clear headings:</strong> Use clear and distinct headings for different sections of your resume.</li>
+        <li><strong>Simple language:</strong> Avoid jargon and use simple, straightforward language.</li>
       </ul>
     `,
   },
   {
     id: 2,
-    question: "What if I'm not in a numbers-focused role?",
+    question: "What are some tips for using active voice in my resume?",
     answer: `
-      A common misconception is that only people in financial or sales roles have access to numbers they can use on their resume. That's not true. Every role or project has something you can quantify. You just need to think about the impact of your work in a non-financial context.
-      <br /><br />
-      Let's go through a few examples:
+      Using active voice makes your resume more dynamic and engaging. Here are some tips:
       <ul>
-        <li><strong>Time savings:</strong> Did you introduce a new process, template, or tool that saved your company time? e.g. in terms of hours per week.</li>
-        <li><strong>Scope:</strong> You can highlight the complexity of work you did by mentioning how many customers or users your team served.</li>
-        <li><strong>Industry-specific metrics:</strong> Depending on the industry you're looking to apply to, there are specific metrics. e.g. have you worked with large amounts of data? For example, you could explain how you "analyzed 10,000 data points to do x" or "Collected 1,000 survey responses to do y".</li>
+        <li><strong>Start with action verbs:</strong> Begin your bullet points with strong action verbs like "Led," "Developed," or "Implemented."</li>
+        <li><strong>Avoid passive constructions:</strong> Instead of saying "Was responsible for managing," say "Managed."</li>
+        <li><strong>Be direct:</strong> Clearly state what you did and the impact it had.</li>
       </ul>
-      Don't be afraid to estimate if you don't have an exact number available. Most resumes use estimates. For example, if you upgraded some machinery and made your company’s operations more efficient, you could estimate how many hours of labor those new machines saved per week.
-      <br /><br />
-      To take it a step further, you could multiply these weekly labor hours by the average hourly employee pay to give a rough idea of how much money the machines saved.
     `,
   },
   {
     id: 3,
-    question: "How do you add numbers and metrics to your bullet points?",
-    answer: `<p>
-Expand the image next to the question for a real example of how to add numbers to your bullet points. This is called quantifying your bullet points.
-<br><br>
-This is one of the best things you can do to separate your resume from other applicants.
-<br><br>								In the examples, notice how we explicitly describe the <em>impact</em> of our work. You want to always talk about the <em>result</em> of your work —&nbsp;did you help your company get more sales? Did you save your company time? Doing this makes your achievements more meaningful and helps employers know what kind of impact you can have at their company.					</p>`,
+    question: "How can I ensure consistency in my resume?",
+    answer: `
+      Consistency is key to a professional-looking resume. Here are some tips:
+      <ul>
+        <li><strong>Uniform formatting:</strong> Use the same font, size, and style for similar elements.</li>
+        <li><strong>Consistent dates:</strong> Format dates in the same way throughout your resume.</li>
+        <li><strong>Standardized language:</strong> Use similar language and tone across all sections.</li>
+      </ul>
+    `,
   },
   {
     id: 4,
-    question: "What numbers can I use to quantify my resume?",
-    answer: `<p>
-Employers love to see achievements that directly contribute to the company’s bottom line (i.e. revenues and costs). Thus, quantifying your impact in dollars will be most impressive to employers.
-<br><br>
-However, not all of us work in sales or finance roles where our performance can be easily converted into dollar figures. What should you do in that case? Here are a few options:
-<br><br>
-1) Use any metric that is relevant to your job, and then make an educated estimate to convert that metric into dollars. For example, improvements you made to a process may have cut the process’s time by 20 hours a week. Twenty hours is equivalent to half of one full-time employee’s workweek, so you can convert your time savings into an estimated financial impact of half the average full-time employee’s salary — say, $30,000 a year.
-										<br><br>
-										2) There are also other metrics you can use to quantify your results!
-										For example, how many people or departments did you work with? Did a change you made result in fewer customer support queries? You can even quantify your achievements based on the size of a project you ran or the time you saved your team on a weekly basis. 
-										<br><br>
-										3. Keep in mind that quantifying a bullet point is not just about the amount (i.e. how much, or a dollar or percentage value) but also the frequency (i.e. how often) and length (i.e. how long a project was).
-
-<br><br>
-
-There are hundreds of other metrics you can use depending on your industry. If you're in marketing, metrics include things like marketing spend, total subscribers, change in conversion rates and changes in customer acquisition costs. If you're in a technical field like software engineering, metrics could include reduction in execution speed, size of data you worked with and time you saved your team.</p>`,
+    question: "What are some common buzzwords to include in my resume?",
+    answer: `
+      Including relevant buzzwords can make your resume stand out. Here are some examples:
+      <ul>
+        <li><strong>Industry-specific terms:</strong> Use terms that are relevant to your industry.</li>
+        <li><strong>Action-oriented words:</strong> Words like "Achieved," "Improved," and "Managed" can highlight your accomplishments.</li>
+        <li><strong>Skills and competencies:</strong> Include key skills and competencies that are in demand in your field.</li>
+      </ul>
+    `,
   },
 ];
 
-const explanation = `
-    Recruiters are looking for evidence of impact on your resume, and hard numbers help with this. To explain this, let's compare these two lines from a sample resume (don't worry, we'll rewrite lines on your own resume in a second) Notice how using hard numbers emphasizes the impact of your work — this is what recruiters look for on your resume. Let's now work through your own resume, including giving you ideas of numbers even if you're not in a numbers-heavy role.
-
-Our data has shown that the best performing resumes quantify the majority of their bullet points (75%+)..
-  `;
-
-const question = "What do hard numbers and quantifying impact mean?";
-
-interface StyleProps {
+interface QuantifyImpactProps {
   resume_url: string;
   style_score: number;
   style_feedback: string;
+  buzzwords_score: number;
+  dates_score: number;
+  contact_personal_details_score: number;
+  readability_score: number;
+  personal_pronouns_score: number;
+  active_voice_score: number;
+  spelling_consistencies_score: number;
 }
-const Style: React.FC<StyleProps> = ({
+
+
+
+interface ScoreItem {
+  id: string;
+  title: string;
+  description: string;
+  path: string;
+  status: "success" | "error" | "locked";
+  action: "FIX" | "MORE";
+}
+const scoreItems = (
+  buzzwords_score: number,
+  dates_score: number,
+  contact_personal_details_score: number,
+  readability_score: number,
+  personal_pronouns_score: number,
+  active_voice_score: number,
+  spelling_consistencies_score: number,
+): ScoreItem[] => [
+  {
+    id: "1",
+    title: "Buzzwords",
+    description:
+      buzzwords_score > THRESHOLD
+        ? "Great job! Your buzzwords make achievements stand out."
+        : "Missing buzzwords! Your style feels vague.",
+    status: buzzwords_score > THRESHOLD ? "success" : "error",
+    action: buzzwords_score > THRESHOLD ? "MORE" : "FIX",
+    path: "/factors/style/buzzwords",
+  },
+  {
+    id: "2",
+    title: "Dates",
+    description:
+      dates_score > THRESHOLD
+        ? "Great job! Your dates are well formatted."
+        : "Incorrect dates! Please check the formatting.",
+    status: dates_score > THRESHOLD ? "success" : "error",
+    action: dates_score > THRESHOLD ? "MORE" : "FIX",
+    path: "/factors/style/dates",
+  },
+  {
+    id: "3",
+    title: "Contact & Personal Details",
+    description:
+      contact_personal_details_score > THRESHOLD
+        ? "Great job! Your contact and personal details are complete."
+        : "Incomplete contact and personal details! Please update them.",
+    status: contact_personal_details_score > THRESHOLD ? "success" : "error",
+    action: contact_personal_details_score > THRESHOLD ? "MORE" : "FIX",
+    path: "/factors/style/contact-personal-details",
+  },
+  {
+    id: "4",
+    title: "Readability",
+    description:
+      readability_score > THRESHOLD
+        ? "Great job! Your resume is easy to read."
+        : "Poor readability! Please improve the clarity.",
+    status: readability_score > THRESHOLD ? "success" : "error",
+    action: readability_score > THRESHOLD ? "MORE" : "FIX",
+    path: "/factors/style/readability",
+  },
+  {
+    id: "5",
+    title: "Personal Pronouns",
+    description:
+      personal_pronouns_score > THRESHOLD
+        ? "Great job! Your use of personal pronouns is consistent."
+        : "Inconsistent use of personal pronouns! Please review them.",
+    status: personal_pronouns_score > THRESHOLD ? "success" : "error",
+    action: personal_pronouns_score > THRESHOLD ? "MORE" : "FIX",
+    path: "/factors/style/personal-pronouns",
+  },
+  {
+    id: "6",
+    title: "Active Voice",
+    description:
+      active_voice_score > THRESHOLD
+        ? "Great job! Your use of active voice is consistent."
+        : "Inconsistent use of active voice! Please review them.",
+    status: active_voice_score > THRESHOLD ? "success" : "error",
+    action: active_voice_score > THRESHOLD ? "MORE" : "FIX",
+    path: "/factors/style/active-voice",
+  },
+  {
+    id: "7",
+    title: "Consistency",
+    description:
+    spelling_consistencies_score > THRESHOLD
+        ? "Great job! Your resume is consistent."
+        : "Inconsistencies found! Please review your resume.",
+    status: spelling_consistencies_score > THRESHOLD ? "success" : "error",
+    action: spelling_consistencies_score > THRESHOLD ? "MORE" : "FIX",
+    path: "/factors/style/consistency",
+  },
+];
+
+const Style: React.FC<QuantifyImpactProps> = ({
   resume_url,
   style_score,
   style_feedback,
+  buzzwords_score,
+  dates_score,
+  contact_personal_details_score,
+  readability_score,
+  personal_pronouns_score,
+  active_voice_score,
+  spelling_consistencies_score,
 }) => {
+  const router = useRouter();
   return (
     <div className="grid h-screen grid-cols-2">
       {/* Left half */}
       <div className="flex h-full flex-col justify-start overflow-y-auto p-4 [-ms-overflow-style:none] [scrollbar-width:none] hover:[-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden">
-        {/* Row with heading on the left and circle at the far right */}
-        <div className="flex w-full items-center justify-between">
-          <p className="text-2xl font-semibold text-black dark:text-white">
-            Style
-            <p className="mb-4 mt-1 text-sm text-gray-600 dark:text-gray-400">
-              Increase your impact by using numbers and metrics in your bullet
-              points
-            </p>
-          </p>
-          <CircleProgress score={style_score} />
-        </div>
-        <br />
-        <hr />
-        <br />
+        <div className="rounded-xl border border-gray-100 bg-white p-8 shadow-sm">
+          <div className="mb-6 flex items-center justify-between">
+            <h2 className="text-2xl font-semibold text-purple-900">Style</h2>
+            <div className="rounded-full bg-orange-50 px-4 py-2">
+              <span className="font-semibold text-orange-600">
+                {style_score}
+              </span>
+              <span className="text-sm text-orange-400">/10</span>
+            </div>
+          </div>
 
-        {/* The rest of the content below */}
-        {/* <p>Quantify Impact feedback: {quantify_impact_feedback}</p> */}
-        <FeedbackCard
-          explanation={explanation}
-          question={question}
-          feedback={style_feedback}
-        />
+          <p className="mb-8 text-gray-600">{style_feedback}</p>
+
+          {scoreItems(
+            buzzwords_score,
+            dates_score,
+            contact_personal_details_score,
+            readability_score,
+            personal_pronouns_score,
+            active_voice_score,
+            spelling_consistencies_score
+          ).map((item: ScoreItem) => (
+            <div
+              key={item.id}
+              className="flex items-center justify-between rounded-lg border border-gray-100 p-4 transition-colors hover:border-gray-200"
+            >
+              <div className="flex items-start gap-3">
+                {item.status === "success" && (
+                  <div className="mt-1">
+                    <Check className="h-5 w-5 text-green-500" />
+                  </div>
+                )}
+                {item.status === "error" && (
+                  <div className="mt-1">
+                    <AlertCircle className="h-5 w-5 text-red-500" />
+                  </div>
+                )}
+                {item.status === "locked" && (
+                  <div className="mt-1">
+                    <Lock className="h-5 w-5 text-gray-400" />
+                  </div>
+                )}
+                <div>
+                  <h3 className="mb-1 font-medium text-gray-900">
+                    {item.title}
+                  </h3>
+                  <p className="text-sm text-gray-500">{item.description}</p>
+                </div>
+              </div>
+              <button
+                className={`flex items-center rounded-full px-4 py-1.5 text-sm font-medium transition-colors ${
+                  item.action === "FIX"
+                    ? "text-purple-600 hover:bg-purple-50"
+                    : "text-purple-600 hover:bg-purple-50"
+                }`}
+                onClick={() => {
+                  router.push(item.path);
+                }}
+              >
+                {item.action}
+                <ChevronRight className="ml-1 h-4 w-4" />
+              </button>
+            </div>
+          ))}
+        </div>
         <br />
         <RecruiterInsightsCard faqs={faqs} />
       </div>
