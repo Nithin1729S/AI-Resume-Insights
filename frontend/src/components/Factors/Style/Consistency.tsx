@@ -9,70 +9,66 @@ import RecruiterInsightsCard from "../../RecruiterInsightsCard";
 const faqs = [
   {
     id: 1,
-    question: "I'm a student or recent graduate. What metrics should I use?",
+    question: "Why is consistency important in a resume?",
     answer: `
-      If you're a student and you are struggling to come up with metrics and numbers, here are a few ideas:
+      Consistency in your resume is crucial for several reasons:
       <ul>
-        <li><strong>Team size:</strong> e.g. how many people have you worked with for specific projects or extracurricular activities? e.g. Teamed with x people to deliver y...</li>
-        <li><strong>Industry-specific metrics:</strong> Depending on the industry you're looking to apply to, there are specific metrics. e.g. have you worked with large amounts of data? For example, you could explain how you "analyzed 10,000 data points to do x" or "Collected 1,000 survey responses to do y".</li>
-        <li><strong>Extra-curricular activities:</strong> Think about any other extra-curricular activities you may have participated in. e.g. you could discuss the # of participants at an event you may have organized, etc.</li>
+        <li><strong>Professionalism:</strong> A consistent format shows attention to detail and professionalism</li>
+        <li><strong>Readability:</strong> Consistent formatting makes it easier for recruiters to scan your resume quickly</li>
+        <li><strong>ATS Optimization:</strong> Consistent formatting helps Applicant Tracking Systems parse your resume more accurately</li>
       </ul>
     `,
   },
   {
     id: 2,
-    question: "What if I'm not in a numbers-focused role?",
+    question: "What elements should be consistent in my resume?",
     answer: `
-      A common misconception is that only people in financial or sales roles have access to numbers they can use on their resume. That's not true. Every role or project has something you can quantify. You just need to think about the impact of your work in a non-financial context.
-      <br /><br />
-      Let's go through a few examples:
+      Several key elements need to maintain consistency throughout your resume:
       <ul>
-        <li><strong>Time savings:</strong> Did you introduce a new process, template, or tool that saved your company time? e.g. in terms of hours per week.</li>
-        <li><strong>Scope:</strong> You can highlight the complexity of work you did by mentioning how many customers or users your team served.</li>
-        <li><strong>Industry-specific metrics:</strong> Depending on the industry you're looking to apply to, there are specific metrics. e.g. have you worked with large amounts of data? For example, you could explain how you "analyzed 10,000 data points to do x" or "Collected 1,000 survey responses to do y".</li>
+        <li><strong>Bullet Points:</strong> Use the same punctuation style and format</li>
+        <li><strong>Verb Tense:</strong> Use past tense for past roles and present tense for current roles</li>
+        <li><strong>Date Format:</strong> Stick to one format (MM/YYYY or Month Year)</li>
+        <li><strong>Font Style and Size:</strong> Use the same font and sizing hierarchy throughout</li>
       </ul>
-      Don't be afraid to estimate if you don't have an exact number available. Most resumes use estimates. For example, if you upgraded some machinery and made your company’s operations more efficient, you could estimate how many hours of labor those new machines saved per week.
-      <br /><br />
-      To take it a step further, you could multiply these weekly labor hours by the average hourly employee pay to give a rough idea of how much money the machines saved.
     `,
   },
   {
     id: 3,
-    question: "How do you add numbers and metrics to your bullet points?",
-    answer: `<p>
-Expand the image next to the question for a real example of how to add numbers to your bullet points. This is called quantifying your bullet points.
-<br><br>
-This is one of the best things you can do to separate your resume from other applicants.
-<br><br>								In the examples, notice how we explicitly describe the <em>impact</em> of our work. You want to always talk about the <em>result</em> of your work —&nbsp;did you help your company get more sales? Did you save your company time? Doing this makes your achievements more meaningful and helps employers know what kind of impact you can have at their company.					</p>`,
+    question: "How do I maintain consistency in bullet point formatting?",
+    answer: `
+      To maintain consistent bullet points:
+      <ul>
+        <li>Start each bullet with an action verb</li>
+        <li>Use the same punctuation style (period or no period)</li>
+        <li>Keep similar length and structure</li>
+        <li>Maintain parallel grammar structure</li>
+      </ul>
+      For example, if you use periods at the end of one bullet point, use them for all bullet points.
+    `,
   },
   {
     id: 4,
-    question: "What numbers can I use to quantify my resume?",
-    answer: `<p>
-Employers love to see achievements that directly contribute to the company’s bottom line (i.e. revenues and costs). Thus, quantifying your impact in dollars will be most impressive to employers.
-<br><br>
-However, not all of us work in sales or finance roles where our performance can be easily converted into dollar figures. What should you do in that case? Here are a few options:
-<br><br>
-1) Use any metric that is relevant to your job, and then make an educated estimate to convert that metric into dollars. For example, improvements you made to a process may have cut the process’s time by 20 hours a week. Twenty hours is equivalent to half of one full-time employee’s workweek, so you can convert your time savings into an estimated financial impact of half the average full-time employee’s salary — say, $30,000 a year.
-										<br><br>
-										2) There are also other metrics you can use to quantify your results!
-										For example, how many people or departments did you work with? Did a change you made result in fewer customer support queries? You can even quantify your achievements based on the size of a project you ran or the time you saved your team on a weekly basis. 
-										<br><br>
-										3. Keep in mind that quantifying a bullet point is not just about the amount (i.e. how much, or a dollar or percentage value) but also the frequency (i.e. how often) and length (i.e. how long a project was).
-
-<br><br>
-
-There are hundreds of other metrics you can use depending on your industry. If you're in marketing, metrics include things like marketing spend, total subscribers, change in conversion rates and changes in customer acquisition costs. If you're in a technical field like software engineering, metrics could include reduction in execution speed, size of data you worked with and time you saved your team.</p>`,
+    question: "What are common consistency mistakes to avoid?",
+    answer: `
+      Watch out for these common consistency errors:
+      <ul>
+        <li><strong>Mixed Tenses:</strong> Switching between past and present tense inconsistently</li>
+        <li><strong>Varying Formats:</strong> Different date formats or spacing throughout the resume</li>
+        <li><strong>Inconsistent Capitalization:</strong> Mixing title case and sentence case</li>
+        <li><strong>Different Bullet Styles:</strong> Using different symbols or punctuation for bullet points</li>
+      </ul>
+    `,
   },
 ];
 
 const explanation = `
-    Recruiters are looking for evidence of impact on your resume, and hard numbers help with this. To explain this, let's compare these two lines from a sample resume (don't worry, we'll rewrite lines on your own resume in a second) Notice how using hard numbers emphasizes the impact of your work — this is what recruiters look for on your resume. Let's now work through your own resume, including giving you ideas of numbers even if you're not in a numbers-heavy role.
+  Consistency in your resume is a key indicator of attention to detail and professionalism. 
+  When formatting elements like bullet points, dates, and spacing remain consistent throughout your resume, 
+  it becomes easier for recruiters to read and understand your experience. Inconsistencies can distract 
+  from your achievements and may give the impression of carelessness.
+`;
 
-Our data has shown that the best performing resumes quantify the majority of their bullet points (75%+)..
-  `;
-
-const question = "What do hard numbers and quantifying impact mean?";
+const question = "Why does consistency matter in my resume?";
 
 interface ConsistencyProps {
   resume_url: string;

@@ -145,11 +145,11 @@ const Sections: React.FC<SectionsProps> = ({
         <div className="rounded-xl border border-gray-100 bg-white p-8 shadow-sm">
           <div className="mb-6 flex items-center justify-between">
             <h2 className="text-2xl font-semibold text-purple-900">Sections</h2>
-            <div className="rounded-full bg-orange-50 px-4 py-2">
-              <span className="font-semibold text-orange-600">
-                {sections_score}
-              </span>
-              <span className="text-sm text-orange-400">/10</span>
+            <div
+              className={`rounded-full px-4 py-2 ${sections_score >= 10 ? "bg-green-100 text-green-700" : ""} ${sections_score >= 7 && sections_score < 10 ? "bg-green-50 text-green-600" : ""} ${sections_score >= 5 && sections_score < 7 ? "bg-orange-50 text-orange-600" : ""} ${sections_score < 5 ? "bg-red-50 text-red-600" : ""} `}
+            >
+              <span className="font-semibold">{sections_score}</span>
+              <span className="text-sm opacity-70">/10</span>
             </div>
           </div>
 

@@ -9,70 +9,71 @@ import RecruiterInsightsCard from "../../RecruiterInsightsCard";
 const faqs = [
   {
     id: 1,
-    question: "I'm a student or recent graduate. What metrics should I use?",
+    question: "What academic information should I include in my resume?",
     answer: `
-      If you're a student and you are struggling to come up with metrics and numbers, here are a few ideas:
+      Here are key elements to include in your education section:
       <ul>
-        <li><strong>Team size:</strong> e.g. how many people have you worked with for specific projects or extracurricular activities? e.g. Teamed with x people to deliver y...</li>
-        <li><strong>Industry-specific metrics:</strong> Depending on the industry you're looking to apply to, there are specific metrics. e.g. have you worked with large amounts of data? For example, you could explain how you "analyzed 10,000 data points to do x" or "Collected 1,000 survey responses to do y".</li>
-        <li><strong>Extra-curricular activities:</strong> Think about any other extra-curricular activities you may have participated in. e.g. you could discuss the # of participants at an event you may have organized, etc.</li>
+        <li><strong>Degree and Major:</strong> List your degree type (BS, BA, MS, etc.) and field of study</li>
+        <li><strong>University Name:</strong> Include the full name of your institution</li>
+        <li><strong>Graduation Date:</strong> Add your graduation date (or expected date)</li>
+        <li><strong>GPA:</strong> Include if it's 3.0 or higher</li>
+        <li><strong>Relevant Coursework:</strong> List key courses that align with the job you're applying for</li>
+        <li><strong>Academic Honors:</strong> Mention Dean's List, scholarships, or other achievements</li>
       </ul>
     `,
   },
   {
     id: 2,
-    question: "What if I'm not in a numbers-focused role?",
+    question: "Should I list all my educational experiences?",
     answer: `
-      A common misconception is that only people in financial or sales roles have access to numbers they can use on their resume. That's not true. Every role or project has something you can quantify. You just need to think about the impact of your work in a non-financial context.
-      <br /><br />
-      Let's go through a few examples:
+      Generally, you should focus on your highest and most relevant education:
       <ul>
-        <li><strong>Time savings:</strong> Did you introduce a new process, template, or tool that saved your company time? e.g. in terms of hours per week.</li>
-        <li><strong>Scope:</strong> You can highlight the complexity of work you did by mentioning how many customers or users your team served.</li>
-        <li><strong>Industry-specific metrics:</strong> Depending on the industry you're looking to apply to, there are specific metrics. e.g. have you worked with large amounts of data? For example, you could explain how you "analyzed 10,000 data points to do x" or "Collected 1,000 survey responses to do y".</li>
+        <li><strong>Recent Graduates:</strong> Include university and possibly high school if you have notable achievements</li>
+        <li><strong>Experienced Professionals:</strong> Focus on college and advanced degrees only</li>
+        <li><strong>Multiple Degrees:</strong> List in reverse chronological order</li>
+        <li><strong>Certifications:</strong> Include relevant professional certifications separately</li>
       </ul>
-      Don't be afraid to estimate if you don't have an exact number available. Most resumes use estimates. For example, if you upgraded some machinery and made your company’s operations more efficient, you could estimate how many hours of labor those new machines saved per week.
-      <br /><br />
-      To take it a step further, you could multiply these weekly labor hours by the average hourly employee pay to give a rough idea of how much money the machines saved.
+      Focus on education that adds value to the position you're applying for and demonstrates your qualifications.
     `,
   },
   {
     id: 3,
-    question: "How do you add numbers and metrics to your bullet points?",
-    answer: `<p>
-Expand the image next to the question for a real example of how to add numbers to your bullet points. This is called quantifying your bullet points.
-<br><br>
-This is one of the best things you can do to separate your resume from other applicants.
-<br><br>								In the examples, notice how we explicitly describe the <em>impact</em> of our work. You want to always talk about the <em>result</em> of your work —&nbsp;did you help your company get more sales? Did you save your company time? Doing this makes your achievements more meaningful and helps employers know what kind of impact you can have at their company.					</p>`,
+    question: "How should I format my education section?",
+    answer: `
+      Keep your education section clear and consistent:
+      <ul>
+        <li><strong>Placement:</strong> Usually at the top for recent graduates, below experience for professionals</li>
+        <li><strong>Format:</strong> Use consistent formatting for each entry</li>
+        <li><strong>Details:</strong> Include relevant academic projects, thesis work, or research</li>
+        <li><strong>Clarity:</strong> Use clear dates and degree information</li>
+      </ul>
+      Remember to maintain the same formatting style throughout your resume for professionalism.
+    `,
   },
   {
     id: 4,
-    question: "What numbers can I use to quantify my resume?",
-    answer: `<p>
-Employers love to see achievements that directly contribute to the company’s bottom line (i.e. revenues and costs). Thus, quantifying your impact in dollars will be most impressive to employers.
-<br><br>
-However, not all of us work in sales or finance roles where our performance can be easily converted into dollar figures. What should you do in that case? Here are a few options:
-<br><br>
-1) Use any metric that is relevant to your job, and then make an educated estimate to convert that metric into dollars. For example, improvements you made to a process may have cut the process’s time by 20 hours a week. Twenty hours is equivalent to half of one full-time employee’s workweek, so you can convert your time savings into an estimated financial impact of half the average full-time employee’s salary — say, $30,000 a year.
-										<br><br>
-										2) There are also other metrics you can use to quantify your results!
-										For example, how many people or departments did you work with? Did a change you made result in fewer customer support queries? You can even quantify your achievements based on the size of a project you ran or the time you saved your team on a weekly basis. 
-										<br><br>
-										3. Keep in mind that quantifying a bullet point is not just about the amount (i.e. how much, or a dollar or percentage value) but also the frequency (i.e. how often) and length (i.e. how long a project was).
-
-<br><br>
-
-There are hundreds of other metrics you can use depending on your industry. If you're in marketing, metrics include things like marketing spend, total subscribers, change in conversion rates and changes in customer acquisition costs. If you're in a technical field like software engineering, metrics could include reduction in execution speed, size of data you worked with and time you saved your team.</p>`,
+    question: "What if I didn't finish my degree?",
+    answer: `
+      Be honest but strategic about incomplete education:
+      <ul>
+        <li><strong>Currently Enrolled:</strong> List expected graduation date and "In Progress"</li>
+        <li><strong>Partial Completion:</strong> List credits earned or "Coursework in [Field]"</li>
+        <li><strong>Focus on Learning:</strong> Highlight relevant courses and skills gained</li>
+        <li><strong>Additional Training:</strong> Include certifications or professional development</li>
+      </ul>
+      Never misrepresent your educational background, but focus on what you've learned and achieved.
+    `,
   },
 ];
 
 const explanation = `
-    Recruiters are looking for evidence of impact on your resume, and hard numbers help with this. To explain this, let's compare these two lines from a sample resume (don't worry, we'll rewrite lines on your own resume in a second) Notice how using hard numbers emphasizes the impact of your work — this is what recruiters look for on your resume. Let's now work through your own resume, including giving you ideas of numbers even if you're not in a numbers-heavy role.
+  Your education section is crucial for demonstrating your academic qualifications and knowledge foundation. 
+  A well-structured education section helps recruiters quickly understand your academic background and 
+  relevant coursework. It's particularly important for recent graduates or career changers, as it showcases 
+  your theoretical knowledge and academic achievements.
+`;
 
-Our data has shown that the best performing resumes quantify the majority of their bullet points (75%+)..
-  `;
-
-const question = "What do hard numbers and quantifying impact mean?";
+const question = "How important is the education section in my resume?";
 
 
 interface EducationProps {

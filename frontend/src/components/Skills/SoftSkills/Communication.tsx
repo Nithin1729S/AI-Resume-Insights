@@ -9,70 +9,63 @@ import RecruiterInsightsCard from "../../RecruiterInsightsCard";
 const faqs = [
   {
     id: 1,
-    question: "I'm a student or recent graduate. What metrics should I use?",
+    question: "How can I demonstrate communication skills on my resume?",
     answer: `
-      If you're a student and you are struggling to come up with metrics and numbers, here are a few ideas:
+      Here are effective ways to showcase your communication abilities:
       <ul>
-        <li><strong>Team size:</strong> e.g. how many people have you worked with for specific projects or extracurricular activities? e.g. Teamed with x people to deliver y...</li>
-        <li><strong>Industry-specific metrics:</strong> Depending on the industry you're looking to apply to, there are specific metrics. e.g. have you worked with large amounts of data? For example, you could explain how you "analyzed 10,000 data points to do x" or "Collected 1,000 survey responses to do y".</li>
-        <li><strong>Extra-curricular activities:</strong> Think about any other extra-curricular activities you may have participated in. e.g. you could discuss the # of participants at an event you may have organized, etc.</li>
+        <li><strong>Action verbs:</strong> Use words like 'presented', 'negotiated', 'collaborated', 'influenced', and 'facilitated' to demonstrate communication skills</li>
+        <li><strong>Project examples:</strong> Highlight instances where you led meetings, gave presentations, or wrote important documentation</li>
+        <li><strong>Results:</strong> Quantify your communication wins, e.g., "Presented to audiences of 50+ people" or "Wrote documentation that reduced support tickets by 30%"</li>
       </ul>
     `,
   },
   {
     id: 2,
-    question: "What if I'm not in a numbers-focused role?",
+    question: "What communication skills are employers looking for?",
     answer: `
-      A common misconception is that only people in financial or sales roles have access to numbers they can use on their resume. That's not true. Every role or project has something you can quantify. You just need to think about the impact of your work in a non-financial context.
-      <br /><br />
-      Let's go through a few examples:
+      Key communication skills valued by employers include:
       <ul>
-        <li><strong>Time savings:</strong> Did you introduce a new process, template, or tool that saved your company time? e.g. in terms of hours per week.</li>
-        <li><strong>Scope:</strong> You can highlight the complexity of work you did by mentioning how many customers or users your team served.</li>
-        <li><strong>Industry-specific metrics:</strong> Depending on the industry you're looking to apply to, there are specific metrics. e.g. have you worked with large amounts of data? For example, you could explain how you "analyzed 10,000 data points to do x" or "Collected 1,000 survey responses to do y".</li>
+        <li><strong>Written communication:</strong> Clear emails, reports, and documentation</li>
+        <li><strong>Verbal communication:</strong> Presentation skills, meeting facilitation, team discussions</li>
+        <li><strong>Active listening:</strong> Understanding and responding to others' needs</li>
+        <li><strong>Cross-functional collaboration:</strong> Working effectively with different departments</li>
       </ul>
-      Don't be afraid to estimate if you don't have an exact number available. Most resumes use estimates. For example, if you upgraded some machinery and made your company’s operations more efficient, you could estimate how many hours of labor those new machines saved per week.
-      <br /><br />
-      To take it a step further, you could multiply these weekly labor hours by the average hourly employee pay to give a rough idea of how much money the machines saved.
+      Remember to provide specific examples of how you've demonstrated these skills in your previous roles.
     `,
   },
   {
     id: 3,
-    question: "How do you add numbers and metrics to your bullet points?",
+    question: "I work in a technical role. How do I show communication skills?",
     answer: `<p>
-Expand the image next to the question for a real example of how to add numbers to your bullet points. This is called quantifying your bullet points.
-<br><br>
-This is one of the best things you can do to separate your resume from other applicants.
-<br><br>								In the examples, notice how we explicitly describe the <em>impact</em> of our work. You want to always talk about the <em>result</em> of your work —&nbsp;did you help your company get more sales? Did you save your company time? Doing this makes your achievements more meaningful and helps employers know what kind of impact you can have at their company.					</p>`,
+      Technical roles require strong communication skills too. Here's how to showcase them:
+      <ul>
+        <li>Highlight how you explained complex technical concepts to non-technical stakeholders</li>
+        <li>Describe documentation you've written for systems or processes</li>
+        <li>Mention cross-team collaborations and technical presentations</li>
+        <li>Include examples of mentoring or training others</li>
+      </ul>
+    </p>`,
   },
   {
     id: 4,
-    question: "What numbers can I use to quantify my resume?",
+    question: "How can I improve the communication section of my resume?",
     answer: `<p>
-Employers love to see achievements that directly contribute to the company’s bottom line (i.e. revenues and costs). Thus, quantifying your impact in dollars will be most impressive to employers.
-<br><br>
-However, not all of us work in sales or finance roles where our performance can be easily converted into dollar figures. What should you do in that case? Here are a few options:
-<br><br>
-1) Use any metric that is relevant to your job, and then make an educated estimate to convert that metric into dollars. For example, improvements you made to a process may have cut the process’s time by 20 hours a week. Twenty hours is equivalent to half of one full-time employee’s workweek, so you can convert your time savings into an estimated financial impact of half the average full-time employee’s salary — say, $30,000 a year.
-										<br><br>
-										2) There are also other metrics you can use to quantify your results!
-										For example, how many people or departments did you work with? Did a change you made result in fewer customer support queries? You can even quantify your achievements based on the size of a project you ran or the time you saved your team on a weekly basis. 
-										<br><br>
-										3. Keep in mind that quantifying a bullet point is not just about the amount (i.e. how much, or a dollar or percentage value) but also the frequency (i.e. how often) and length (i.e. how long a project was).
-
-<br><br>
-
-There are hundreds of other metrics you can use depending on your industry. If you're in marketing, metrics include things like marketing spend, total subscribers, change in conversion rates and changes in customer acquisition costs. If you're in a technical field like software engineering, metrics could include reduction in execution speed, size of data you worked with and time you saved your team.</p>`,
+      To strengthen your communication skills on your resume:
+      <ul>
+        <li>Use specific examples instead of generic statements</li>
+        <li>Quantify your achievements where possible (e.g., "Led weekly meetings with 15+ team members")</li>
+        <li>Include both internal and external communication examples</li>
+        <li>Highlight different communication channels you're proficient in (written, verbal, digital)</li>
+      </ul>
+      Remember to tailor your examples to the job you're applying for.</p>`,
   },
 ];
 
 const explanation = `
-    Recruiters are looking for evidence of impact on your resume, and hard numbers help with this. To explain this, let's compare these two lines from a sample resume (don't worry, we'll rewrite lines on your own resume in a second) Notice how using hard numbers emphasizes the impact of your work — this is what recruiters look for on your resume. Let's now work through your own resume, including giving you ideas of numbers even if you're not in a numbers-heavy role.
-
-Our data has shown that the best performing resumes quantify the majority of their bullet points (75%+)..
+    Strong communication skills are consistently ranked as one of the most important qualities employers seek. Whether you're dealing with clients, collaborating with team members, or presenting to stakeholders, your ability to communicate effectively can make or break your professional success. Let's analyze your resume to see how well you're showcasing these crucial skills.
   `;
 
-const question = "What do hard numbers and quantifying impact mean?";
+const question = "How effectively does your resume demonstrate your communication skills?";
 
 interface CommunicationProps {
   resume_url: string;

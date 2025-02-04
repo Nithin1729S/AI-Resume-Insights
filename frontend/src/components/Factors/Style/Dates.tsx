@@ -5,74 +5,64 @@ import PDFCanvas from "@/components/PDFCanvas/PDFCanvas";
 import CircleProgress from "@/components/ProgressTrackers/CircleProgress";
 import FeedbackCard from "../../FeedbackCard";
 import RecruiterInsightsCard from "../../RecruiterInsightsCard";
-
 const faqs = [
   {
     id: 1,
-    question: "I'm a student or recent graduate. What metrics should I use?",
+    question: "Why are dates important on a resume?",
     answer: `
-      If you're a student and you are struggling to come up with metrics and numbers, here are a few ideas:
+      Dates on your resume are crucial for several reasons:
       <ul>
-        <li><strong>Team size:</strong> e.g. how many people have you worked with for specific projects or extracurricular activities? e.g. Teamed with x people to deliver y...</li>
-        <li><strong>Industry-specific metrics:</strong> Depending on the industry you're looking to apply to, there are specific metrics. e.g. have you worked with large amounts of data? For example, you could explain how you "analyzed 10,000 data points to do x" or "Collected 1,000 survey responses to do y".</li>
-        <li><strong>Extra-curricular activities:</strong> Think about any other extra-curricular activities you may have participated in. e.g. you could discuss the # of participants at an event you may have organized, etc.</li>
+        <li><strong>Career progression:</strong> They show your career progression and growth over time</li>
+        <li><strong>Relevance:</strong> Recent experience is typically more relevant to employers</li>
+        <li><strong>Employment gaps:</strong> Clear dates help explain any gaps in your work history transparently</li>
       </ul>
     `,
   },
   {
     id: 2,
-    question: "What if I'm not in a numbers-focused role?",
+    question: "How should I format dates on my resume?",
     answer: `
-      A common misconception is that only people in financial or sales roles have access to numbers they can use on their resume. That's not true. Every role or project has something you can quantify. You just need to think about the impact of your work in a non-financial context.
-      <br /><br />
-      Let's go through a few examples:
+      Consistency is key when formatting dates on your resume. Here are best practices:
       <ul>
-        <li><strong>Time savings:</strong> Did you introduce a new process, template, or tool that saved your company time? e.g. in terms of hours per week.</li>
-        <li><strong>Scope:</strong> You can highlight the complexity of work you did by mentioning how many customers or users your team served.</li>
-        <li><strong>Industry-specific metrics:</strong> Depending on the industry you're looking to apply to, there are specific metrics. e.g. have you worked with large amounts of data? For example, you could explain how you "analyzed 10,000 data points to do x" or "Collected 1,000 survey responses to do y".</li>
+        <li><strong>Format:</strong> Use either Month/Year (e.g., June 2020) or just years for older positions</li>
+        <li><strong>Order:</strong> List experiences in reverse chronological order (most recent first)</li>
+        <li><strong>Current positions:</strong> Use "Present" or "Current" for ongoing roles (e.g., June 2020 - Present)</li>
       </ul>
-      Don't be afraid to estimate if you don't have an exact number available. Most resumes use estimates. For example, if you upgraded some machinery and made your company’s operations more efficient, you could estimate how many hours of labor those new machines saved per week.
-      <br /><br />
-      To take it a step further, you could multiply these weekly labor hours by the average hourly employee pay to give a rough idea of how much money the machines saved.
     `,
   },
   {
     id: 3,
-    question: "How do you add numbers and metrics to your bullet points?",
-    answer: `<p>
-Expand the image next to the question for a real example of how to add numbers to your bullet points. This is called quantifying your bullet points.
-<br><br>
-This is one of the best things you can do to separate your resume from other applicants.
-<br><br>								In the examples, notice how we explicitly describe the <em>impact</em> of our work. You want to always talk about the <em>result</em> of your work —&nbsp;did you help your company get more sales? Did you save your company time? Doing this makes your achievements more meaningful and helps employers know what kind of impact you can have at their company.					</p>`,
+    question: "How far back should my resume dates go?",
+    answer: `
+      Generally, keep your resume focused on recent and relevant experience:
+      <ul>
+        <li>10-15 years of experience is typically sufficient for senior roles</li>
+        <li>Recent graduates should include relevant internships and academic projects</li>
+        <li>Only include older experience if highly relevant to the position</li>
+      </ul>
+    `,
   },
   {
     id: 4,
-    question: "What numbers can I use to quantify my resume?",
-    answer: `<p>
-Employers love to see achievements that directly contribute to the company’s bottom line (i.e. revenues and costs). Thus, quantifying your impact in dollars will be most impressive to employers.
-<br><br>
-However, not all of us work in sales or finance roles where our performance can be easily converted into dollar figures. What should you do in that case? Here are a few options:
-<br><br>
-1) Use any metric that is relevant to your job, and then make an educated estimate to convert that metric into dollars. For example, improvements you made to a process may have cut the process’s time by 20 hours a week. Twenty hours is equivalent to half of one full-time employee’s workweek, so you can convert your time savings into an estimated financial impact of half the average full-time employee’s salary — say, $30,000 a year.
-										<br><br>
-										2) There are also other metrics you can use to quantify your results!
-										For example, how many people or departments did you work with? Did a change you made result in fewer customer support queries? You can even quantify your achievements based on the size of a project you ran or the time you saved your team on a weekly basis. 
-										<br><br>
-										3. Keep in mind that quantifying a bullet point is not just about the amount (i.e. how much, or a dollar or percentage value) but also the frequency (i.e. how often) and length (i.e. how long a project was).
-
-<br><br>
-
-There are hundreds of other metrics you can use depending on your industry. If you're in marketing, metrics include things like marketing spend, total subscribers, change in conversion rates and changes in customer acquisition costs. If you're in a technical field like software engineering, metrics could include reduction in execution speed, size of data you worked with and time you saved your team.</p>`,
+    question: "How do I handle employment gaps in my dates?",
+    answer: `
+      Employment gaps should be handled professionally:
+      <ul>
+        <li>Be honest about gaps - they're more common than you think</li>
+        <li>Consider using years only if gaps are small</li>
+        <li>If gaps were used for education, freelancing, or skill development, include these activities</li>
+      </ul>
+    `,
   },
 ];
 
 const explanation = `
-    Recruiters are looking for evidence of impact on your resume, and hard numbers help with this. To explain this, let's compare these two lines from a sample resume (don't worry, we'll rewrite lines on your own resume in a second) Notice how using hard numbers emphasizes the impact of your work — this is what recruiters look for on your resume. Let's now work through your own resume, including giving you ideas of numbers even if you're not in a numbers-heavy role.
+  Dates play a crucial role in your resume as they help recruiters understand your career timeline and progression. 
+  Properly formatted dates show your experience level, job stability, and career growth. They also help validate 
+  your skills and achievements within specific timeframes.
+`;
 
-Our data has shown that the best performing resumes quantify the majority of their bullet points (75%+)..
-  `;
-
-const question = "What do hard numbers and quantifying impact mean?";
+const question = "How important are dates on your resume?";
 
 interface DatesProps {
   resume_url: string;

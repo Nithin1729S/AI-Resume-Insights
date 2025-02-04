@@ -9,70 +9,67 @@ import RecruiterInsightsCard from "../../RecruiterInsightsCard";
 const faqs = [
   {
     id: 1,
-    question: "I'm a student or recent graduate. What metrics should I use?",
+    question: "Why should I avoid personal pronouns in my resume?",
     answer: `
-      If you're a student and you are struggling to come up with metrics and numbers, here are a few ideas:
+      Personal pronouns (I, me, my, we, our) should be avoided in resumes for several reasons:
       <ul>
-        <li><strong>Team size:</strong> e.g. how many people have you worked with for specific projects or extracurricular activities? e.g. Teamed with x people to deliver y...</li>
-        <li><strong>Industry-specific metrics:</strong> Depending on the industry you're looking to apply to, there are specific metrics. e.g. have you worked with large amounts of data? For example, you could explain how you "analyzed 10,000 data points to do x" or "Collected 1,000 survey responses to do y".</li>
-        <li><strong>Extra-curricular activities:</strong> Think about any other extra-curricular activities you may have participated in. e.g. you could discuss the # of participants at an event you may have organized, etc.</li>
+        <li><strong>Professionalism:</strong> Resumes are formal documents, and avoiding personal pronouns maintains a professional tone</li>
+        <li><strong>Conciseness:</strong> Removing pronouns helps keep bullet points shorter and more impactful</li>
+        <li><strong>Focus:</strong> It keeps the focus on your achievements and skills rather than on yourself as a narrator</li>
       </ul>
     `,
   },
   {
     id: 2,
-    question: "What if I'm not in a numbers-focused role?",
+    question: "How do I write resume bullets without using personal pronouns?",
     answer: `
-      A common misconception is that only people in financial or sales roles have access to numbers they can use on their resume. That's not true. Every role or project has something you can quantify. You just need to think about the impact of your work in a non-financial context.
-      <br /><br />
-      Let's go through a few examples:
+      There are several effective ways to write strong resume bullets without personal pronouns:
       <ul>
-        <li><strong>Time savings:</strong> Did you introduce a new process, template, or tool that saved your company time? e.g. in terms of hours per week.</li>
-        <li><strong>Scope:</strong> You can highlight the complexity of work you did by mentioning how many customers or users your team served.</li>
-        <li><strong>Industry-specific metrics:</strong> Depending on the industry you're looking to apply to, there are specific metrics. e.g. have you worked with large amounts of data? For example, you could explain how you "analyzed 10,000 data points to do x" or "Collected 1,000 survey responses to do y".</li>
+        <li><strong>Start with action verbs:</strong> Begin each bullet with a strong action verb (e.g., "Developed," "Led," "Managed")</li>
+        <li><strong>Focus on achievements:</strong> Instead of "I increased sales," write "Increased sales by 50%"</li>
+        <li><strong>Use implied subjects:</strong> The subject (you) is implied in resume bullets, making pronouns unnecessary</li>
       </ul>
-      Don't be afraid to estimate if you don't have an exact number available. Most resumes use estimates. For example, if you upgraded some machinery and made your company’s operations more efficient, you could estimate how many hours of labor those new machines saved per week.
-      <br /><br />
-      To take it a step further, you could multiply these weekly labor hours by the average hourly employee pay to give a rough idea of how much money the machines saved.
+      <br />
+      For example:
+      Instead of "I managed a team of 5 people"
+      Write "Managed a team of 5 people"
     `,
   },
   {
     id: 3,
-    question: "How do you add numbers and metrics to your bullet points?",
-    answer: `<p>
-Expand the image next to the question for a real example of how to add numbers to your bullet points. This is called quantifying your bullet points.
-<br><br>
-This is one of the best things you can do to separate your resume from other applicants.
-<br><br>								In the examples, notice how we explicitly describe the <em>impact</em> of our work. You want to always talk about the <em>result</em> of your work —&nbsp;did you help your company get more sales? Did you save your company time? Doing this makes your achievements more meaningful and helps employers know what kind of impact you can have at their company.					</p>`,
+    question: "What are common mistakes when removing personal pronouns?",
+    answer: `
+      When removing personal pronouns, watch out for these common mistakes:
+      <ul>
+        <li><strong>Awkward phrasing:</strong> Simply deleting pronouns without restructuring the sentence</li>
+        <li><strong>Passive voice:</strong> Falling into passive voice when trying to avoid pronouns</li>
+        <li><strong>Inconsistency:</strong> Mixing styles by removing some pronouns but keeping others</li>
+      </ul>
+      Always ensure the sentence remains clear and natural after removing pronouns.
+    `,
   },
   {
     id: 4,
-    question: "What numbers can I use to quantify my resume?",
-    answer: `<p>
-Employers love to see achievements that directly contribute to the company’s bottom line (i.e. revenues and costs). Thus, quantifying your impact in dollars will be most impressive to employers.
-<br><br>
-However, not all of us work in sales or finance roles where our performance can be easily converted into dollar figures. What should you do in that case? Here are a few options:
-<br><br>
-1) Use any metric that is relevant to your job, and then make an educated estimate to convert that metric into dollars. For example, improvements you made to a process may have cut the process’s time by 20 hours a week. Twenty hours is equivalent to half of one full-time employee’s workweek, so you can convert your time savings into an estimated financial impact of half the average full-time employee’s salary — say, $30,000 a year.
-										<br><br>
-										2) There are also other metrics you can use to quantify your results!
-										For example, how many people or departments did you work with? Did a change you made result in fewer customer support queries? You can even quantify your achievements based on the size of a project you ran or the time you saved your team on a weekly basis. 
-										<br><br>
-										3. Keep in mind that quantifying a bullet point is not just about the amount (i.e. how much, or a dollar or percentage value) but also the frequency (i.e. how often) and length (i.e. how long a project was).
-
-<br><br>
-
-There are hundreds of other metrics you can use depending on your industry. If you're in marketing, metrics include things like marketing spend, total subscribers, change in conversion rates and changes in customer acquisition costs. If you're in a technical field like software engineering, metrics could include reduction in execution speed, size of data you worked with and time you saved your team.</p>`,
+    question: "Are there any exceptions where personal pronouns are acceptable?",
+    answer: `
+      While generally avoided in resume bullet points, there are a few specific situations where personal pronouns might be acceptable:
+      <br /><br />
+      1) In your resume summary or objective statement (though still better avoided)
+      <br /><br />
+      2) In cover letters, where a more personal tone is appropriate
+      <br /><br />
+      3) In personal websites or LinkedIn profiles, where the style can be more conversational
+      <br /><br />
+      However, for the main content of your resume, especially in experience and achievement sections, personal pronouns should always be avoided.
+    `,
   },
 ];
 
 const explanation = `
-    Recruiters are looking for evidence of impact on your resume, and hard numbers help with this. To explain this, let's compare these two lines from a sample resume (don't worry, we'll rewrite lines on your own resume in a second) Notice how using hard numbers emphasizes the impact of your work — this is what recruiters look for on your resume. Let's now work through your own resume, including giving you ideas of numbers even if you're not in a numbers-heavy role.
-
-Our data has shown that the best performing resumes quantify the majority of their bullet points (75%+)..
+    Personal pronouns like "I," "me," "my," "we," and "our" should be avoided in resumes as they can make your writing less concise and professional. Instead, start sentences with action verbs and focus on your achievements directly. This creates a more powerful and professional impression with recruiters.
   `;
 
-const question = "What do hard numbers and quantifying impact mean?";
+const question = "Why should personal pronouns be removed from resumes?";
 
 interface PersonalPronounsProps {
   resume_url: string;
