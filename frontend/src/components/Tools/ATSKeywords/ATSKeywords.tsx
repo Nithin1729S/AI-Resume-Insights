@@ -23,7 +23,7 @@ const ATSKeywords: React.FC<ATSKeywordsProps> = ({
                   <h1 className="text-2xl font-semibold tracking-tight">Job Matches</h1>
                 </div>
                 
-                <Card className="flex-1 shadow-md">
+                <Card className="flex-1 shadow-md bg-white">
                   <CardHeader className="pb-3">
                     <div className="flex items-center justify-between">
                       <CardTitle className="text-lg font-medium">Generated Content</CardTitle>

@@ -26,15 +26,15 @@ const CoverLetterGeneration: React.FC<CoverLetterGenerationProps> = ({
             <h1 className="text-2xl font-semibold tracking-tight">Cover Letter</h1>
           </div>
           
-          <Card className="flex-1 shadow-md">
-            <CardHeader className="pb-3">
+          <Card className="flex-1 shadow-md bg-white">
+            <CardHeader className="pb-3 bg-white">
               <div className="flex items-center justify-between">
                 <CardTitle className="text-lg font-medium">Generated Content</CardTitle>
                 <SplitSquareVertical className="h-4 w-4 text-muted-foreground" />
               </div>
               <Separator className="mt-2" />
             </CardHeader>
-            <CardContent>
+            <CardContent className="bg-white">
               <ScrollArea className="h-[calc(100vh-220px)] pr-4">
                 <div className="space-y-6">
                   {paragraphs.map((paragraph, index) => (

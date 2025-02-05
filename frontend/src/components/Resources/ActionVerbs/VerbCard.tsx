@@ -13,7 +13,7 @@ interface VerbCardProps {
 
 const VerbCard: React.FC<VerbCardProps> = ({ title, verbs }) => {
   return (
-    <Card className="w-full transition-all duration-300 hover:shadow-lg">
+    <Card className="w-full transition-all duration-300 hover:shadow-lg bg-white">
       <CardHeader className="pb-3">
         <div className="flex items-center space-x-2">
           <ListChecks className="h-5 w-5 text-primary" />
