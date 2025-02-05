@@ -16,12 +16,17 @@ const ResumeUpload = () => {
 
   useEffect(() => {
     const checkUser = async () => {
+      try {
       const fetchedUserId = await getUserId();
       if (!fetchedUserId) {
         router.push('/login');
       } else {
         setUserId(fetchedUserId);
         setIsLoading(false);
+      }
+      } catch (error) {
+      console.error('Error fetching user ID:', error);
+      router.push('/login');
       }
     };
 
