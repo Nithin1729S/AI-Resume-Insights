@@ -1,15 +1,14 @@
-import { getUserId } from "@/app/lib/actions";
-import apiService from "@/app/services/apiService";
+
 import DefaultLayout from "@/components/Layouts/DefaultLayout";
 import LineAnalysis from "@/components/Tools/LineAnalysis/LineAnalysis";
+import { usePageData } from "@/hooks/usePageData";
 
 
 const LineAnalysisPage = async () => {
-  const userId=await getUserId();
-  const resume=await apiService.get(`/api/ats/${userId}`)
+  const { resumeData } = await usePageData();
   return (
     <DefaultLayout>
-      <LineAnalysis resume_url={resume.get_pdf_url}/>
+      <LineAnalysis resume_url={resumeData.get_pdf_url}/>
     </DefaultLayout>
   );
 };

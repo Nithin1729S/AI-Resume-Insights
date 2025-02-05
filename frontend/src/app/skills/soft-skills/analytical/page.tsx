@@ -1,15 +1,13 @@
-import { getUserId } from "@/app/lib/actions";
-import apiService from "@/app/services/apiService";
 import DefaultLayout from "@/components/Layouts/DefaultLayout";
 import Analytical from "@/components/Skills/SoftSkills/Analytical";
+import { usePageData } from "@/hooks/usePageData";
 
 
 const AnalyticalPage = async () => {
-  const userId=await getUserId();
-  const resume=await apiService.get(`/api/ats/${userId}`)
+   const { resumeData } = await usePageData();
   return (
     <DefaultLayout>
-      <Analytical resume_url={resume.get_pdf_url} analytical_score={resume.analytical_score} analytical_feedback={resume.analytical_feedback}/>
+      <Analytical resume_url={resumeData.get_pdf_url} analytical_score={resumeData.analytical_score} analytical_feedback={resumeData.analytical_feedback}/>
     </DefaultLayout>
   );
 };

@@ -1,14 +1,15 @@
-import { getUserId } from "@/app/lib/actions";
-import apiService from "@/app/services/apiService";
 import DefaultLayout from "@/components/Layouts/DefaultLayout";
 import TeamWork from "@/components/Skills/SoftSkills/Teamwork";
+import { usePageData } from "@/hooks/usePageData";
 
 const TeamWorkPage = async () => {
-  const userId=await getUserId();
-  const resume=await apiService.get(`/api/ats/${userId}`)
+  const { resumeData } = await usePageData();
   return (
     <DefaultLayout>
-      <TeamWork resume_url={resume.get_pdf_url} teamwork_score={resume.teamwork_score} teamwork_feedback={resume.teamwork_feedback}/>
+      <TeamWork 
+      resume_url={resumeData.get_pdf_url} 
+      teamwork_score={resumeData.teamwork_score} 
+      teamwork_feedback={resumeData.teamwork_feedback}/>
     </DefaultLayout>
   );
 };

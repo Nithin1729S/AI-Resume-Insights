@@ -4,7 +4,7 @@ import Table from "./ResumeTable";
 import apiService from "@/app/services/apiService";
 import DefaultLayout from "@/components/Layouts/DefaultLayout";
 import Loader from "@/components/common/Loader";
-import { useRouter } from "next/router";
+import { useRouter } from "next/navigation";
 
 const MyResumesPage = () => {
   const router = useRouter();
