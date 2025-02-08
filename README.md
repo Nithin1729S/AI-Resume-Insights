@@ -3,6 +3,17 @@
 AI Resume Insights is an AI-driven resume feedback system built with **Langchain** and the **Gemini API**, using a **Django backend** (with Django REST Framework) and a **Next.js/TypeScript frontend**. The system is designed to help job seekers enhance their resumes by evaluating them against over **30 key metrics**, generating actionable suggestions, and providing additional features like cover letter generation, job matching, and hard skills assessments.
 
 # Screenshots
+![image](https://github.com/user-attachments/assets/6e5524fd-b843-4b54-ad14-f6d2d195c956)
+
+![image](https://github.com/user-attachments/assets/788d89f0-67e9-4c9c-a6bd-b4bdf959fde9)
+
+![image](https://github.com/user-attachments/assets/abf2315d-c8b7-475e-a53e-9e8382b50bd4)
+
+![image](https://github.com/user-attachments/assets/d6d5a66b-0665-4181-970a-8a370d9ba54c)
+
+![image](https://github.com/user-attachments/assets/d5260c63-f930-4a1d-aa44-95a15bda923e)
+
+![Uploading image.png…]()
 
 
 
