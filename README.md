@@ -169,7 +169,7 @@ GOOGLE_API_KEY=your_google_api_key
 GOOGLE_CLIENT_ID=your_google_client_id
 GOOGLE_CLIENT_SECRET=your_google_client_secret
 GOOGLE_CALLBACK_URL=http://localhost:3000/api/auth/callback/google
-
+```
 Replace `your_google_api_key`, `your_google_client_id` and `your_google_client_secret` with your credentials.
 Ensure these align with the settings in the Docker Compose YAML file.
 
@@ -222,42 +222,3 @@ npm run dev
 - The backend will be available at `http://localhost:8001` and the frontend at `http://localhost:3000` by default.
 - Update environment variables as necessary for your deployment.
 
----
-
-
-# Backend
-
-To run : sudo docker compose up --build
-
-To create new apps : sudo docker-compose exec
-web python manage.py startapp `app-name`
-
-To abort: sudo docker-compose down
-
-To allow vscode to edit : sudo chown -R $USER `folder name`
-
-To create a virtual env :
-python3 -m venv env
-source env/bin/activate
-
-To open shell in container:
-
-sudo docker exec -it backend-web-1 bash
-
-# Tech Stack
-
-Django Rest Framwork \
-NextJS \
-Typescript \
-NextAUTH \
-Google OAUTH2.0 \
-Postgres \
-TailwindCSS \
-Docker \
-Gemini \
-Langchain \
-LangGraph \
-Zustand \
-Material UI \
-Headless UI \
-Radix UI
