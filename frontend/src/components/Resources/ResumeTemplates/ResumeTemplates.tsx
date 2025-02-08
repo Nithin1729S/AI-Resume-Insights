@@ -14,7 +14,7 @@ const ResumeTemplates: React.FC<ResumeTemplatesProps> = ({
   return (
     <div className="grid grid-cols-2 h-screen">
       {/* Left half */}
-      <div>
+      <div className="overflow-y-auto p-4 [scrollbar-width:none] [-ms-overflow-style:none] hover:[-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden">
         <ResumeTemplatesCollection/>
       </div>
 

@@ -25,8 +25,8 @@ const HardSkills: React.FC<HardSkillsProps> = ({ resume_url, skills }) => {
   return (
     <div className="flex h-screen bg-muted/30">
       {/* Left Panel - Skills Grid */}
-      <div className="flex-1 p-6 border-r">
-        <Card className="h-full">
+      <div className="flex-1 p-6">
+        <Card className="w-full">
           <CardHeader className="pb-3">
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-2">
@@ -40,21 +40,22 @@ const HardSkills: React.FC<HardSkillsProps> = ({ resume_url, skills }) => {
               <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3">
                 {skills.map((skill, index) => (
                   <Button
-                    key={index}
-                    variant="secondary"
-                    className={cn(
-                      "h-auto py-4 px-4 group relative",
-                      "hover:bg-primary hover:text-primary-foreground",
-                      "transition-all duration-200"
-                    )}
-                    onClick={() => handleSkillClick(skill)}
-                  >
-                    <span className="text-sm font-medium">{skill}</span>
-                    <ChevronRight className={cn(
-                      "h-4 w-4 absolute right-2 opacity-0",
-                      "group-hover:opacity-100 transition-opacity duration-200"
-                    )} />
-                  </Button>
+                  key={index}
+                  variant="secondary"
+                  className={cn(
+                    "h-auto py-4 px-4 group relative bg-[#f5f5f5] text-gray-800 border border-gray-300",
+                    "hover:bg-[#e0e0e0] hover:text-gray-900",
+                    "transition-all duration-200"
+                  )}
+                  onClick={() => handleSkillClick(skill)}
+                >
+                  <span className="text-sm font-medium">{skill}</span>
+                  <ChevronRight className={cn(
+                    "h-4 w-4 absolute right-2 opacity-0 text-gray-600",
+                    "group-hover:opacity-100 group-hover:text-gray-900 transition-opacity duration-200"
+                  )} />
+                </Button>
+                
                 ))}
               </div>
             </ScrollArea>

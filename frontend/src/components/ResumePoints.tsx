@@ -52,12 +52,12 @@ const ResumePoints = () => {
 
   return (
     <div className="max-w-4xl w-full mx-auto">
-      <div className="bg-white rounded-2xl shadow-2xl overflow-hidden border border-gray-100">
-        <div className="h-2 bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500" />
+      <div className="bg-white rounded-2xl overflow-hidden border border-gray-100">
+        {/* <div className="h-2 bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500" /> */}
         
         <div className="px-8 py-10">
           <h2 className="text-4xl font-bold mb-2 text-gray-800">
-            Professional Achievements
+            Sample Bullet Points
           </h2>
           <p className="text-gray-500 mb-8">A track record of impactful contributions and technical excellence</p>
           
@@ -82,7 +82,7 @@ const ResumePoints = () => {
                       {point.text}
                     </p>
                   </div>
-                  <div className="absolute left-0 w-1 h-0 bg-gradient-to-b from-indigo-500 to-purple-500 group-hover:h-full transition-all duration-300 rounded-r-lg" />
+                  <div className="absolute left-0 w-1 h-0 bg-gradient-to-b from-indigo-500 to-purple-500 group-hover:h-[50px] transition-all duration-300 rounded-r-lg" />
                 </div>
               );
             })}
