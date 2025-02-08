@@ -13,7 +13,42 @@ AI Resume Insights is an AI-driven resume feedback system built with **Langchain
 
 ![image](https://github.com/user-attachments/assets/d5260c63-f930-4a1d-aa44-95a15bda923e)
 
-![Uploading image.png…]()
+![image](https://github.com/user-attachments/assets/08d55555-e7f0-457b-b196-aa78dc5794c1)
+
+
+![image](https://github.com/user-attachments/assets/7afdf9e0-05cf-498a-99a7-feb7b270c5bf)
+
+![image](https://github.com/user-attachments/assets/0a4b69da-686d-4fdf-b6ac-e13955947438)
+
+![image](https://github.com/user-attachments/assets/2b677f30-ddba-4bfb-a28f-879c34bda4d5)
+
+![image](https://github.com/user-attachments/assets/e01b66a6-8045-495b-aef3-8fea8a9aabd1)
+
+
+![image](https://github.com/user-attachments/assets/57562d60-fc36-4e0d-ac06-2860ba4b031e)
+
+![image](https://github.com/user-attachments/assets/4f4a98f4-e079-48f6-b66c-d5059faf8994)
+
+![image](https://github.com/user-attachments/assets/d672cd71-3dde-4e52-8120-8adbb6567f8c)
+
+
+![image](https://github.com/user-attachments/assets/68081502-154b-4bc7-858a-a1c16c92b0f6)
+
+![image](https://github.com/user-attachments/assets/4f52f615-a305-436c-8a7d-81ce70561011)
+
+![image](https://github.com/user-attachments/assets/ea570b6d-4c70-4f55-b659-62ed350597ac)
+
+![image](https://github.com/user-attachments/assets/71755a55-f536-4029-8e58-30801e86d135)
+
+![image](https://github.com/user-attachments/assets/fc645829-86d2-4db0-b780-c246a17a3822)
+
+![image](https://github.com/user-attachments/assets/1e2b98b9-11c5-474c-ad34-099c24471c74)
+
+![image](https://github.com/user-attachments/assets/03266b56-de57-4f71-a782-4210bb42e162)
+
+![image](https://github.com/user-attachments/assets/2f31476d-ee87-4a13-bb14-8799adac6cb9)
+
+![image](https://github.com/user-attachments/assets/05c269a7-b7a0-45f5-a816-6a1183cca5bb)
 
 
 
