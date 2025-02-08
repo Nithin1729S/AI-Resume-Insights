@@ -249,7 +249,7 @@ sudo docker-compose down
 
 Create a `.env.local` file in the frontend directory with the following content:
 
-```
+``` env
 NEXT_PUBLIC_API_HOST=http://localhost:8001
 NEXT_PUBLIC_GOOGLE_REDIRECT_URI=http://localhost:3000/api/auth/callback/google
 GOOGLE_CLIENT_ID=your_google_client_id
