@@ -7,7 +7,7 @@ AI Resume Insights is an AI-driven resume feedback system built with **Langchain
 
 [output.webm](https://github.com/user-attachments/assets/5b5aaccb-b957-4ebb-a733-c7ec868a7c4e)
 
-
+Watch Demo on Youtube: https://youtu.be/vaUHY6kaM3g
 
 # Screenshots
 ![image](https://github.com/user-attachments/assets/6e5524fd-b843-4b54-ad14-f6d2d195c956)
