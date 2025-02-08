@@ -2,6 +2,7 @@
 
 import React from "react";
 import PDFCanvas from "@/components/PDFCanvas/PDFCanvas";
+import ResumePoints from "@/components/ResumePoints";
 
 
 interface SampleBulletsProps {
@@ -14,7 +15,7 @@ const SampleBullets: React.FC<SampleBulletsProps> = ({
     <div className="grid grid-cols-2 h-screen">
       {/* Left half */}
       <div>
-        Sample Bullets
+        <ResumePoints/>
       </div>
 
       {/* Right half - PDFCanvas */}

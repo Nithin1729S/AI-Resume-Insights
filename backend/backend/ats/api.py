@@ -306,9 +306,7 @@ def get_all_resumes(request):
             "brevity": resume.brevity_score,
             "style": resume.style_score, 
             "sections": resume.sections_score,  
-            "total_score": sum(
-                filter(None, [resume.impact_score, resume.brevity_score, resume.style_score,resume.sections_score])
-            )  # Summing available scores
+            "total_score": resume.overall_score,
         }
         for resume in resumes
     ]

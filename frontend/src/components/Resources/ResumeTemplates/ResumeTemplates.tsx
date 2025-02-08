@@ -2,6 +2,7 @@
 
 import React from "react";
 import PDFCanvas from "@/components/PDFCanvas/PDFCanvas";
+import ResumeTemplatesCollection from "@/components/ResumeTemplatesCollection";
 
 
 interface ResumeTemplatesProps {
@@ -14,7 +15,7 @@ const ResumeTemplates: React.FC<ResumeTemplatesProps> = ({
     <div className="grid grid-cols-2 h-screen">
       {/* Left half */}
       <div>
-        Resume Templates
+        <ResumeTemplatesCollection/>
       </div>
 
       {/* Right half - PDFCanvas */}
