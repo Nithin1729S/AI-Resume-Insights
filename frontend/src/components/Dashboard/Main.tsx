@@ -7,6 +7,7 @@ import { Star, History } from "lucide-react";
 import { Card } from "../ui/card";
 import { AlertCircle, Check, ChevronRight, Lock } from "lucide-react";
 import { useRouter } from "next/navigation";
+import ResumePlot from "../ResumePlot";
 const THRESHOLD: number = 6;
 const faqs = [
   {
@@ -276,7 +277,11 @@ const Main: React.FC<MainProps> = ({
             </div>
           </Card>
           <div className="flex h-full w-full flex-col justify-start pt-8">
-            <div className="w-full max-w-3xl rounded-xl border border-gray-100 bg-white p-8 shadow-sm">
+          <div className="mx-auto w-full max-w-6xl mt-4">
+              <ResumePlot impact={impact_score} brevity={brevity_score} style={style_score} sections={sections_score} total_score={overall_score}/>
+            </div>
+
+            <div className="mt-6 w-full max-w-3xl rounded-xl border border-gray-100 bg-white p-8 shadow-sm">
               <div className="mb-6 flex items-center justify-between">
                 <h2 className="text-2xl font-semibold text-purple-900">
                   Steps to increase your score
@@ -344,6 +349,8 @@ const Main: React.FC<MainProps> = ({
                 ))}
               </div>
             </div>
+
+            
             <div className="mx-auto w-full max-w-6xl">
               <RecruiterInsightsCard faqs={faqs} />
             </div>

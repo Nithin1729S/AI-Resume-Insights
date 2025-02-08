@@ -5,6 +5,7 @@ import { getUserId } from "@/app/lib/actions";
 import apiService from "@/app/services/apiService";
 import { redirect } from "next/navigation"; // Import redirect from next/navigation
 import { usePageData } from "@/hooks/usePageData";
+import ResumePlot from "@/components/ResumePlot";
 
 export const metadata = {
   title: "AI Resume Insights",
@@ -47,6 +48,7 @@ const HomePage = async () => {
         sections_score={resumeData.sections_score}
         soft_skills_score={resumeData.soft_skills_score}
       />
+      
     </DefaultLayout>
   );
 };
