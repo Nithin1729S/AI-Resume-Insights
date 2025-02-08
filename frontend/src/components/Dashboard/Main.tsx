@@ -195,7 +195,7 @@ const Main: React.FC<MainProps> = ({
               <div className="flex items-center justify-between">
                 <div>
                   <h1 className="text-2xl font-semibold text-[#1A1942]">
-                    Good morning, {userName}.
+                    Greetings, {userName}.
                   </h1>
                   <p className="mt-1 text-gray-600">
                     Welcome to your resume review.

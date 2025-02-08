@@ -8,7 +8,7 @@ import Logo05 from "../../public/images/logo-05.svg";
 import Logo10 from "../../public/images/logo-10.svg";
 import Logo07 from "../../public/images/logo-07.svg";
 import ModalVideo from "./Modals/ModalVideo";
-import VideoThumb from "../../public/images/hero-image-01.jpg";
+import VideoThumb from "../../public/images/main.png";
 
 export default function HeroHome() {
   return (

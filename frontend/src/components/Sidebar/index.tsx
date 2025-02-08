@@ -313,7 +313,7 @@ const menuGroups = [
             </defs>
           </svg>
         ),
-        label: "ATS Keywords",
+        label: "Job Matches",
         route: "/tools/ats-keywords",
       },
       {
