@@ -6,6 +6,7 @@ import DefaultLayout from "@/components/Layouts/DefaultLayout";
 import apiService from "@/app/services/apiService";
 import { useEffect, useState } from "react";
 import { getUserId } from "@/app/lib/actions";
+import { toast } from 'sonner';
 
 const Settings = () => {
   interface UserData {
@@ -19,19 +20,22 @@ const Settings = () => {
   const [error, setError] = useState<string | null>(null);
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
   const [previewUrl, setPreviewUrl] = useState<string | null>(null);
+  const [isSaving, setIsSaving] = useState(false);
 
   const fetchUserDetails = async () => {
     try {
       const userId = await getUserId();
       if (!userId) {
+        toast.error("No user ID found");
         setError("No user ID found");
         return;
       }
       const response = await apiService.get(`/api/auth/${userId}/`);
       setUserData(response);
     } catch (error) {
-      setError("Error fetching user details");
       console.error("Error fetching user details:", error);
+      toast.error("Failed to fetch user details");
+      setError("Error fetching user details");
     }
   };
 
@@ -45,12 +49,13 @@ const Settings = () => {
 
     const validTypes = ["image/jpeg", "image/jpg", "image/png"];
     if (!validTypes.includes(file.type)) {
+      toast.error("Please upload only JPG, JPEG, or PNG files");
       setError("Please upload only JPG, JPEG, or PNG files");
       return;
     }
 
     if (file.size > 5 * 1024 * 1024) {
-      // 5MB limit
+      toast.error("File size should be less than 5MB");
       setError("File size should be less than 5MB");
       return;
     }
@@ -64,71 +69,71 @@ const Settings = () => {
     return () => URL.revokeObjectURL(objectUrl);
   };
 
-  const handleSubmit = async () => {
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
     if (!selectedFile) return;
 
     setUploading(true);
     setError(null);
 
+    // Show loading toast
+    const loadingToast = toast.loading('Uploading avatar...');
+
     const formData = new FormData();
     formData.append("avatar", selectedFile);
 
     try {
-      const response = await apiService.post(
-        "/api/auth/update_avatar/",
-        formData,
-      );
+      const response = await apiService.post("/api/auth/update_avatar/", formData);
 
       if (response.success) {
+        toast.success("Avatar updated successfully!", { id: loadingToast });
         setSelectedFile(null);
         setPreviewUrl(null);
-
-        // Fetch updated user details
         await fetchUserDetails();
       } else {
-        setError(response.message || "Failed to upload avatar");
+        throw new Error(response.message || "Failed to upload avatar");
       }
     } catch (error: any) {
       console.error("Error uploading avatar:", error);
-      setError(
-        error.response?.data?.message || "An error occurred during upload",
-      );
+      toast.error(error.message || "An error occurred during upload", { id: loadingToast });
+      setError(error.message || "An error occurred during upload");
     } finally {
       setUploading(false);
     }
   };
 
-  const handleCancel = () => {
-    setSelectedFile(null);
-    setPreviewUrl(null);
-    setError(null);
-  };
-  const handleSave = async () => {
-    setUploading(true);
+  const handleSave = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (isSaving) return;
+    
+    setIsSaving(true);
     setError(null);
 
-    const formData = new FormData();
-    formData.append("name", userData?.name || "");
-    formData.append("about_me", userData?.about_me || "");
+    // Show loading toast
+    const loadingToast = toast.loading('Saving profile...');
 
     try {
+      const formData = new FormData();
+      formData.append("name", userData?.name || "");
+      formData.append("about_me", userData?.about_me || "");
+
       const response = await apiService.post(
         "/api/auth/update_user_details/",
-        formData,
+        formData
       );
 
       if (response.success) {
+        toast.success("Profile updated successfully!", { id: loadingToast });
         await fetchUserDetails();
       } else {
-        setError(response.message || "Failed to update user details");
+        throw new Error(response.message || "Failed to update user details");
       }
     } catch (error: any) {
       console.error("Error updating user details:", error);
-      setError(
-        error.response?.data?.message || "An error occurred during update",
-      );
+      toast.error(error.message || "An error occurred during update", { id: loadingToast });
+      setError(error.message || "An error occurred during update");
     } finally {
-      setUploading(false);
+      setIsSaving(false);
     }
   };
 
@@ -146,7 +151,7 @@ const Settings = () => {
                 </h3>
               </div>
               <div className="p-7">
-                <form onSubmit={(e) => e.preventDefault()}>
+                <form onSubmit={handleSave}>
                   <div className="mb-5.5 flex flex-col gap-5.5 sm:flex-row">
                     <div className="w-full sm:w-1/2">
                       <label
@@ -258,13 +263,13 @@ const Settings = () => {
                   </div>
 
                   <div className="flex justify-end gap-4.5">
-                    <button
-                      className="flex justify-center rounded bg-primary px-6 py-2 font-medium text-gray hover:bg-opacity-90"
-                      type="button" // Change to button type "button" to avoid form submission
-                      onClick={handleSave} // Trigger save
-                    >
-                      Save
-                    </button>
+                  <button
+                        type="submit"
+                        disabled={isSaving}
+                        className="flex justify-center rounded bg-primary px-6 py-2 font-medium text-gray hover:bg-opacity-90 disabled:opacity-50"
+                      >
+                        {isSaving ? "Saving..." : "Save"}
+                      </button>
                   </div>
                 </form>
               </div>
@@ -278,7 +283,7 @@ const Settings = () => {
                 </h3>
               </div>
               <div className="p-7">
-                <form action="#">
+                <form onSubmit={handleSubmit}>
                   <div className="mb-4 flex items-center gap-3">
                     <div className="h-14 w-14 rounded-full">
                       <Image
@@ -349,13 +354,13 @@ const Settings = () => {
                   </div>
 
                   <div className="flex justify-end gap-4.5">
-                    <button
-                      onClick={handleSubmit}
-                      className="flex justify-center rounded bg-primary px-6 py-2 font-medium text-gray hover:bg-opacity-90"
-                      type="submit"
-                    >
-                      Save
-                    </button>
+                  <button
+                    type="submit"
+                    disabled={uploading || !selectedFile}
+                    className="flex justify-center rounded bg-primary px-6 py-2 font-medium text-gray hover:bg-opacity-90 disabled:opacity-50"
+                  >
+                    {uploading ? "Uploading..." : "Save"}
+                  </button>
                   </div>
                 </form>
               </div>

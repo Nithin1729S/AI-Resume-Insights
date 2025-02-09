@@ -66,11 +66,6 @@ const HardSkills: React.FC<HardSkillsProps> = ({ resume_url, skills }) => {
       {/* Right Panel - Resume Preview */}
       <div className="w-1/2 h-full bg-background p-6">
         <Card className="h-full border-0 shadow-none">
-          <CardHeader className="pb-3">
-            <CardTitle className="text-lg font-medium text-muted-foreground">
-              Resume Preview
-            </CardTitle>
-          </CardHeader>
           <CardContent className="p-0">
             <div className="h-[calc(100vh-140px)] w-full">
               <PDFCanvas resume_url={resume_url} />
