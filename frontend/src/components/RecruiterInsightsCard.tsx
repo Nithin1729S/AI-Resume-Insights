@@ -27,10 +27,10 @@ const RecruiterInsightsPage: React.FC<RecruiterInsightsPageProps> = ({ faqs }) =
   );
 
   return (
-    <div className="min-h-screen bg-background py-12 px-6">
+    <div className="min-h-screen bg-background mt-10">
       <div className="w-full mx-auto space-y-8">
         {/* Header Section */}
-        <Card className="bg-white shadow-lg w-full">
+        <Card className="bg-white  w-full">
           <CardHeader className="text-center pb-2">
             <div className="flex items-center justify-center space-x-2">
               <Lightbulb className="h-8 w-8 text-primary" />
