@@ -20,7 +20,7 @@ load_dotenv()
 
 GOOGLE_API_KEY=os.getenv('GOOGLE_API_KEY')
 genai.configure(api_key=GOOGLE_API_KEY)
-model=ChatGoogleGenerativeAI(model='gemini-pro',google_api_key=GOOGLE_API_KEY)
+model=ChatGoogleGenerativeAI(model='gemini-1.5-pro',google_api_key=GOOGLE_API_KEY)
 
 
 

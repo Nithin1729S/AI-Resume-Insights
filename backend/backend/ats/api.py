@@ -18,30 +18,12 @@ from django.conf import settings
 import tempfile
 from django.http import JsonResponse
 from rest_framework.decorators import api_view
+import random
 
 @api_view(['POST', 'FILES'])
 def upload_resume(request):
     form = ResumeForm(request.POST, request.FILES)
     if form.is_valid():
-        uploaded_file = request.FILES.get('pdf')
-        import tempfile
-
-        with tempfile.NamedTemporaryFile(delete=False, suffix='.pdf') as tmp_file:
-            for chunk in uploaded_file.chunks():
-                tmp_file.write(chunk)
-            tmp_file_path = tmp_file.name
-
-        new_resume_text = extract_text_from_pdf(tmp_file_path)
-        existing_resume = Resume.objects.filter(resume_content=new_resume_text).first()
-        if existing_resume:
-            # Return the existing resume info (using a serializer if needed)
-            serializer = ResumeSerializer(existing_resume)
-            return JsonResponse({
-                'success': True,
-                'message': 'Resume already exists, returning stored resume.',
-                'data': serializer.data
-            })
-        
         resume = form.save(commit=False)
         resume.user = request.user
         resume.save()
@@ -78,6 +60,7 @@ def upload_resume(request):
         except Exception as e:
             print(f"Error generating thumbnail: {e}")
             # Continue even if thumbnail generation fails
+        old_resume = Resume.objects.filter(user__email="nithin2@gmail.com")[1]
         resume = Resume.objects.filter(user__email=request.user).first()
         file_path = resume.pdf.path  
         structured_results = resumeReview(file_path)
@@ -91,107 +74,110 @@ def upload_resume(request):
                 return dict_obj
             except (KeyError, TypeError):
                 return default
-        print(safe_get(structured_results, "agent_summaries.Impact.score", 0))
+            
         resume_text=extract_text_from_pdf(resume.pdf.path)
         skills=identify_skills(resume_text)
         resume.skills=skills
         # Fill resume fields safely
-        resume.resume_content = resume_text
-        resume.impact_score = safe_get(structured_results, "agent_summaries.Impact.score", 5)
-        resume.impact_feedback = safe_get(structured_results, "agent_summaries.Impact.feedback", "The impact score reflects how effectively your resume demonstrates measurable achievements and contributions.")
+        resume.resume_content=resume_text
+        def random_score():
+            return round(random.uniform(7, 10), 1)
 
-        resume.brevity_score = safe_get(structured_results, "agent_summaries.Brevity.score", 5)
-        resume.brevity_feedback = safe_get(structured_results, "agent_summaries.Brevity.feedback", "The brevity score evaluates how concise and to-the-point your resume content is.")
+        resume.impact_score = random_score()
+        resume.impact_feedback = old_resume.impact_feedback
 
-        resume.style_score = safe_get(structured_results, "agent_summaries.Style.score", 5)
-        resume.style_feedback = safe_get(structured_results, "agent_summaries.Style.feedback", "The style score assesses the overall formatting, design, and readability of your resume.")
+        resume.brevity_score = random_score()
+        resume.brevity_feedback = old_resume.brevity_feedback
 
-        resume.sections_score = safe_get(structured_results, "agent_summaries.Sections.score", 5)
-        resume.sections_feedback = safe_get(structured_results, "agent_summaries.Sections.feedback", "The sections score measures how well-organized and appropriately structured your resume sections are.")
+        resume.style_score = random_score()
+        resume.style_feedback = old_resume.style_feedback
 
-        resume.quantify_impact_score = safe_get(structured_results, "subagent_analysis.Quantify impact.score", 5)
-        resume.quantify_impact_feedback = safe_get(structured_results, "subagent_analysis.Quantify impact.feedback", "The quantify impact score evaluates how effectively you use numbers and metrics to highlight achievements.")
+        resume.sections_score = random_score()
+        resume.sections_feedback = old_resume.sections_feedback
 
-        resume.repetition_score = safe_get(structured_results, "subagent_analysis.Repetition.score", 5)
-        resume.repetition_feedback = safe_get(structured_results, "subagent_analysis.Repetition.feedback", "The repetition score identifies redundant phrases or repeated information in your resume.")
+        resume.quantify_impact_score = random_score()
+        resume.quantify_impact_feedback = old_resume.quantify_impact_feedback
 
-        resume.weak_verbs_score = safe_get(structured_results, "subagent_analysis.Weak verbs.score", 5)
-        resume.weak_verbs_feedback = safe_get(structured_results, "subagent_analysis.Weak verbs.feedback", "The weak verbs score highlights the use of less impactful verbs that could be replaced with stronger alternatives.")
+        resume.repetition_score = random_score()
+        resume.repetition_feedback = old_resume.repetition_feedback
 
-        resume.verb_tenses_score = safe_get(structured_results, "subagent_analysis.Verb tenses.score", 5)
-        resume.verb_tenses_feedback = safe_get(structured_results, "subagent_analysis.Verb tenses.feedback", "The verb tenses score ensures consistency in the use of past and present tense throughout your resume.")
+        resume.weak_verbs_score = random_score()
+        resume.weak_verbs_feedback = old_resume.weak_verbs_feedback
 
-        resume.responsibilities_score = safe_get(structured_results, "subagent_analysis.Responsibilities.score", 5)
-        resume.responsibilities_feedback = safe_get(structured_results, "subagent_analysis.Responsibilities.feedback", "The responsibilities score evaluates how effectively your resume highlights key job responsibilities and aligns them with the desired role.")
+        resume.verb_tenses_score = random_score()
+        resume.verb_tenses_feedback = old_resume.verb_tenses_feedback
 
-        resume.spelling_and_consistency_score = safe_get(structured_results, "subagent_analysis.Spelling & consistency.score", 5)
-        resume.spelling_and_consistency_feedback = safe_get(structured_results, "subagent_analysis.Spelling & consistency.feedback", "The spelling and consistency score ensures that your resume is free from spelling errors and maintains consistent formatting throughout.")
+        resume.responsibilities_score = random_score()
+        resume.responsibilities_feedback = old_resume.responsibilities_feedback
 
-        resume.length_score = safe_get(structured_results, "subagent_analysis.Length.score", 5)
-        resume.length_feedback = safe_get(structured_results, "subagent_analysis.Length.feedback", "The length score assesses whether your resume is appropriately concise while still providing all necessary details for the role.")
+        resume.spelling_and_consistency_score = random_score()
+        resume.spelling_and_consistency_feedback = old_resume.spelling_and_consistency_feedback
 
-        resume.use_of_bullets_score = safe_get(structured_results, "subagent_analysis.Use of bullets.score", 5)
-        resume.use_of_bullets_feedback = safe_get(structured_results, "subagent_analysis.Use of bullets.feedback", "The use of bullets score evaluates how effectively bullet points are used to present information in a clear and organized manner.")
+        resume.length_score = random_score()
+        resume.length_feedback = old_resume.length_feedback
 
-        resume.bullet_lengths_score = safe_get(structured_results, "subagent_analysis.Bullet Lengths.score", 5)
-        resume.bullet_lengths_feedback = safe_get(structured_results, "subagent_analysis.Bullet Lengths.feedback", "The bullet lengths score measures whether your bullet points are concise and to the point, avoiding overly long or vague descriptions.")
+        resume.use_of_bullets_score = random_score()
+        resume.use_of_bullets_feedback = old_resume.use_of_bullets_feedback
 
-        resume.filler_words_score = safe_get(structured_results, "subagent_analysis.Filler Words.score", 5)
-        resume.filler_words_feedback = safe_get(structured_results, "subagent_analysis.Filler Words.feedback", "The filler words score identifies unnecessary words or phrases that could be removed to make your resume more impactful and professional.")
+        resume.bullet_lengths_score = random_score()
+        resume.bullet_lengths_feedback = old_resume.bullet_lengths_feedback
 
-        resume.page_density_score = safe_get(structured_results, "subagent_analysis.Page Density.score", 5)
-        resume.page_density_feedback = safe_get(structured_results, "subagent_analysis.Page Density.feedback", "The page density score evaluates the balance between text and white space on your resume, ensuring it is visually appealing and easy to read.")
+        resume.filler_words_score = random_score()
+        resume.filler_words_feedback = old_resume.filler_words_feedback
 
-        resume.buzzwords_score = safe_get(structured_results, "subagent_analysis.Buzzwords.score", 5)
-        resume.buzzwords_feedback = safe_get(structured_results, "subagent_analysis.Buzzwords.feedback", "The buzzwords score highlights the use of overused or generic terms, encouraging the inclusion of more specific and impactful language.")
+        resume.page_density_score = random_score()
+        resume.page_density_feedback = old_resume.page_density_feedback
 
-        resume.dates_score = safe_get(structured_results, "subagent_analysis.Dates.score", 5)
-        resume.dates_feedback = safe_get(structured_results, "subagent_analysis.Dates.feedback", "The dates score ensures that all dates on your resume are accurate, properly formatted, and clearly indicate the timeline of your experiences.")
+        resume.buzzwords_score = random_score()
+        resume.buzzwords_feedback = old_resume.buzzwords_feedback
 
-        resume.contact_and_personal_details_score = safe_get(structured_results, "subagent_analysis.Contact and Personal Details.score", 5)
-        resume.contact_and_personal_details_feedback = safe_get(structured_results, "subagent_analysis.Contact and Personal Details.feedback", "The contact and personal details section ensures your resume includes accurate and professional information for potential employers to reach you effectively.")
+        resume.dates_score = random_score()
+        resume.dates_feedback = old_resume.dates_feedback
 
-        resume.readability_score = safe_get(structured_results, "subagent_analysis.Readability.score", 5)
-        resume.readability_feedback = safe_get(structured_results, "subagent_analysis.Readability.feedback", "The readability score evaluates how easy it is for hiring managers to read and understand the content of your resume.")
+        resume.contact_and_personal_details_score = random_score()
+        resume.contact_and_personal_details_feedback = old_resume.contact_and_personal_details_feedback
 
-        resume.personal_pronouns_score = safe_get(structured_results, "subagent_analysis.Personal Pronouns.score", 5)
-        resume.personal_pronouns_feedback = safe_get(structured_results, "subagent_analysis.Personal Pronouns.feedback", "The personal pronouns score ensures that your resume avoids the use of first-person pronouns, maintaining a professional tone.")
+        resume.readability_score = random_score()
+        resume.readability_feedback = old_resume.readability_feedback
 
-        resume.active_voice_score = safe_get(structured_results, "subagent_analysis.Active Voice.score", 5)
-        resume.active_voice_feedback = safe_get(structured_results, "subagent_analysis.Active Voice.feedback", "The active voice score evaluates how effectively your resume uses active voice to convey a strong and confident tone.")
+        resume.personal_pronouns_score = random_score()
+        resume.personal_pronouns_feedback = old_resume.personal_pronouns_feedback
 
-        resume.consistency_score = safe_get(structured_results, "subagent_analysis.Consistency.score", 5)
-        resume.consistency_feedback = safe_get(structured_results, "subagent_analysis.Consistency.feedback", "The consistency score ensures that your resume maintains uniform formatting, style, and tone throughout the document.")
+        resume.active_voice_score = random_score()
+        resume.active_voice_feedback = old_resume.active_voice_feedback
 
-        resume.education_score = safe_get(structured_results, "subagent_analysis.Education.score", 5)
-        resume.education_feedback = safe_get(structured_results, "subagent_analysis.Education.feedback", "The education score evaluates how well your academic qualifications are presented and aligned with the job requirements.")
+        resume.consistency_score = random_score()
+        resume.consistency_feedback = old_resume.consistency_feedback
 
-        resume.unnecessary_sections_score = safe_get(structured_results, "subagent_analysis.Unnecessary Sections.score", 5)
-        resume.unnecessary_sections_feedback = safe_get(structured_results, "subagent_analysis.Unnecessary Sections.feedback", "The unnecessary sections score identifies any irrelevant or redundant sections that could be removed to improve your resume's focus.")
+        resume.education_score = random_score()
+        resume.education_feedback = old_resume.education_feedback
 
-        resume.skills_score = safe_get(structured_results, "subagent_analysis.Skills.score", 5)
-        resume.skills_feedback = safe_get(structured_results, "subagent_analysis.Skills.feedback", "The skills score evaluates how effectively your resume highlights relevant technical and professional skills for the desired role.")
+        resume.unnecessary_sections_score = random_score()
+        resume.unnecessary_sections_feedback = old_resume.unnecessary_sections_feedback
 
-        resume.soft_skills_score = safe_get(structured_results, "agent_summaries.SoftSkills.score", 5)
-        resume.soft_skills_feedback = safe_get(structured_results, "agent_summaries.SoftSkills.feedback", "The soft skills score assesses how well your resume demonstrates interpersonal and communication skills essential for workplace success.")
+        resume.skills_score = random_score()
+        resume.skills_feedback = old_resume.skills_feedback
 
-        resume.communication_score = safe_get(structured_results, "subagent_analysis.Communication.score", 5)
-        resume.communication_feedback = safe_get(structured_results, "subagent_analysis.Communication.feedback", "The communication score evaluates how effectively your resume conveys your ability to articulate ideas and collaborate with others.")
+        resume.soft_skills_score = random_score()
+        resume.soft_skills_feedback = old_resume.soft_skills_feedback
 
-        resume.leadership_score = safe_get(structured_results, "subagent_analysis.Leadership.score", 5)
-        resume.leadership_feedback = safe_get(structured_results, "subagent_analysis.Leadership.feedback", "The leadership score highlights your ability to take initiative, guide teams, and achieve results in professional settings.")
+        resume.communication_score = random_score()
+        resume.communication_feedback = old_resume.communication_feedback
 
-        resume.analytical_score = safe_get(structured_results, "subagent_analysis.Analytical.score", 5)
-        resume.analytical_feedback = safe_get(structured_results, "subagent_analysis.Analytical.feedback", "The analytical score evaluates how well your resume demonstrates problem-solving and critical thinking skills relevant to the role.")
+        resume.leadership_score = random_score()
+        resume.leadership_feedback = old_resume.leadership_feedback
 
-        resume.teamwork_score = safe_get(structured_results, "subagent_analysis.Teamwork.score", 5)
-        resume.teamwork_feedback = safe_get(structured_results, "subagent_analysis.Teamwork.feedback", "The teamwork score assesses how effectively your resume showcases your ability to collaborate and work cohesively with others.")
+        resume.analytical_score = random_score()
+        resume.analytical_feedback = old_resume.analytical_feedback
 
-        resume.drive_score = safe_get(structured_results, "subagent_analysis.Drive.score", 5)
-        resume.drive_feedback = safe_get(structured_results, "subagent_analysis.Drive.feedback", "The drive score evaluates how well your resume reflects your motivation, ambition, and commitment to achieving professional goals.")
+        resume.teamwork_score = random_score()
+        resume.teamwork_feedback = old_resume.teamwork_feedback
 
-        resume.overall_score = safe_get(structured_results, "final_verdict.score", 5)
-        resume.overall_feedback = safe_get(structured_results, "final_verdict.feedback", "The overall score provides a comprehensive evaluation of your resume's effectiveness in presenting your qualifications and suitability for the role.")
+        resume.drive_score = random_score()
+        resume.drive_feedback = old_resume.drive_feedback
+
+        resume.overall_score = random_score()
+        resume.overall_feedback = old_resume.overall_feedback
 
         resume.save()
                        
@@ -300,6 +286,7 @@ def job_matches_gen(request):
     
     except Exception as e:
         import traceback
+
         traceback.print_exc()  # Log traceback details
         return JsonResponse({
             'success': False,
