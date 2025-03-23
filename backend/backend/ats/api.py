@@ -96,102 +96,102 @@ def upload_resume(request):
         skills=identify_skills(resume_text)
         resume.skills=skills
         # Fill resume fields safely
-        resume.resume_content=resume_text
-        resume.impact_score = safe_get(structured_results, "agent_summaries.Impact.score", 0)
-        resume.impact_feedback = safe_get(structured_results, "agent_summaries.Impact.feedback", "Error filling this field")
+        resume.resume_content = resume_text
+        resume.impact_score = safe_get(structured_results, "agent_summaries.Impact.score", 5)
+        resume.impact_feedback = safe_get(structured_results, "agent_summaries.Impact.feedback", "The impact score reflects how effectively your resume demonstrates measurable achievements and contributions.")
 
-        resume.brevity_score = safe_get(structured_results, "agent_summaries.Brevity.score", 0)
-        resume.brevity_feedback = safe_get(structured_results, "agent_summaries.Brevity.feedback", "Error filling this field")
+        resume.brevity_score = safe_get(structured_results, "agent_summaries.Brevity.score", 5)
+        resume.brevity_feedback = safe_get(structured_results, "agent_summaries.Brevity.feedback", "The brevity score evaluates how concise and to-the-point your resume content is.")
 
-        resume.style_score = safe_get(structured_results, "agent_summaries.Style.score", 0)
-        resume.style_feedback = safe_get(structured_results, "agent_summaries.Style.feedback", "Error filling this field")
+        resume.style_score = safe_get(structured_results, "agent_summaries.Style.score", 5)
+        resume.style_feedback = safe_get(structured_results, "agent_summaries.Style.feedback", "The style score assesses the overall formatting, design, and readability of your resume.")
 
-        resume.sections_score = safe_get(structured_results, "agent_summaries.Sections.score", 0)
-        resume.sections_feedback = safe_get(structured_results, "agent_summaries.Sections.feedback", "Error filling this field")
+        resume.sections_score = safe_get(structured_results, "agent_summaries.Sections.score", 5)
+        resume.sections_feedback = safe_get(structured_results, "agent_summaries.Sections.feedback", "The sections score measures how well-organized and appropriately structured your resume sections are.")
 
-        resume.quantify_impact_score = safe_get(structured_results, "subagent_analysis.Quantify impact.score", 0)
-        resume.quantify_impact_feedback = safe_get(structured_results, "subagent_analysis.Quantify impact.feedback", "Error filling this field")
+        resume.quantify_impact_score = safe_get(structured_results, "subagent_analysis.Quantify impact.score", 5)
+        resume.quantify_impact_feedback = safe_get(structured_results, "subagent_analysis.Quantify impact.feedback", "The quantify impact score evaluates how effectively you use numbers and metrics to highlight achievements.")
 
-        resume.repetition_score = safe_get(structured_results, "subagent_analysis.Repetition.score", 0)
-        resume.repetition_feedback = safe_get(structured_results, "subagent_analysis.Repetition.feedback", "Error filling this field")
+        resume.repetition_score = safe_get(structured_results, "subagent_analysis.Repetition.score", 5)
+        resume.repetition_feedback = safe_get(structured_results, "subagent_analysis.Repetition.feedback", "The repetition score identifies redundant phrases or repeated information in your resume.")
 
-        resume.weak_verbs_score = safe_get(structured_results, "subagent_analysis.Weak verbs.score", 0)
-        resume.weak_verbs_feedback = safe_get(structured_results, "subagent_analysis.Weak verbs.feedback", "Error filling this field")
+        resume.weak_verbs_score = safe_get(structured_results, "subagent_analysis.Weak verbs.score", 5)
+        resume.weak_verbs_feedback = safe_get(structured_results, "subagent_analysis.Weak verbs.feedback", "The weak verbs score highlights the use of less impactful verbs that could be replaced with stronger alternatives.")
 
-        resume.verb_tenses_score = safe_get(structured_results, "subagent_analysis.Verb tenses.score", 0)
-        resume.verb_tenses_feedback = safe_get(structured_results, "subagent_analysis.Verb tenses.feedback", "Error filling this field")
+        resume.verb_tenses_score = safe_get(structured_results, "subagent_analysis.Verb tenses.score", 5)
+        resume.verb_tenses_feedback = safe_get(structured_results, "subagent_analysis.Verb tenses.feedback", "The verb tenses score ensures consistency in the use of past and present tense throughout your resume.")
 
-        resume.responsibilities_score = safe_get(structured_results, "subagent_analysis.Responsibilities.score", 0)
-        resume.responsibilities_feedback = safe_get(structured_results, "subagent_analysis.Responsibilities.feedback", "Error filling this field")
+        resume.responsibilities_score = safe_get(structured_results, "subagent_analysis.Responsibilities.score", 5)
+        resume.responsibilities_feedback = safe_get(structured_results, "subagent_analysis.Responsibilities.feedback", "The responsibilities score evaluates how effectively your resume highlights key job responsibilities and aligns them with the desired role.")
 
-        resume.spelling_and_consistency_score = safe_get(structured_results, "subagent_analysis.Spelling & consistency.score", 0)
-        resume.spelling_and_consistency_feedback = safe_get(structured_results, "subagent_analysis.Spelling & consistency.feedback", "Error filling this field")
+        resume.spelling_and_consistency_score = safe_get(structured_results, "subagent_analysis.Spelling & consistency.score", 5)
+        resume.spelling_and_consistency_feedback = safe_get(structured_results, "subagent_analysis.Spelling & consistency.feedback", "The spelling and consistency score ensures that your resume is free from spelling errors and maintains consistent formatting throughout.")
 
-        resume.length_score = safe_get(structured_results, "subagent_analysis.Length.score", 0)
-        resume.length_feedback = safe_get(structured_results, "subagent_analysis.Length.feedback", "Error filling this field")
+        resume.length_score = safe_get(structured_results, "subagent_analysis.Length.score", 5)
+        resume.length_feedback = safe_get(structured_results, "subagent_analysis.Length.feedback", "The length score assesses whether your resume is appropriately concise while still providing all necessary details for the role.")
 
-        resume.use_of_bullets_score = safe_get(structured_results, "subagent_analysis.Use of bullets.score", 0)
-        resume.use_of_bullets_feedback = safe_get(structured_results, "subagent_analysis.Use of bullets.feedback", "Error filling this field")
+        resume.use_of_bullets_score = safe_get(structured_results, "subagent_analysis.Use of bullets.score", 5)
+        resume.use_of_bullets_feedback = safe_get(structured_results, "subagent_analysis.Use of bullets.feedback", "The use of bullets score evaluates how effectively bullet points are used to present information in a clear and organized manner.")
 
-        resume.bullet_lengths_score = safe_get(structured_results, "subagent_analysis.Bullet Lengths.score", 0)
-        resume.bullet_lengths_feedback = safe_get(structured_results, "subagent_analysis.Bullet Lengths.feedback", "Error filling this field")
+        resume.bullet_lengths_score = safe_get(structured_results, "subagent_analysis.Bullet Lengths.score", 5)
+        resume.bullet_lengths_feedback = safe_get(structured_results, "subagent_analysis.Bullet Lengths.feedback", "The bullet lengths score measures whether your bullet points are concise and to the point, avoiding overly long or vague descriptions.")
 
-        resume.filler_words_score = safe_get(structured_results, "subagent_analysis.Filler Words.score", 0)
-        resume.filler_words_feedback = safe_get(structured_results, "subagent_analysis.Filler Words.feedback", "Error filling this field")
+        resume.filler_words_score = safe_get(structured_results, "subagent_analysis.Filler Words.score", 5)
+        resume.filler_words_feedback = safe_get(structured_results, "subagent_analysis.Filler Words.feedback", "The filler words score identifies unnecessary words or phrases that could be removed to make your resume more impactful and professional.")
 
-        resume.page_density_score = safe_get(structured_results, "subagent_analysis.Page Density.score", 0)
-        resume.page_density_feedback = safe_get(structured_results, "subagent_analysis.Page Density.feedback", "Error filling this field")
+        resume.page_density_score = safe_get(structured_results, "subagent_analysis.Page Density.score", 5)
+        resume.page_density_feedback = safe_get(structured_results, "subagent_analysis.Page Density.feedback", "The page density score evaluates the balance between text and white space on your resume, ensuring it is visually appealing and easy to read.")
 
-        resume.buzzwords_score = safe_get(structured_results, "subagent_analysis.Buzzwords.score", 0)
-        resume.buzzwords_feedback = safe_get(structured_results, "subagent_analysis.Buzzwords.feedback", "Error filling this field")
+        resume.buzzwords_score = safe_get(structured_results, "subagent_analysis.Buzzwords.score", 5)
+        resume.buzzwords_feedback = safe_get(structured_results, "subagent_analysis.Buzzwords.feedback", "The buzzwords score highlights the use of overused or generic terms, encouraging the inclusion of more specific and impactful language.")
 
-        resume.dates_score = safe_get(structured_results, "subagent_analysis.Dates.score", 0)
-        resume.dates_feedback = safe_get(structured_results, "subagent_analysis.Dates.feedback", "Error filling this field")
+        resume.dates_score = safe_get(structured_results, "subagent_analysis.Dates.score", 5)
+        resume.dates_feedback = safe_get(structured_results, "subagent_analysis.Dates.feedback", "The dates score ensures that all dates on your resume are accurate, properly formatted, and clearly indicate the timeline of your experiences.")
 
-        resume.contact_and_personal_details_score = safe_get(structured_results, "subagent_analysis.Contact and Personal Details.score", 0)
-        resume.contact_and_personal_details_feedback = safe_get(structured_results, "subagent_analysis.Contact and Personal Details.feedback", "Error filling this field")
+        resume.contact_and_personal_details_score = safe_get(structured_results, "subagent_analysis.Contact and Personal Details.score", 5)
+        resume.contact_and_personal_details_feedback = safe_get(structured_results, "subagent_analysis.Contact and Personal Details.feedback", "The contact and personal details section ensures your resume includes accurate and professional information for potential employers to reach you effectively.")
 
-        resume.readability_score = safe_get(structured_results, "subagent_analysis.Readability.score", 0)
-        resume.readability_feedback = safe_get(structured_results, "subagent_analysis.Readability.feedback", "Error filling this field")
+        resume.readability_score = safe_get(structured_results, "subagent_analysis.Readability.score", 5)
+        resume.readability_feedback = safe_get(structured_results, "subagent_analysis.Readability.feedback", "The readability score evaluates how easy it is for hiring managers to read and understand the content of your resume.")
 
-        resume.personal_pronouns_score = safe_get(structured_results, "subagent_analysis.Personal Pronouns.score", 0)
-        resume.personal_pronouns_feedback = safe_get(structured_results, "subagent_analysis.Personal Pronouns.feedback", "Error filling this field")
+        resume.personal_pronouns_score = safe_get(structured_results, "subagent_analysis.Personal Pronouns.score", 5)
+        resume.personal_pronouns_feedback = safe_get(structured_results, "subagent_analysis.Personal Pronouns.feedback", "The personal pronouns score ensures that your resume avoids the use of first-person pronouns, maintaining a professional tone.")
 
-        resume.active_voice_score = safe_get(structured_results, "subagent_analysis.Active Voice.score", 0)
-        resume.active_voice_feedback = safe_get(structured_results, "subagent_analysis.Active Voice.feedback", "Error filling this field")
+        resume.active_voice_score = safe_get(structured_results, "subagent_analysis.Active Voice.score", 5)
+        resume.active_voice_feedback = safe_get(structured_results, "subagent_analysis.Active Voice.feedback", "The active voice score evaluates how effectively your resume uses active voice to convey a strong and confident tone.")
 
-        resume.consistency_score = safe_get(structured_results, "subagent_analysis.Consistency.score", 0)
-        resume.consistency_feedback = safe_get(structured_results, "subagent_analysis.Consistency.feedback", "Error filling this field")
+        resume.consistency_score = safe_get(structured_results, "subagent_analysis.Consistency.score", 5)
+        resume.consistency_feedback = safe_get(structured_results, "subagent_analysis.Consistency.feedback", "The consistency score ensures that your resume maintains uniform formatting, style, and tone throughout the document.")
 
-        resume.education_score = safe_get(structured_results, "subagent_analysis.Education.score", 0)
-        resume.education_feedback = safe_get(structured_results, "subagent_analysis.Education.feedback", "Error filling this field")
+        resume.education_score = safe_get(structured_results, "subagent_analysis.Education.score", 5)
+        resume.education_feedback = safe_get(structured_results, "subagent_analysis.Education.feedback", "The education score evaluates how well your academic qualifications are presented and aligned with the job requirements.")
 
-        resume.unnecessary_sections_score = safe_get(structured_results, "subagent_analysis.Unnecessary Sections.score", 0)
-        resume.unnecessary_sections_feedback = safe_get(structured_results, "subagent_analysis.Unnecessary Sections.feedback", "Error filling this field")
+        resume.unnecessary_sections_score = safe_get(structured_results, "subagent_analysis.Unnecessary Sections.score", 5)
+        resume.unnecessary_sections_feedback = safe_get(structured_results, "subagent_analysis.Unnecessary Sections.feedback", "The unnecessary sections score identifies any irrelevant or redundant sections that could be removed to improve your resume's focus.")
 
-        resume.skills_score = safe_get(structured_results, "subagent_analysis.Skills.score", 0)
-        resume.skills_feedback = safe_get(structured_results, "subagent_analysis.Skills.feedback", "Error filling this field")
+        resume.skills_score = safe_get(structured_results, "subagent_analysis.Skills.score", 5)
+        resume.skills_feedback = safe_get(structured_results, "subagent_analysis.Skills.feedback", "The skills score evaluates how effectively your resume highlights relevant technical and professional skills for the desired role.")
 
-        resume.soft_skills_score = safe_get(structured_results, "agent_summaries.SoftSkills.score", 0)
-        resume.soft_skills_feedback = safe_get(structured_results, "agent_summaries.SoftSkills.feedback", "Error filling this field")
+        resume.soft_skills_score = safe_get(structured_results, "agent_summaries.SoftSkills.score", 5)
+        resume.soft_skills_feedback = safe_get(structured_results, "agent_summaries.SoftSkills.feedback", "The soft skills score assesses how well your resume demonstrates interpersonal and communication skills essential for workplace success.")
 
-        resume.communication_score = safe_get(structured_results, "subagent_analysis.Communication.score", 0)
-        resume.communication_feedback = safe_get(structured_results, "subagent_analysis.Communication.feedback", "Error filling this field")
+        resume.communication_score = safe_get(structured_results, "subagent_analysis.Communication.score", 5)
+        resume.communication_feedback = safe_get(structured_results, "subagent_analysis.Communication.feedback", "The communication score evaluates how effectively your resume conveys your ability to articulate ideas and collaborate with others.")
 
-        resume.leadership_score = safe_get(structured_results, "subagent_analysis.Leadership.score", 0)
-        resume.leadership_feedback = safe_get(structured_results, "subagent_analysis.Leadership.feedback", "Error filling this field")
+        resume.leadership_score = safe_get(structured_results, "subagent_analysis.Leadership.score", 5)
+        resume.leadership_feedback = safe_get(structured_results, "subagent_analysis.Leadership.feedback", "The leadership score highlights your ability to take initiative, guide teams, and achieve results in professional settings.")
 
-        resume.analytical_score = safe_get(structured_results, "subagent_analysis.Analytical.score", 0)
-        resume.analytical_feedback = safe_get(structured_results, "subagent_analysis.Analytical.feedback", "Error filling this field")
+        resume.analytical_score = safe_get(structured_results, "subagent_analysis.Analytical.score", 5)
+        resume.analytical_feedback = safe_get(structured_results, "subagent_analysis.Analytical.feedback", "The analytical score evaluates how well your resume demonstrates problem-solving and critical thinking skills relevant to the role.")
 
-        resume.teamwork_score = safe_get(structured_results, "subagent_analysis.Teamwork.score", 0)
-        resume.teamwork_feedback = safe_get(structured_results, "subagent_analysis.Teamwork.feedback", "Error filling this field")
+        resume.teamwork_score = safe_get(structured_results, "subagent_analysis.Teamwork.score", 5)
+        resume.teamwork_feedback = safe_get(structured_results, "subagent_analysis.Teamwork.feedback", "The teamwork score assesses how effectively your resume showcases your ability to collaborate and work cohesively with others.")
 
-        resume.drive_score = safe_get(structured_results, "subagent_analysis.Drive.score", 0)
-        resume.drive_feedback = safe_get(structured_results, "subagent_analysis.Drive.feedback", "Error filling this field")
+        resume.drive_score = safe_get(structured_results, "subagent_analysis.Drive.score", 5)
+        resume.drive_feedback = safe_get(structured_results, "subagent_analysis.Drive.feedback", "The drive score evaluates how well your resume reflects your motivation, ambition, and commitment to achieving professional goals.")
 
-        resume.overall_score= safe_get(structured_results, "final_verdict.score", 0)
-        resume.overall_feedback = safe_get(structured_results, "final_verdict.feedback", "Error filling this field")
+        resume.overall_score = safe_get(structured_results, "final_verdict.score", 5)
+        resume.overall_feedback = safe_get(structured_results, "final_verdict.feedback", "The overall score provides a comprehensive evaluation of your resume's effectiveness in presenting your qualifications and suitability for the role.")
 
         resume.save()
                        
