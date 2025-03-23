@@ -23,6 +23,25 @@ from rest_framework.decorators import api_view
 def upload_resume(request):
     form = ResumeForm(request.POST, request.FILES)
     if form.is_valid():
+        uploaded_file = request.FILES.get('pdf')
+        import tempfile
+
+        with tempfile.NamedTemporaryFile(delete=False, suffix='.pdf') as tmp_file:
+            for chunk in uploaded_file.chunks():
+                tmp_file.write(chunk)
+            tmp_file_path = tmp_file.name
+
+        new_resume_text = extract_text_from_pdf(tmp_file_path)
+        existing_resume = Resume.objects.filter(resume_content=new_resume_text).first()
+        if existing_resume:
+            # Return the existing resume info (using a serializer if needed)
+            serializer = ResumeSerializer(existing_resume)
+            return JsonResponse({
+                'success': True,
+                'message': 'Resume already exists, returning stored resume.',
+                'data': serializer.data
+            })
+        
         resume = form.save(commit=False)
         resume.user = request.user
         resume.save()
