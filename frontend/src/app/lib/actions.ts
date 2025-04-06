@@ -6,8 +6,8 @@ import { redirect } from 'next/navigation';
 export async function handleRefresh() {
     try {
         const refreshToken = await getRefreshToken();
-
-        const token = await fetch('http://localhost:8001/api/auth/token/refresh/', {
+        const backendURL = process.env.NEXT_PUBLIC_API_HOST;
+        const token = await fetch(`${backendURL}/api/auth/token/refresh/`, {
             method: 'POST',
             body: JSON.stringify({
                 refresh: refreshToken
