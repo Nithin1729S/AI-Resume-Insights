@@ -60,7 +60,8 @@ def upload_resume(request):
         except Exception as e:
             print(f"Error generating thumbnail: {e}")
             # Continue even if thumbnail generation fails
-        old_resume = Resume.objects.filter(user__email="nithin2@gmail.com")[1]
+        random_number = random.randint(1, 5)
+        old_resume = Resume.objects.filter(user__email="nithin2@gmail.com")[random_number]
         resume = Resume.objects.filter(user__email=request.user).first()
         file_path = resume.pdf.path  
         structured_results = resumeReview(file_path)
